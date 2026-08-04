@@ -7,55 +7,49 @@ DeskSpace OS is a powerful and elegant desktop organization utility designed to 
 ### 🗂️ Spaces (Spaces)
 Group your icons, shortcuts, and files into shaded, resizable areas on your desktop. Keep your workspace organized by categorizing your apps and documents logically.
 
-![Spaces Screenshot](docs/images/placeholder_spaces.png)
+![Spaces Screenshot](docs/images/spaces.png)
 
 ### 📂 Folder Portals
 Mirror the contents of any folder (like your Downloads or Documents) directly onto your desktop as a space. Access deeply nested files instantly without opening a File Explorer window.
 
-![Folder Portals Screenshot](docs/images/placeholder_folder_portals.png)
+![Folder Portals Screenshot](docs/images/folder%20portal.png)
 
 ### 🎨 Color & Appearance
 Fully customize the look and feel of your workspace. Adjust the background color, transparency, blur effects, and label fonts of your spaces to match your wallpaper and personal style.
 
-![Appearance Screenshot](docs/images/placeholder_appearance.png)
+![Appearance Screenshot](docs/images/color.png)
 
 ### ⚡ Sorting Rules
 Automate your desktop organization. Create rules to automatically route new files, documents, or shortcuts into designated spaces based on file extensions, name patterns, or creation dates.
 
-![Sorting Rules Screenshot](docs/images/placeholder_sorting_rules.png)
+![Sorting Rules Screenshot](docs/images/sorting.png)
 
 ### ⌨️ Hotkeys
 Navigate and manage your desktop at the speed of thought. Assign custom keyboard shortcuts to trigger actions like hiding icons, switching layouts, or bringing spaces to the front.
 
+![Hotkeys Screenshot](docs/images/hotkeys.png)
+
 ### 📜 Roll-Up
 Save valuable screen real estate by double-clicking the title bar of a space to "roll it up." The contents are hidden, leaving only the title bar visible until you need them again or hover over them.
 
-![Roll-Up Screenshot](docs/images/placeholder_rollup.png)
+![Roll-Up Screenshot](docs/images/rollup.png)
 
 ### 🧘 Zen Mode
 Reduce visual distractions by fading out spaces and desktop icons when they are not actively being used. They gently reappear when you hover your mouse over them or click the desktop.
 
-![Zen Mode Screenshot](docs/images/placeholder_zen_mode.png)
-
 ### 👀 Peek
 Instantly bring your desktop spaces on top of all your open windows with a simple hotkey. Access your files and apps quickly without needing to minimize your current work.
 
-![Peek Screenshot](docs/images/placeholder_peek.png)
+![Peek Screenshot](docs/images/peek.png)
 
 ### 👻 QuickHide
 Double-click any empty space on your desktop to instantly hide all your icons and spaces, revealing your clean wallpaper. Double-click again to bring them all back.
 
-![QuickHide Screenshot](docs/images/placeholder_quickhide.png)
-
 ### 📑 Tabs
 Combine multiple spaces or folder portals into a single, tabbed interface on your desktop. Perfect for organizing large amounts of files into a compact, easily accessible area.
 
-![Tabs Screenshot](docs/images/placeholder_tabs.png)
-
 ### 💾 Layout Management
 Save snapshots of your desktop layouts. Easily restore your icon and space positions, which is especially useful when docking your laptop or switching between different monitor setups and resolutions.
-
-![Layouts Screenshot](docs/images/placeholder_layouts.png)
 
 ## 🛠️ Tech Stack
 
