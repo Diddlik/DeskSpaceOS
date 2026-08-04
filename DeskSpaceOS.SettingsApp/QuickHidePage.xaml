@@ -9,8 +9,8 @@
 
     <ScrollViewer>
         <StackPanel Spacing="24" Padding="0,0,16,24" MaxWidth="800" HorizontalAlignment="Left">
-            <TextBlock Text="Schnell-verstecken" FontSize="28" FontWeight="SemiBold" />
-            <TextBlock Text="Mit Quick-hide können Sie Ihre Desktop-Symbole durch Doppelklick auf eine leere Stelle Ihres Desktops schnell verbergen und anzeigen." 
+            <TextBlock Text="Quick Hide" FontSize="28" FontWeight="SemiBold" />
+            <TextBlock Text="Quick Hide lets you instantly hide and show your desktop icons by double-clicking an empty spot on your desktop."
                        TextWrapping="Wrap" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
 
             <!-- Dummy Preview Screen -->
@@ -29,33 +29,33 @@
             </Border>
 
             <StackPanel Spacing="4">
-                <HyperlinkButton Content="So verwenden Sie" Padding="0" />
-                <HyperlinkButton Content="Einzelne Spaces ausschließen" Padding="0" />
+                <HyperlinkButton Content="How to use" Padding="0" />
+                <HyperlinkButton Content="Exclude individual spaces" Padding="0" />
             </StackPanel>
 
             <StackPanel Spacing="16">
-                <TextBlock Text="Einstellungen" FontSize="20" FontWeight="SemiBold" />
+                <TextBlock Text="Settings" FontSize="20" FontWeight="SemiBold" />
                 
-                <CheckBox x:Name="EnableQuickHideCheckBox" Content="Aktiviert" Checked="SettingChanged" Unchecked="SettingChanged" />
+                <CheckBox x:Name="EnableQuickHideCheckBox" Content="Enabled" Checked="SettingChanged" Unchecked="SettingChanged" />
                 
                 <StackPanel Spacing="8" Margin="0,8,0,0">
                     <ComboBox x:Name="QuickHideScopeComboBox" Width="400" SelectionChanged="SettingChanged">
-                        <ComboBoxItem Content="Verberge alle Desktopsymbole und Space-Gruppen" Tag="IconsAndSpaces" />
-                        <ComboBoxItem Content="Nur Desktopsymbole verbergen" Tag="OnlyIcons" />
-                        <ComboBoxItem Content="Nur Space-Gruppen verbergen" Tag="OnlySpaces" />
+                        <ComboBoxItem Content="Hide all desktop icons and space groups" Tag="IconsAndSpaces" />
+                        <ComboBoxItem Content="Hide desktop icons only" Tag="OnlyIcons" />
+                        <ComboBoxItem Content="Hide space groups only" Tag="OnlySpaces" />
                     </ComboBox>
                 </StackPanel>
 
-                <CheckBox x:Name="AutoHideCheckBox" Content="Symbole automatisch ausblenden, wenn der Desktop nicht verwendet wird" Checked="SettingChanged" Unchecked="SettingChanged" />
-                <CheckBox x:Name="AutoShowCheckBox" Content="Symbole automatisch anzeigen, wenn der Desktop verwendet wird" Checked="SettingChanged" Unchecked="SettingChanged" />
+                <CheckBox x:Name="AutoHideCheckBox" Content="Automatically hide icons when the desktop is not in use" Checked="SettingChanged" Unchecked="SettingChanged" />
+                <CheckBox x:Name="AutoShowCheckBox" Content="Automatically show icons when the desktop is in use" Checked="SettingChanged" Unchecked="SettingChanged" />
             </StackPanel>
 
             <StackPanel Spacing="16">
-                <TextBlock Text="Zusätzliche Optionen" FontSize="20" FontWeight="SemiBold" />
-                <CheckBox x:Name="ShowOnStartCheckBox" Content="Beim Start immer Symbole anzeigen" Checked="SettingChanged" Unchecked="SettingChanged" />
+                <TextBlock Text="Additional options" FontSize="20" FontWeight="SemiBold" />
+                <CheckBox x:Name="ShowOnStartCheckBox" Content="Always show icons on startup" Checked="SettingChanged" Unchecked="SettingChanged" />
             </StackPanel>
 
-            <Button x:Name="SaveButton" Content="Einstellungen speichern" Style="{ThemeResource AccentButtonStyle}" Click="SaveButton_Click" Margin="0,12,0,0" />
+            <Button x:Name="SaveButton" Content="Save settings" Style="{ThemeResource AccentButtonStyle}" Click="SaveButton_Click" Margin="0,12,0,0" />
             <InfoBar x:Name="StatusInfoBar" IsOpen="False" IsClosable="True" />
         </StackPanel>
     </ScrollViewer>

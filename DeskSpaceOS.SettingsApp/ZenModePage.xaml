@@ -30,9 +30,51 @@
                            ValueChanged="AnyValue_Changed"/>
             </StackPanel>
             
-            <Border BorderBrush="{ThemeResource SurfaceStrokeColorDefaultBrush}" BorderThickness="1" CornerRadius="8" MaxWidth="600" HorizontalAlignment="Left">
-                <Image x:Name="ZenModePreviewImage" Stretch="Uniform" Height="300"/>
-            </Border>
+            <StackPanel Spacing="8">
+                <TextBlock Text="Preview" FontWeight="SemiBold"/>
+                <Grid ColumnSpacing="12">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Border x:Name="PreviewOffCard"
+                            Grid.Column="0"
+                            BorderBrush="{ThemeResource SurfaceStrokeColorDefaultBrush}"
+                            BorderThickness="1" CornerRadius="8" Padding="8"
+                            Background="{ThemeResource LayerFillColorDefaultBrush}">
+                        <StackPanel Spacing="8">
+                            <Image Source="ms-appx:///Assets/zen_mode_off.png"
+                                   AutomationProperties.Name="Desktop with Zen Mode off — spaces stay visible"
+                                   Stretch="Uniform" Height="200"/>
+                            <TextBlock Text="Off — spaces stay visible"
+                                       HorizontalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap"
+                                       Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
+                            <TextBlock x:Name="PreviewOffActiveLabel" Text="Active" Visibility="Collapsed"
+                                       HorizontalAlignment="Center" FontWeight="SemiBold"
+                                       Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}"/>
+                        </StackPanel>
+                    </Border>
+
+                    <Border x:Name="PreviewOnCard"
+                            Grid.Column="1"
+                            BorderBrush="{ThemeResource SurfaceStrokeColorDefaultBrush}"
+                            BorderThickness="1" CornerRadius="8" Padding="8"
+                            Background="{ThemeResource LayerFillColorDefaultBrush}">
+                        <StackPanel Spacing="8">
+                            <Image Source="ms-appx:///Assets/zen_mode_on.png"
+                                   AutomationProperties.Name="Desktop with Zen Mode on — spaces faded into the wallpaper"
+                                   Stretch="Uniform" Height="200"/>
+                            <TextBlock Text="On — spaces fade when idle"
+                                       HorizontalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap"
+                                       Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
+                            <TextBlock x:Name="PreviewOnActiveLabel" Text="Active" Visibility="Collapsed"
+                                       HorizontalAlignment="Center" FontWeight="SemiBold"
+                                       Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}"/>
+                        </StackPanel>
+                    </Border>
+                </Grid>
+            </StackPanel>
 
             <InfoBar x:Name="StatusInfoBar" IsOpen="False" IsClosable="True"/>
         </StackPanel>

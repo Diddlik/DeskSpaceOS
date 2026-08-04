@@ -1,4 +1,3 @@
-using System;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using DeskSpaceOS.Core.Storage;
@@ -29,9 +28,17 @@ public sealed partial class ZenModePage : Page
     {
         IdleBox.IsEnabled = enabled;
         OpacityBox.IsEnabled = enabled;
-        
-        string imageName = enabled ? "zen_mode_on.png" : "zen_mode_off.png";
-        ZenModePreviewImage.Source = new Microsoft.UI.Xaml.Media.Imaging.BitmapImage(new Uri($"ms-appx:///Assets/{imageName}"));
+        HighlightActivePreview(enabled);
+    }
+
+    // Indicate the active state two ways so it isn't visual-only: a visible "Active"
+    // text label (announced by screen readers) plus dimming the inactive card.
+    private void HighlightActivePreview(bool zenOn)
+    {
+        PreviewOnActiveLabel.Visibility = zenOn ? Visibility.Visible : Visibility.Collapsed;
+        PreviewOffActiveLabel.Visibility = zenOn ? Visibility.Collapsed : Visibility.Visible;
+        PreviewOnCard.Opacity = zenOn ? 1.0 : 0.45;
+        PreviewOffCard.Opacity = zenOn ? 0.45 : 1.0;
     }
 
     private void ZenModeToggle_Toggled(object sender, RoutedEventArgs e)
