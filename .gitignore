@@ -480,3 +480,12 @@ $RECYCLE.BIN/
 
 # Vim temporary swap files
 *.swp
+
+# --- DeskSpaceOS: re-include source the stock .NET template wrongly ignores ---
+# DeskSpaceOS.Core/Win32 holds P/Invoke SOURCE, not C++ build output (the
+# generic "[Ww][Ii][Nn]32/" rule above would otherwise drop the whole folder).
+!DeskSpaceOS.Core/Win32/
+!DeskSpaceOS.Core/Win32/**
+# Publish profiles are checked-in build inputs (RID + self-contained flags, no
+# secrets); the "*.pubxml" rule above would otherwise exclude them.
+!DeskSpaceOS.SettingsApp/Properties/PublishProfiles/*.pubxml
