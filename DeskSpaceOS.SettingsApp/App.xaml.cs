@@ -1,10 +1,13 @@
 using System;
 using System.Diagnostics;
+using System.IO;
 using System.IO.Pipes;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
+using DeskSpaceOS.Core.Storage;
 using Microsoft.UI.Xaml;
+using Windows.Globalization;
 
 namespace DeskSpaceOS_SettingsApp;
 
@@ -24,6 +27,16 @@ public partial class App : Application
     public App()
     {
         _singleInstanceMutex = new Mutex(true, SingleInstanceMutexName, out _ownsSingleInstanceMutex);
+        string language = AppSettingsStore.Load().Language;
+        if (!string.IsNullOrEmpty(language)
+            && !string.Equals(
+                ApplicationLanguages.PrimaryLanguageOverride,
+                language,
+                StringComparison.OrdinalIgnoreCase))
+        {
+            ApplicationLanguages.PrimaryLanguageOverride = language;
+        }
+
         InitializeComponent();
     }
 
@@ -84,9 +97,10 @@ public partial class App : Application
             using var pipe = new NamedPipeClientStream(".", ActivationPipeName, PipeDirection.Out);
             pipe.Connect(750);
         }
-        catch
+        catch (Exception ex) when (ex is IOException or TimeoutException or UnauthorizedAccessException)
         {
-            // The mutex still prevents a duplicate settings window while the first instance starts.
+            BringExistingProcessWindowToFront();
+            return;
         }
 
         BringExistingProcessWindowToFront();

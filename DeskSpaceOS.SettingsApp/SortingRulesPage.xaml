@@ -9,19 +9,19 @@
 
     <ScrollViewer>
         <StackPanel Spacing="24" Padding="0,0,16,24">
-            <TextBlock Text="Sorting Rules" FontSize="24" FontWeight="SemiBold" />
-            <TextBlock Text="Define rules to automatically sort new desktop items into spaces by file extension or name pattern."
+            <TextBlock x:Uid="Rules_Title" FontSize="24" FontWeight="SemiBold" />
+            <TextBlock x:Uid="Rules_Description"
                        Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" />
 
-            <Button x:Name="AddRuleButton" Content="Add Rule" Style="{ThemeResource AccentButtonStyle}" Click="AddRuleButton_Click" />
+            <Button x:Name="AddRuleButton" x:Uid="Rules_Add" Style="{ThemeResource AccentButtonStyle}" Click="AddRuleButton_Click" />
 
             <ItemsRepeater x:Name="RulesList" />
 
             <!-- Empty state -->
             <StackPanel x:Name="EmptyState" Visibility="Collapsed" HorizontalAlignment="Center" Spacing="8" Padding="0,40,0,0">
                 <FontIcon Glyph="&#xE16E;" FontSize="48" Foreground="{ThemeResource TextFillColorSecondaryBrush}" HorizontalAlignment="Center" />
-                <TextBlock Text="No sorting rules" FontSize="16" HorizontalAlignment="Center" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                <TextBlock Text="Add a rule to automatically organize new files on your desktop."
+                <TextBlock x:Uid="Rules_EmptyTitle" FontSize="16" HorizontalAlignment="Center" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                <TextBlock x:Uid="Rules_EmptyDescription"
                            HorizontalAlignment="Center" Foreground="{ThemeResource TextFillColorTertiaryBrush}" TextWrapping="Wrap" />
             </StackPanel>
 

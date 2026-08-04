@@ -1,0 +1,766 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms</value></resheader>
+  <data name="About_CreditsDescription.Text" xml:space="preserve">
+    <value>Built with passion for the desktop community. This application uses the following open-source libraries and technologies:</value>
+  </data>
+  <data name="About_CreditsTitle.Text" xml:space="preserve">
+    <value>Credits &amp; Open Source Packages</value>
+  </data>
+  <data name="About_HostingPackage.Text" xml:space="preserve">
+    <value>• Microsoft.Extensions.Hosting &amp; Logging</value>
+  </data>
+  <data name="About_PageDescription.Text" xml:space="preserve">
+    <value>Information about the application.</value>
+  </data>
+  <data name="About_PageTitle.Text" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="About_ProductDescription.Text" xml:space="preserve">
+    <value>A modern, open-source desktop organizer that groups your shortcuts and files into highly customizable visual spaces. Clean up your digital workspace and boost your productivity.</value>
+  </data>
+  <data name="About_Thanks.Text" xml:space="preserve">
+    <value>Special thanks to the contributors and the C# community.</value>
+  </data>
+  <data name="About_Version" xml:space="preserve">
+    <value>Version {0}</value>
+  </data>
+  <data name="About_Win32Package.Text" xml:space="preserve">
+    <value>• Win32 APIs (SysListView32 hook &amp; user32.dll integrations)</value>
+  </data>
+  <data name="About_WinUiPackage.Text" xml:space="preserve">
+    <value>• Microsoft.WindowsAppSDK (WinUI 3)</value>
+  </data>
+  <data name="Appearance_DefaultColor.Text" xml:space="preserve">
+    <value>Default Space Color</value>
+  </data>
+  <data name="Appearance_Description.Text" xml:space="preserve">
+    <value>Configure the default look for new spaces.</value>
+  </data>
+  <data name="Appearance_NewSpace.Text" xml:space="preserve">
+    <value>New Space</value>
+  </data>
+  <data name="Appearance_Preview.Text" xml:space="preserve">
+    <value>Preview</value>
+  </data>
+  <data name="Appearance_Save.Content" xml:space="preserve">
+    <value>Save Defaults</value>
+  </data>
+  <data name="Appearance_Saved" xml:space="preserve">
+    <value>Default appearance saved.</value>
+  </data>
+  <data name="Appearance_Title.Text" xml:space="preserve">
+    <value>Color &amp; Appearance</value>
+  </data>
+  <data name="Common_Add" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="Common_Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="Common_Close" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="Common_Create" xml:space="preserve">
+    <value>Create</value>
+  </data>
+  <data name="Common_Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="Common_Edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="Common_Remove" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="Common_Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="Hotkeys_Description.Text" xml:space="preserve">
+    <value>Configure keyboard shortcuts for quick actions.</value>
+  </data>
+  <data name="Hotkeys_DistractionFreeDescription.Text" xml:space="preserve">
+    <value>Hide all spaces and icons</value>
+  </data>
+  <data name="Hotkeys_DistractionFreePlaceholder.PlaceholderText" xml:space="preserve">
+    <value>e.g. Win+D</value>
+  </data>
+  <data name="Hotkeys_DistractionFreeTitle.Text" xml:space="preserve">
+    <value>Distraction Free Mode</value>
+  </data>
+  <data name="Hotkeys_NewSpaceDescription.Text" xml:space="preserve">
+    <value>Start drawing a new space</value>
+  </data>
+  <data name="Hotkeys_NewSpacePlaceholder.PlaceholderText" xml:space="preserve">
+    <value>e.g. Ctrl+Shift+N</value>
+  </data>
+  <data name="Hotkeys_NewSpaceTitle.Text" xml:space="preserve">
+    <value>New Space</value>
+  </data>
+  <data name="Hotkeys_PeekDescription.Text" xml:space="preserve">
+    <value>Bring all spaces above active windows</value>
+  </data>
+  <data name="Hotkeys_PeekPlaceholder.PlaceholderText" xml:space="preserve">
+    <value>e.g. Win+Space</value>
+  </data>
+  <data name="Hotkeys_PeekTitle.Text" xml:space="preserve">
+    <value>Peek Mode</value>
+  </data>
+  <data name="Hotkeys_Save.Content" xml:space="preserve">
+    <value>Save Hotkeys</value>
+  </data>
+  <data name="Hotkeys_Saved" xml:space="preserve">
+    <value>Hotkeys saved. Changes applied automatically.</value>
+  </data>
+  <data name="Hotkeys_Title.Text" xml:space="preserve">
+    <value>Hotkeys</value>
+  </data>
+  <data name="Layout_Description.Text" xml:space="preserve">
+    <value>Control how spaces align themselves during drag operations. Snapping pulls spaces to screen edges and to the bounding boxes of other spaces.</value>
+  </data>
+  <data name="Layout_Saved" xml:space="preserve">
+    <value>Layout settings saved. Applied automatically.</value>
+  </data>
+  <data name="Layout_Snapping.Header" xml:space="preserve">
+    <value>Enable magnetic snapping</value>
+  </data>
+  <data name="Layout_Snapping.OffContent" xml:space="preserve">
+    <value>Free movement</value>
+  </data>
+  <data name="Layout_Snapping.OnContent" xml:space="preserve">
+    <value>Spaces snap while dragging</value>
+  </data>
+  <data name="Layout_SnappingTitle.Text" xml:space="preserve">
+    <value>Magnetic Snapping</value>
+  </data>
+  <data name="Layout_Threshold.Header" xml:space="preserve">
+    <value>Snap threshold (pixels)</value>
+  </data>
+  <data name="Layout_Title.Text" xml:space="preserve">
+    <value>Layout</value>
+  </data>
+  <data name="MainWindow_Title.Text" xml:space="preserve">
+    <value>DeskSpace OS Settings</value>
+  </data>
+  <data name="Nav_About.Content" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="Nav_Appearance.Content" xml:space="preserve">
+    <value>Color &amp; Appearance</value>
+  </data>
+  <data name="Nav_CheckForUpdates.Content" xml:space="preserve">
+    <value>Check for updates</value>
+  </data>
+  <data name="Nav_Hotkeys.Content" xml:space="preserve">
+    <value>Hotkeys</value>
+  </data>
+  <data name="Nav_Layout.Content" xml:space="preserve">
+    <value>Layout</value>
+  </data>
+  <data name="Nav_Peek.Content" xml:space="preserve">
+    <value>Peek</value>
+  </data>
+  <data name="Nav_Portals.Content" xml:space="preserve">
+    <value>Folder Portals</value>
+  </data>
+  <data name="Nav_QuickHide.Content" xml:space="preserve">
+    <value>Quick Hide</value>
+  </data>
+  <data name="Nav_RollUp.Content" xml:space="preserve">
+    <value>Roll-Up</value>
+  </data>
+  <data name="Nav_Rules.Content" xml:space="preserve">
+    <value>Sorting Rules</value>
+  </data>
+  <data name="Nav_Settings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="Nav_Spaces.Content" xml:space="preserve">
+    <value>Spaces</value>
+  </data>
+  <data name="Nav_Tabs.Content" xml:space="preserve">
+    <value>Tabs</value>
+  </data>
+  <data name="Nav_ZenMode.Content" xml:space="preserve">
+    <value>Zen Mode</value>
+  </data>
+  <data name="Peek_Description.Text" xml:space="preserve">
+    <value>Temporarily bring spaces and folder portals above active windows.</value>
+  </data>
+  <data name="Peek_Enable.Header" xml:space="preserve">
+    <value>Enable Peek</value>
+  </data>
+  <data name="Peek_Enable.OffContent" xml:space="preserve">
+    <value>Peek hotkey is disabled</value>
+  </data>
+  <data name="Peek_Enable.OnContent" xml:space="preserve">
+    <value>Peek hotkey is active</value>
+  </data>
+  <data name="Peek_Hotkey.Header" xml:space="preserve">
+    <value>Peek hotkey</value>
+  </data>
+  <data name="Peek_Hotkey.PlaceholderText" xml:space="preserve">
+    <value>e.g. Win+Space</value>
+  </data>
+  <data name="Peek_Saved" xml:space="preserve">
+    <value>Peek settings saved. Applied automatically.</value>
+  </data>
+  <data name="Peek_Title.Text" xml:space="preserve">
+    <value>Peek</value>
+  </data>
+  <data name="Portals_Add.Content" xml:space="preserve">
+    <value>Add Folder Portal</value>
+  </data>
+  <data name="Portals_AddDialogTitle" xml:space="preserve">
+    <value>Add Folder Portal</value>
+  </data>
+  <data name="Portals_Added" xml:space="preserve">
+    <value>Portal added. It will appear on the desktop automatically.</value>
+  </data>
+  <data name="Portals_Ascending.Content" xml:space="preserve">
+    <value>Ascending</value>
+  </data>
+  <data name="Portals_Browse.Content" xml:space="preserve">
+    <value>Browse…</value>
+  </data>
+  <data name="Portals_ColumnDate.Content" xml:space="preserve">
+    <value>Date Modified</value>
+  </data>
+  <data name="Portals_ColumnName.Content" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Portals_ColumnSize.Content" xml:space="preserve">
+    <value>Size</value>
+  </data>
+  <data name="Portals_DefaultName" xml:space="preserve">
+    <value>Portal</value>
+  </data>
+  <data name="Portals_Descending.Content" xml:space="preserve">
+    <value>Descending</value>
+  </data>
+  <data name="Portals_Description.Text" xml:space="preserve">
+    <value>Mirror the contents of a folder on your desktop. Files added to or removed from the folder appear automatically in the portal space.</value>
+  </data>
+  <data name="Portals_Details" xml:space="preserve">
+    <value>{0}×{1} • {2} • Sort: {3}{4}</value>
+  </data>
+  <data name="Portals_DirectoryMissing" xml:space="preserve">
+    <value>Directory does not exist.</value>
+  </data>
+  <data name="Portals_EditDialogTitle" xml:space="preserve">
+    <value>Edit Folder Portal</value>
+  </data>
+  <data name="Portals_EmptyDescription.Text" xml:space="preserve">
+    <value>Add a portal to mirror a folder like Downloads on your desktop.</value>
+  </data>
+  <data name="Portals_EmptyTitle.Text" xml:space="preserve">
+    <value>No folder portals</value>
+  </data>
+  <data name="Portals_EnableNavigation.Header" xml:space="preserve">
+    <value>Enable Navigation</value>
+  </data>
+  <data name="Portals_EnableNavigation.OffContent" xml:space="preserve">
+    <value>Clicks open folders in Explorer</value>
+  </data>
+  <data name="Portals_EnableNavigation.OnContent" xml:space="preserve">
+    <value>Clicks navigate inside the portal</value>
+  </data>
+  <data name="Portals_FolderPath.Text" xml:space="preserve">
+    <value>Folder Path</value>
+  </data>
+  <data name="Portals_Name.Header" xml:space="preserve">
+    <value>Portal Name</value>
+  </data>
+  <data name="Portals_Name.PlaceholderText" xml:space="preserve">
+    <value>e.g. Downloads</value>
+  </data>
+  <data name="Portals_NavigationOn" xml:space="preserve">
+    <value> • Navigation: On</value>
+  </data>
+  <data name="Portals_PathRequired" xml:space="preserve">
+    <value>Folder path is required.</value>
+  </data>
+  <data name="Portals_Removed" xml:space="preserve">
+    <value>Portal removed. Changes applied automatically.</value>
+  </data>
+  <data name="Portals_SelectFolder" xml:space="preserve">
+    <value>Select Folder</value>
+  </data>
+  <data name="Portals_SortBy.Header" xml:space="preserve">
+    <value>Sort By</value>
+  </data>
+  <data name="Portals_SortDate.Content" xml:space="preserve">
+    <value>Date Modified</value>
+  </data>
+  <data name="Portals_SortDateLabel" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="Portals_SortDirection.Header" xml:space="preserve">
+    <value>Sort Direction</value>
+  </data>
+  <data name="Portals_SortName.Content" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Portals_SortNameLabel" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Portals_SortSize.Content" xml:space="preserve">
+    <value>Size</value>
+  </data>
+  <data name="Portals_SortSizeLabel" xml:space="preserve">
+    <value>Size</value>
+  </data>
+  <data name="Portals_Title.Text" xml:space="preserve">
+    <value>Folder Portals</value>
+  </data>
+  <data name="Portals_Updated" xml:space="preserve">
+    <value>Portal updated. Changes applied automatically.</value>
+  </data>
+  <data name="Portals_ViewDetails.Content" xml:space="preserve">
+    <value>Details</value>
+  </data>
+  <data name="Portals_ViewDetailsLabel" xml:space="preserve">
+    <value>Details</value>
+  </data>
+  <data name="Portals_ViewIcons.Content" xml:space="preserve">
+    <value>Icons</value>
+  </data>
+  <data name="Portals_ViewIconsLabel" xml:space="preserve">
+    <value>Icons</value>
+  </data>
+  <data name="Portals_ViewMode.Header" xml:space="preserve">
+    <value>View Mode</value>
+  </data>
+  <data name="Portals_VisibleColumns.Text" xml:space="preserve">
+    <value>Visible Columns (Details view)</value>
+  </data>
+  <data name="QuickHide_AdditionalOptions.Text" xml:space="preserve">
+    <value>Additional options</value>
+  </data>
+  <data name="QuickHide_AutoHide.Content" xml:space="preserve">
+    <value>Automatically hide icons when the desktop is not in use</value>
+  </data>
+  <data name="QuickHide_AutoShow.Content" xml:space="preserve">
+    <value>Automatically show icons when the desktop is in use</value>
+  </data>
+  <data name="QuickHide_Description.Text" xml:space="preserve">
+    <value>Quick Hide lets you instantly hide and show your desktop icons by double-clicking an empty spot on your desktop.</value>
+  </data>
+  <data name="QuickHide_Enabled.Content" xml:space="preserve">
+    <value>Enabled</value>
+  </data>
+  <data name="QuickHide_ExcludeSpaces.Content" xml:space="preserve">
+    <value>Exclude individual spaces</value>
+  </data>
+  <data name="QuickHide_HowToUse.Content" xml:space="preserve">
+    <value>How to use</value>
+  </data>
+  <data name="QuickHide_PreviewCaption.Text" xml:space="preserve">
+    <value>Double-click desktop to hide/show</value>
+  </data>
+  <data name="QuickHide_Save.Content" xml:space="preserve">
+    <value>Save settings</value>
+  </data>
+  <data name="QuickHide_SavedMessage" xml:space="preserve">
+    <value>Quick Hide settings have been updated.</value>
+  </data>
+  <data name="QuickHide_SavedTitle" xml:space="preserve">
+    <value>Settings Saved</value>
+  </data>
+  <data name="QuickHide_ScopeAll.Content" xml:space="preserve">
+    <value>Hide all desktop icons and space groups</value>
+  </data>
+  <data name="QuickHide_ScopeIcons.Content" xml:space="preserve">
+    <value>Hide desktop icons only</value>
+  </data>
+  <data name="QuickHide_ScopeSpaces.Content" xml:space="preserve">
+    <value>Hide space groups only</value>
+  </data>
+  <data name="QuickHide_SettingsTitle.Text" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="QuickHide_ShowOnStart.Content" xml:space="preserve">
+    <value>Always show icons on startup</value>
+  </data>
+  <data name="QuickHide_Title.Text" xml:space="preserve">
+    <value>Quick Hide</value>
+  </data>
+  <data name="RollUp_Description.Text" xml:space="preserve">
+    <value>Collapse spaces and folder portals to their header when you need more desktop space.</value>
+  </data>
+  <data name="RollUp_Enable.Header" xml:space="preserve">
+    <value>Enable Roll-Up</value>
+  </data>
+  <data name="RollUp_Enable.OffContent" xml:space="preserve">
+    <value>Roll-Up commands are disabled</value>
+  </data>
+  <data name="RollUp_Enable.OnContent" xml:space="preserve">
+    <value>Roll-Up commands are available</value>
+  </data>
+  <data name="RollUp_Saved" xml:space="preserve">
+    <value>Roll-Up settings saved. Applied automatically.</value>
+  </data>
+  <data name="RollUp_Title.Text" xml:space="preserve">
+    <value>Roll-Up</value>
+  </data>
+  <data name="Rules_Add.Content" xml:space="preserve">
+    <value>Add Rule</value>
+  </data>
+  <data name="Rules_AddDialogTitle" xml:space="preserve">
+    <value>Add Sorting Rule</value>
+  </data>
+  <data name="Rules_Added" xml:space="preserve">
+    <value>Rule added. Changes applied automatically.</value>
+  </data>
+  <data name="Rules_AgeRange" xml:space="preserve">
+    <value>{0}..{1} days</value>
+  </data>
+  <data name="Rules_CategoryArchives" xml:space="preserve">
+    <value>Archives</value>
+  </data>
+  <data name="Rules_CategoryAudio" xml:space="preserve">
+    <value>Audio</value>
+  </data>
+  <data name="Rules_CategoryCode" xml:space="preserve">
+    <value>Code</value>
+  </data>
+  <data name="Rules_CategoryDocuments" xml:space="preserve">
+    <value>Documents</value>
+  </data>
+  <data name="Rules_CategoryExecutables" xml:space="preserve">
+    <value>Executables</value>
+  </data>
+  <data name="Rules_CategoryFolders" xml:space="preserve">
+    <value>Folders</value>
+  </data>
+  <data name="Rules_CategoryImages" xml:space="preserve">
+    <value>Images</value>
+  </data>
+  <data name="Rules_CategoryOther" xml:space="preserve">
+    <value>Other</value>
+  </data>
+  <data name="Rules_CategoryShortcuts" xml:space="preserve">
+    <value>Shortcuts</value>
+  </data>
+  <data name="Rules_CategoryVideo" xml:space="preserve">
+    <value>Video</value>
+  </data>
+  <data name="Rules_Description.Text" xml:space="preserve">
+    <value>Define rules to automatically sort new desktop items into spaces by file extension or name pattern.</value>
+  </data>
+  <data name="Rules_EditDialogTitle" xml:space="preserve">
+    <value>Edit Sorting Rule</value>
+  </data>
+  <data name="Rules_EmptyDescription.Text" xml:space="preserve">
+    <value>Add a rule to automatically organize new files on your desktop.</value>
+  </data>
+  <data name="Rules_EmptyTitle.Text" xml:space="preserve">
+    <value>No sorting rules</value>
+  </data>
+  <data name="Rules_EnableRule" xml:space="preserve">
+    <value>Enable or disable rule</value>
+  </data>
+  <data name="Rules_ExtensionRequired" xml:space="preserve">
+    <value>Extension pattern is required.</value>
+  </data>
+  <data name="Rules_Extensions" xml:space="preserve">
+    <value>Extensions (comma-separated)</value>
+  </data>
+  <data name="Rules_FileCategory" xml:space="preserve">
+    <value>File Category</value>
+  </data>
+  <data name="Rules_KindAge" xml:space="preserve">
+    <value>Age</value>
+  </data>
+  <data name="Rules_KindCategory" xml:space="preserve">
+    <value>Category</value>
+  </data>
+  <data name="Rules_KindExtension" xml:space="preserve">
+    <value>Extension</value>
+  </data>
+  <data name="Rules_KindName" xml:space="preserve">
+    <value>Name contains</value>
+  </data>
+  <data name="Rules_KindShortcut" xml:space="preserve">
+    <value>Shortcut target</value>
+  </data>
+  <data name="Rules_KindSize" xml:space="preserve">
+    <value>Size</value>
+  </data>
+  <data name="Rules_MatchBy" xml:space="preserve">
+    <value>Match By</value>
+  </data>
+  <data name="Rules_MaxAge" xml:space="preserve">
+    <value>Max age (days, -1 = unlimited)</value>
+  </data>
+  <data name="Rules_MaxSize" xml:space="preserve">
+    <value>Max size (KB, -1 = unlimited)</value>
+  </data>
+  <data name="Rules_MinAge" xml:space="preserve">
+    <value>Min age (days)</value>
+  </data>
+  <data name="Rules_MinSize" xml:space="preserve">
+    <value>Min size (KB)</value>
+  </data>
+  <data name="Rules_NameContains" xml:space="preserve">
+    <value>Name contains</value>
+  </data>
+  <data name="Rules_NameExample" xml:space="preserve">
+    <value>report</value>
+  </data>
+  <data name="Rules_NameRequired" xml:space="preserve">
+    <value>Name substring is required.</value>
+  </data>
+  <data name="Rules_NoTarget" xml:space="preserve">
+    <value>(no target)</value>
+  </data>
+  <data name="Rules_Priority" xml:space="preserve">
+    <value>Priority (lower = evaluated first)</value>
+  </data>
+  <data name="Rules_Removed" xml:space="preserve">
+    <value>Rule removed.</value>
+  </data>
+  <data name="Rules_ShortcutRequired" xml:space="preserve">
+    <value>Shortcut target substring is required.</value>
+  </data>
+  <data name="Rules_ShortcutTarget" xml:space="preserve">
+    <value>Shortcut target contains</value>
+  </data>
+  <data name="Rules_TargetRequired" xml:space="preserve">
+    <value>Target space is required.</value>
+  </data>
+  <data name="Rules_TargetSpace" xml:space="preserve">
+    <value>Target Space</value>
+  </data>
+  <data name="Rules_TargetSpacePlaceholder" xml:space="preserve">
+    <value>Select a space</value>
+  </data>
+  <data name="Rules_Title.Text" xml:space="preserve">
+    <value>Sorting Rules</value>
+  </data>
+  <data name="Rules_Updated" xml:space="preserve">
+    <value>Rule updated.</value>
+  </data>
+  <data name="Settings_AutoArrangeSaved" xml:space="preserve">
+    <value>Setting saved. Applied automatically.</value>
+  </data>
+  <data name="Settings_AutoUpdateCheck.Header" xml:space="preserve">
+    <value>Check for updates at startup</value>
+  </data>
+  <data name="Settings_AutoUpdateCheckDescription.Text" xml:space="preserve">
+    <value>DeskSpace OS checks once per start and installs a newer version automatically. Turn this off to check only manually from the menu.</value>
+  </data>
+  <data name="Settings_AutoUpdateCheckSaved" xml:space="preserve">
+    <value>Update setting saved.</value>
+  </data>
+  <data name="Settings_DisableAutoArrange.Header" xml:space="preserve">
+    <value>Disable icon auto-arrange</value>
+  </data>
+  <data name="Settings_DisableAutoArrangeDescription.Text" xml:space="preserve">
+    <value>Automatically disables Windows auto-arrange when the service starts, so icons can be freely positioned inside spaces. Restored on service exit.</value>
+  </data>
+  <data name="Settings_Language.Header" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="Settings_LanguageDescription.Text" xml:space="preserve">
+    <value>Choose the app language. Restart DeskSpace OS Settings to apply the change everywhere.</value>
+  </data>
+  <data name="Settings_LanguageRestartRequired" xml:space="preserve">
+    <value>Language saved. Restart DeskSpace OS Settings to apply it everywhere.</value>
+  </data>
+  <data name="Settings_PageDescription.Text" xml:space="preserve">
+    <value>General application settings.</value>
+  </data>
+  <data name="Settings_PageTitle.Text" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="Settings_QuickHide.Header" xml:space="preserve">
+    <value>Quick Hide</value>
+  </data>
+  <data name="Settings_QuickHideDescription.Text" xml:space="preserve">
+    <value>Quick-hide desktop icons and spaces with a double-click on empty desktop space.</value>
+  </data>
+  <data name="Settings_QuickHideSaved" xml:space="preserve">
+    <value>Quick Hide setting saved.</value>
+  </data>
+  <data name="Settings_StartWithWindows.Header" xml:space="preserve">
+    <value>Start with Windows</value>
+  </data>
+  <data name="Settings_StartWithWindowsDescription.Text" xml:space="preserve">
+    <value>Launch the DeskSpace OS service automatically when you sign in.</value>
+  </data>
+  <data name="Settings_StartupDisabled" xml:space="preserve">
+    <value>Startup entry removed.</value>
+  </data>
+  <data name="Settings_StartupEnabled" xml:space="preserve">
+    <value>DeskSpace OS will start with Windows.</value>
+  </data>
+  <data name="Settings_StartupError" xml:space="preserve">
+    <value>Could not update startup setting: {0}</value>
+  </data>
+  <data name="Settings_SystemDefault.Content" xml:space="preserve">
+    <value>System default</value>
+  </data>
+  <data name="Spaces_ColorTransparency" xml:space="preserve">
+    <value>Color &amp; Transparency</value>
+  </data>
+  <data name="Spaces_Create.Text" xml:space="preserve">
+    <value>Create Space</value>
+  </data>
+  <data name="Spaces_CreateDialogTitle" xml:space="preserve">
+    <value>Create Space</value>
+  </data>
+  <data name="Spaces_Created" xml:space="preserve">
+    <value>Created “{0}”. Changes applied automatically.</value>
+  </data>
+  <data name="Spaces_DefaultName" xml:space="preserve">
+    <value>New Space</value>
+  </data>
+  <data name="Spaces_DeleteConfirmation" xml:space="preserve">
+    <value>Are you sure you want to delete “{0}”? Icons will be released back to the desktop.</value>
+  </data>
+  <data name="Spaces_DeleteDialogTitle" xml:space="preserve">
+    <value>Delete Space</value>
+  </data>
+  <data name="Spaces_Deleted" xml:space="preserve">
+    <value>Deleted “{0}”. Changes applied automatically.</value>
+  </data>
+  <data name="Spaces_Description.Text" xml:space="preserve">
+    <value>Manage your desktop spaces. Changes are saved and applied automatically.</value>
+  </data>
+  <data name="Spaces_Details" xml:space="preserve">
+    <value>Icons: {0} • {1}×{2}</value>
+  </data>
+  <data name="Spaces_EditDialogTitle" xml:space="preserve">
+    <value>Edit Space</value>
+  </data>
+  <data name="Spaces_Empty" xml:space="preserve">
+    <value>Empty</value>
+  </data>
+  <data name="Spaces_EmptyDescription.Text" xml:space="preserve">
+    <value>Use Create Space or draw a rectangle on the desktop to create your first space.</value>
+  </data>
+  <data name="Spaces_EmptyTitle.Text" xml:space="preserve">
+    <value>No spaces yet</value>
+  </data>
+  <data name="Spaces_Height" xml:space="preserve">
+    <value>Height</value>
+  </data>
+  <data name="Spaces_NamePlaceholder" xml:space="preserve">
+    <value>Space name</value>
+  </data>
+  <data name="Spaces_Title.Text" xml:space="preserve">
+    <value>Spaces</value>
+  </data>
+  <data name="Spaces_TitleField" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="Spaces_Updated" xml:space="preserve">
+    <value>Space updated. Changes applied automatically.</value>
+  </data>
+  <data name="Spaces_Width" xml:space="preserve">
+    <value>Width</value>
+  </data>
+  <data name="Tabs_Description.Text" xml:space="preserve">
+    <value>Choose how space and folder portal tabs are drawn.</value>
+  </data>
+  <data name="Tabs_Flat.Content" xml:space="preserve">
+    <value>Flat</value>
+  </data>
+  <data name="Tabs_Menu.Content" xml:space="preserve">
+    <value>Menu</value>
+  </data>
+  <data name="Tabs_Rounded.Content" xml:space="preserve">
+    <value>Rounded</value>
+  </data>
+  <data name="Tabs_Saved" xml:space="preserve">
+    <value>Tab settings saved. Applied automatically.</value>
+  </data>
+  <data name="Tabs_Segmented.Content" xml:space="preserve">
+    <value>Segmented</value>
+  </data>
+  <data name="Tabs_Style.Header" xml:space="preserve">
+    <value>Tab style</value>
+  </data>
+  <data name="Tabs_Title.Text" xml:space="preserve">
+    <value>Tabs</value>
+  </data>
+  <data name="Update_AvailableMessage" xml:space="preserve">
+    <value>DeskSpace OS {0} is available. It is installed on the next start while the automatic update check is enabled.</value>
+  </data>
+  <data name="Update_AvailableTitle" xml:space="preserve">
+    <value>Update available</value>
+  </data>
+  <data name="Update_Checking" xml:space="preserve">
+    <value>Checking…</value>
+  </data>
+  <data name="Update_DevelopmentMessage" xml:space="preserve">
+    <value>Version {0} is not installed through DeskSpace OS Setup, so automatic updates are unavailable.</value>
+  </data>
+  <data name="Update_DevelopmentTitle" xml:space="preserve">
+    <value>Development build</value>
+  </data>
+  <data name="Update_ErrorMessage" xml:space="preserve">
+    <value>DeskSpace OS could not check for updates: {0}</value>
+  </data>
+  <data name="Update_ErrorTitle" xml:space="preserve">
+    <value>Update check failed</value>
+  </data>
+  <data name="Update_MenuLabel" xml:space="preserve">
+    <value>Check for updates</value>
+  </data>
+  <data name="Update_UpToDateMessage" xml:space="preserve">
+    <value>DeskSpace OS {0} is the latest version.</value>
+  </data>
+  <data name="Update_UpToDateTitle" xml:space="preserve">
+    <value>You're up to date</value>
+  </data>
+  <data name="Zen_Description.Text" xml:space="preserve">
+    <value>When enabled, spaces fade into the wallpaper when the mouse is idle over other windows, keeping the desktop distraction-free. Hover back onto the desktop to bring them back.</value>
+  </data>
+  <data name="Zen_EnableToggle.Header" xml:space="preserve">
+    <value>Enable Zen Mode</value>
+  </data>
+  <data name="Zen_EnableToggle.OffContent" xml:space="preserve">
+    <value>Spaces stay visible</value>
+  </data>
+  <data name="Zen_EnableToggle.OnContent" xml:space="preserve">
+    <value>Spaces fade when idle</value>
+  </data>
+  <data name="Zen_IdleTime.Header" xml:space="preserve">
+    <value>Idle time before fade (seconds)</value>
+  </data>
+  <data name="Zen_Opacity.Header" xml:space="preserve">
+    <value>Faded opacity (0.0 – 1.0)</value>
+  </data>
+  <data name="Zen_PageTitle.Text" xml:space="preserve">
+    <value>Zen Mode</value>
+  </data>
+  <data name="Zen_Preview.Text" xml:space="preserve">
+    <value>Preview</value>
+  </data>
+  <data name="Zen_PreviewOffActive.Text" xml:space="preserve">
+    <value>Active</value>
+  </data>
+  <data name="Zen_PreviewOffCaption.Text" xml:space="preserve">
+    <value>Off — spaces stay visible</value>
+  </data>
+  <data name="Zen_PreviewOffImageName" xml:space="preserve">
+    <value>Desktop with Zen Mode off — spaces stay visible</value>
+  </data>
+  <data name="Zen_PreviewOnActive.Text" xml:space="preserve">
+    <value>Active</value>
+  </data>
+  <data name="Zen_PreviewOnCaption.Text" xml:space="preserve">
+    <value>On — spaces fade when idle</value>
+  </data>
+  <data name="Zen_PreviewOnImageName" xml:space="preserve">
+    <value>Desktop with Zen Mode on — spaces faded into the wallpaper</value>
+  </data>
+  <data name="Zen_Saved" xml:space="preserve">
+    <value>Zen Mode settings saved. Applied automatically.</value>
+  </data>
+</root>

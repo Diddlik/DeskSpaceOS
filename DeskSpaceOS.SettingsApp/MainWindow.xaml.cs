@@ -13,6 +13,9 @@ public sealed partial class MainWindow : Window
     {
         InitializeComponent();
 
+        if (NavView.SettingsItem is NavigationViewItem settingsItem)
+            settingsItem.Content = Loc.Get("Nav_Settings");
+
         ExtendsContentIntoTitleBar = true;
         SetTitleBar(AppTitleBar);
         SystemBackdrop = new MicaBackdrop();
@@ -31,6 +34,54 @@ public sealed partial class MainWindow : Window
 
         NavView.SelectedItem = AboutNavItem;
         ContentFrame.Navigate(typeof(AboutPage));
+    }
+
+    private async void NavView_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
+    {
+        if (args.InvokedItemContainer?.Tag as string is not "Update")
+            return;
+
+        UpdateNavItem.IsEnabled = false;
+        UpdateNavItem.Content = Loc.Get("Update_Checking");
+
+        string title;
+        string message;
+
+        try
+        {
+            var result = await UpdateChecker.CheckAsync();
+            (title, message) = result.Status switch
+            {
+                UpdateCheckStatus.DevelopmentBuild => (
+                    Loc.Get("Update_DevelopmentTitle"),
+                    Loc.Format("Update_DevelopmentMessage", result.CurrentVersion)),
+                UpdateCheckStatus.UpToDate => (
+                    Loc.Get("Update_UpToDateTitle"),
+                    Loc.Format("Update_UpToDateMessage", result.CurrentVersion)),
+                _ => (
+                    Loc.Get("Update_AvailableTitle"),
+                    Loc.Format("Update_AvailableMessage", result.AvailableVersion!))
+            };
+        }
+        catch (Exception ex)
+        {
+            title = Loc.Get("Update_ErrorTitle");
+            message = Loc.Format("Update_ErrorMessage", ex.Message);
+        }
+        finally
+        {
+            UpdateNavItem.Content = Loc.Get("Update_MenuLabel");
+            UpdateNavItem.IsEnabled = true;
+        }
+
+        var dialog = new ContentDialog
+        {
+            Title = title,
+            Content = message,
+            CloseButtonText = Loc.Get("Common_Close"),
+            XamlRoot = NavView.XamlRoot
+        };
+        await dialog.ShowAsync();
     }
 
     private void NavView_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)

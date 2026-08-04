@@ -42,7 +42,7 @@ public sealed partial class LayoutPage : Page
     private void Persist()
     {
         AppSettingsStore.Save(_settings);
-        StatusInfoBar.Message = "Layout settings saved. Applied automatically.";
+        StatusInfoBar.Message = Loc.Get("Layout_Saved");
         StatusInfoBar.Severity = InfoBarSeverity.Success;
         StatusInfoBar.IsOpen = true;
     }

@@ -9,13 +9,13 @@
 
     <ScrollViewer>
         <StackPanel Spacing="24" Padding="0,0,16,24">
-            <TextBlock Text="Color &amp; Appearance" FontSize="24" FontWeight="SemiBold" />
-            <TextBlock Text="Configure the default look for new spaces."
+            <TextBlock x:Uid="Appearance_Title" FontSize="24" FontWeight="SemiBold" />
+            <TextBlock x:Uid="Appearance_Description"
                        Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" />
 
             <!-- Preview -->
             <StackPanel Spacing="8">
-                <TextBlock Text="Preview" FontSize="14" FontWeight="SemiBold" />
+                <TextBlock x:Uid="Appearance_Preview" FontSize="14" FontWeight="SemiBold" />
                 <Border x:Name="PreviewBorder"
                         Width="300" Height="160" HorizontalAlignment="Left"
                         CornerRadius="8"
@@ -23,7 +23,7 @@
                     <Grid>
                         <Border x:Name="PreviewHeader" Height="32" VerticalAlignment="Top"
                                 Background="#80000000" CornerRadius="8,8,0,0">
-                            <TextBlock Text="New Space" Foreground="White"
+                            <TextBlock x:Uid="Appearance_NewSpace" Foreground="White"
                                        FontFamily="Segoe UI Variable, Segoe UI"
                                        FontSize="14" FontWeight="SemiBold"
                                        VerticalAlignment="Center" Margin="12,0,0,0" />
@@ -34,7 +34,7 @@
 
             <!-- Default color -->
             <StackPanel Spacing="8">
-                <TextBlock Text="Default Space Color" FontSize="14" FontWeight="SemiBold" />
+                <TextBlock x:Uid="Appearance_DefaultColor" FontSize="14" FontWeight="SemiBold" />
                 <ColorPicker x:Name="DefaultColorPicker"
                              IsAlphaEnabled="True"
                              IsColorSpectrumVisible="True"
@@ -44,7 +44,7 @@
             </StackPanel>
 
             <!-- Save -->
-            <Button Content="Save Defaults" Style="{ThemeResource AccentButtonStyle}" Click="SaveButton_Click" />
+            <Button x:Uid="Appearance_Save" Style="{ThemeResource AccentButtonStyle}" Click="SaveButton_Click" />
             <InfoBar x:Name="StatusInfoBar" IsOpen="False" IsClosable="True" />
         </StackPanel>
     </ScrollViewer>

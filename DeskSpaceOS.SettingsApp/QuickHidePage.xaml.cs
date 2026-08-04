@@ -70,8 +70,8 @@ public sealed partial class QuickHidePage : Page
         AppSettingsStore.Save(_settings);
         SaveButton.IsEnabled = false;
 
-        StatusInfoBar.Title = "Settings Saved";
-        StatusInfoBar.Message = "Quick Hide settings have been updated.";
+        StatusInfoBar.Title = Loc.Get("QuickHide_SavedTitle");
+        StatusInfoBar.Message = Loc.Get("QuickHide_SavedMessage");
         StatusInfoBar.Severity = InfoBarSeverity.Success;
         StatusInfoBar.IsOpen = true;
     }

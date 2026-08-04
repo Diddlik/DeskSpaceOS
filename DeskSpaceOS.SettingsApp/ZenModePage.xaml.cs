@@ -1,5 +1,9 @@
+using System;
+using System.IO;
 using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Automation;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Media.Imaging;
 using DeskSpaceOS.Core.Storage;
 
 namespace DeskSpaceOS_SettingsApp;
@@ -12,7 +16,18 @@ public sealed partial class ZenModePage : Page
     public ZenModePage()
     {
         this.InitializeComponent();
+
+        // Unpackaged WinUI 3 fails to load large images through ms-appx/relative
+        // URIs (they resolve to loose files via StorageFile, which needs package
+        // identity). Load the previews straight from the exe directory instead.
+        PreviewOffImage.Source = LoadAsset("zen_mode_off.png");
+        PreviewOnImage.Source = LoadAsset("zen_mode_on.png");
+        AutomationProperties.SetName(PreviewOffImage, Loc.Get("Zen_PreviewOffImageName"));
+        AutomationProperties.SetName(PreviewOnImage, Loc.Get("Zen_PreviewOnImageName"));
     }
+
+    private static BitmapImage LoadAsset(string fileName) =>
+        new(new Uri(Path.Combine(AppContext.BaseDirectory, "Assets", fileName)));
 
     private void Page_Loaded(object sender, RoutedEventArgs e)
     {
@@ -62,7 +77,7 @@ public sealed partial class ZenModePage : Page
     private void Persist()
     {
         AppSettingsStore.Save(_settings);
-        StatusInfoBar.Message = "Zen Mode settings saved. Applied automatically.";
+        StatusInfoBar.Message = Loc.Get("Zen_Saved");
         StatusInfoBar.Severity = InfoBarSeverity.Success;
         StatusInfoBar.IsOpen = true;
     }

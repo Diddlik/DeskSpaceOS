@@ -2,6 +2,7 @@ using System.IO;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using DeskSpaceOS.Core.Storage;
 using Velopack;
 using Velopack.Sources;
 
@@ -9,8 +10,7 @@ namespace DeskSpaceOS.Service;
 
 public class UpdateService : BackgroundService
 {
-    private static readonly TimeSpan StartupDelay = TimeSpan.FromMinutes(2);
-    private static readonly TimeSpan CheckInterval = TimeSpan.FromHours(4);
+    private const double DefaultStartupDelaySeconds = 120;
 
     private readonly ILogger<UpdateService> _logger;
     private readonly IConfiguration _config;
@@ -25,12 +25,20 @@ public class UpdateService : BackgroundService
     {
         await Task.Delay(StartupDelay, stoppingToken);
 
-        while (!stoppingToken.IsCancellationRequested)
+        if (!AppSettingsStore.Load().AutoUpdateCheck)
         {
-            await TryApplyUpdateAsync(stoppingToken);
-            await Task.Delay(CheckInterval, stoppingToken);
+            _logger.LogInformation("Automatic update check is disabled — skipping.");
+            return;
         }
+
+        await TryApplyUpdateAsync(stoppingToken);
     }
+
+    // Delay before the single startup check so the desktop can settle first.
+    // Override via Updates:StartupDelaySeconds (0 for immediate checks while testing).
+    private TimeSpan StartupDelay =>
+        TimeSpan.FromSeconds(
+            _config.GetValue("Updates:StartupDelaySeconds", DefaultStartupDelaySeconds));
 
     private async Task TryApplyUpdateAsync(CancellationToken ct)
     {
@@ -60,10 +68,13 @@ public class UpdateService : BackgroundService
             _logger.LogInformation("Download complete. Applying update and exiting.");
             mgr.ApplyUpdatesAndExit(update.TargetFullRelease);
         }
-        catch (OperationCanceledException) { }
+        catch (OperationCanceledException)
+        {
+            _logger.LogDebug("Update check cancelled during shutdown.");
+        }
         catch (Exception ex)
         {
-            _logger.LogWarning(ex, "Update check failed — will retry in {Hours}h.", CheckInterval.TotalHours);
+            _logger.LogWarning(ex, "Update check failed — retrying on next start.");
         }
     }
 

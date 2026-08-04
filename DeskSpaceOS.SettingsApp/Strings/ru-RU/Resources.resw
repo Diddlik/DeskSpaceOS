@@ -1,0 +1,766 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms</value></resheader>
+  <data name="About_CreditsDescription.Text" xml:space="preserve">
+    <value>Создано с любовью к сообществу пользователей рабочего стола. Это приложение использует следующие библиотеки и технологии с открытым исходным кодом:</value>
+  </data>
+  <data name="About_CreditsTitle.Text" xml:space="preserve">
+    <value>Благодарности и пакеты с открытым исходным кодом</value>
+  </data>
+  <data name="About_HostingPackage.Text" xml:space="preserve">
+    <value>• Microsoft.Extensions.Hosting &amp; Logging</value>
+  </data>
+  <data name="About_PageDescription.Text" xml:space="preserve">
+    <value>Сведения о приложении.</value>
+  </data>
+  <data name="About_PageTitle.Text" xml:space="preserve">
+    <value>О программе</value>
+  </data>
+  <data name="About_ProductDescription.Text" xml:space="preserve">
+    <value>Современный органайзер рабочего стола с открытым исходным кодом, группирующий ярлыки и файлы в гибко настраиваемых визуальных пространствах. Наведите порядок в цифровой рабочей среде и повысьте продуктивность.</value>
+  </data>
+  <data name="About_Thanks.Text" xml:space="preserve">
+    <value>Особая благодарность участникам проекта и сообществу C#.</value>
+  </data>
+  <data name="About_Version" xml:space="preserve">
+    <value>Версия {0}</value>
+  </data>
+  <data name="About_Win32Package.Text" xml:space="preserve">
+    <value>• Win32 APIs (перехватчик SysListView32 и интеграции user32.dll)</value>
+  </data>
+  <data name="About_WinUiPackage.Text" xml:space="preserve">
+    <value>• Microsoft.WindowsAppSDK (WinUI 3)</value>
+  </data>
+  <data name="Appearance_DefaultColor.Text" xml:space="preserve">
+    <value>Цвет пространства по умолчанию</value>
+  </data>
+  <data name="Appearance_Description.Text" xml:space="preserve">
+    <value>Настройте оформление новых пространств по умолчанию.</value>
+  </data>
+  <data name="Appearance_NewSpace.Text" xml:space="preserve">
+    <value>Новое пространство</value>
+  </data>
+  <data name="Appearance_Preview.Text" xml:space="preserve">
+    <value>Предпросмотр</value>
+  </data>
+  <data name="Appearance_Save.Content" xml:space="preserve">
+    <value>Сохранить значения по умолчанию</value>
+  </data>
+  <data name="Appearance_Saved" xml:space="preserve">
+    <value>Оформление по умолчанию сохранено.</value>
+  </data>
+  <data name="Appearance_Title.Text" xml:space="preserve">
+    <value>Цвет и оформление</value>
+  </data>
+  <data name="Common_Add" xml:space="preserve">
+    <value>Добавить</value>
+  </data>
+  <data name="Common_Cancel" xml:space="preserve">
+    <value>Отмена</value>
+  </data>
+  <data name="Common_Close" xml:space="preserve">
+    <value>Закрыть</value>
+  </data>
+  <data name="Common_Create" xml:space="preserve">
+    <value>Создать</value>
+  </data>
+  <data name="Common_Delete" xml:space="preserve">
+    <value>Удалить</value>
+  </data>
+  <data name="Common_Edit" xml:space="preserve">
+    <value>Изменить</value>
+  </data>
+  <data name="Common_Remove" xml:space="preserve">
+    <value>Убрать</value>
+  </data>
+  <data name="Common_Save" xml:space="preserve">
+    <value>Сохранить</value>
+  </data>
+  <data name="Hotkeys_Description.Text" xml:space="preserve">
+    <value>Настройте сочетания клавиш для быстрых действий.</value>
+  </data>
+  <data name="Hotkeys_DistractionFreeDescription.Text" xml:space="preserve">
+    <value>Скрыть все пространства и значки</value>
+  </data>
+  <data name="Hotkeys_DistractionFreePlaceholder.PlaceholderText" xml:space="preserve">
+    <value>например, Win+D</value>
+  </data>
+  <data name="Hotkeys_DistractionFreeTitle.Text" xml:space="preserve">
+    <value>Режим без отвлечений</value>
+  </data>
+  <data name="Hotkeys_NewSpaceDescription.Text" xml:space="preserve">
+    <value>Начать рисовать новое пространство</value>
+  </data>
+  <data name="Hotkeys_NewSpacePlaceholder.PlaceholderText" xml:space="preserve">
+    <value>например, Ctrl+Shift+N</value>
+  </data>
+  <data name="Hotkeys_NewSpaceTitle.Text" xml:space="preserve">
+    <value>Новое пространство</value>
+  </data>
+  <data name="Hotkeys_PeekDescription.Text" xml:space="preserve">
+    <value>Вывести все пространства поверх активных окон</value>
+  </data>
+  <data name="Hotkeys_PeekPlaceholder.PlaceholderText" xml:space="preserve">
+    <value>например, Win+Space</value>
+  </data>
+  <data name="Hotkeys_PeekTitle.Text" xml:space="preserve">
+    <value>Режим Peek</value>
+  </data>
+  <data name="Hotkeys_Save.Content" xml:space="preserve">
+    <value>Сохранить горячие клавиши</value>
+  </data>
+  <data name="Hotkeys_Saved" xml:space="preserve">
+    <value>Горячие клавиши сохранены. Изменения применены автоматически.</value>
+  </data>
+  <data name="Hotkeys_Title.Text" xml:space="preserve">
+    <value>Горячие клавиши</value>
+  </data>
+  <data name="Layout_Description.Text" xml:space="preserve">
+    <value>Настройте выравнивание пространств при перетаскивании. Привязка притягивает пространства к краям экрана и границам других пространств.</value>
+  </data>
+  <data name="Layout_Saved" xml:space="preserve">
+    <value>Параметры макета сохранены. Применены автоматически.</value>
+  </data>
+  <data name="Layout_Snapping.Header" xml:space="preserve">
+    <value>Включить магнитную привязку</value>
+  </data>
+  <data name="Layout_Snapping.OffContent" xml:space="preserve">
+    <value>Свободное перемещение</value>
+  </data>
+  <data name="Layout_Snapping.OnContent" xml:space="preserve">
+    <value>Пространства привязываются при перетаскивании</value>
+  </data>
+  <data name="Layout_SnappingTitle.Text" xml:space="preserve">
+    <value>Магнитная привязка</value>
+  </data>
+  <data name="Layout_Threshold.Header" xml:space="preserve">
+    <value>Порог привязки (пиксели)</value>
+  </data>
+  <data name="Layout_Title.Text" xml:space="preserve">
+    <value>Макет</value>
+  </data>
+  <data name="MainWindow_Title.Text" xml:space="preserve">
+    <value>Параметры DeskSpace OS</value>
+  </data>
+  <data name="Nav_About.Content" xml:space="preserve">
+    <value>О программе</value>
+  </data>
+  <data name="Nav_Appearance.Content" xml:space="preserve">
+    <value>Цвет и оформление</value>
+  </data>
+  <data name="Nav_CheckForUpdates.Content" xml:space="preserve">
+    <value>Проверить обновления</value>
+  </data>
+  <data name="Nav_Hotkeys.Content" xml:space="preserve">
+    <value>Горячие клавиши</value>
+  </data>
+  <data name="Nav_Layout.Content" xml:space="preserve">
+    <value>Макет</value>
+  </data>
+  <data name="Nav_Peek.Content" xml:space="preserve">
+    <value>Peek</value>
+  </data>
+  <data name="Nav_Portals.Content" xml:space="preserve">
+    <value>Порталы папок</value>
+  </data>
+  <data name="Nav_QuickHide.Content" xml:space="preserve">
+    <value>Быстрое скрытие</value>
+  </data>
+  <data name="Nav_RollUp.Content" xml:space="preserve">
+    <value>Сворачивание</value>
+  </data>
+  <data name="Nav_Rules.Content" xml:space="preserve">
+    <value>Правила сортировки</value>
+  </data>
+  <data name="Nav_Settings" xml:space="preserve">
+    <value>Параметры</value>
+  </data>
+  <data name="Nav_Spaces.Content" xml:space="preserve">
+    <value>Пространства</value>
+  </data>
+  <data name="Nav_Tabs.Content" xml:space="preserve">
+    <value>Вкладки</value>
+  </data>
+  <data name="Nav_ZenMode.Content" xml:space="preserve">
+    <value>Режим дзен</value>
+  </data>
+  <data name="Peek_Description.Text" xml:space="preserve">
+    <value>Временно выводить пространства и порталы папок поверх активных окон.</value>
+  </data>
+  <data name="Peek_Enable.Header" xml:space="preserve">
+    <value>Включить Peek</value>
+  </data>
+  <data name="Peek_Enable.OffContent" xml:space="preserve">
+    <value>Горячая клавиша Peek отключена</value>
+  </data>
+  <data name="Peek_Enable.OnContent" xml:space="preserve">
+    <value>Горячая клавиша Peek активна</value>
+  </data>
+  <data name="Peek_Hotkey.Header" xml:space="preserve">
+    <value>Горячая клавиша Peek</value>
+  </data>
+  <data name="Peek_Hotkey.PlaceholderText" xml:space="preserve">
+    <value>например, Win+Space</value>
+  </data>
+  <data name="Peek_Saved" xml:space="preserve">
+    <value>Параметры Peek сохранены. Применены автоматически.</value>
+  </data>
+  <data name="Peek_Title.Text" xml:space="preserve">
+    <value>Peek</value>
+  </data>
+  <data name="Portals_Add.Content" xml:space="preserve">
+    <value>Добавить портал папки</value>
+  </data>
+  <data name="Portals_AddDialogTitle" xml:space="preserve">
+    <value>Добавить портал папки</value>
+  </data>
+  <data name="Portals_Added" xml:space="preserve">
+    <value>Портал добавлен. Он автоматически появится на рабочем столе.</value>
+  </data>
+  <data name="Portals_Ascending.Content" xml:space="preserve">
+    <value>По возрастанию</value>
+  </data>
+  <data name="Portals_Browse.Content" xml:space="preserve">
+    <value>Обзор…</value>
+  </data>
+  <data name="Portals_ColumnDate.Content" xml:space="preserve">
+    <value>Дата изменения</value>
+  </data>
+  <data name="Portals_ColumnName.Content" xml:space="preserve">
+    <value>Имя</value>
+  </data>
+  <data name="Portals_ColumnSize.Content" xml:space="preserve">
+    <value>Размер</value>
+  </data>
+  <data name="Portals_DefaultName" xml:space="preserve">
+    <value>Портал</value>
+  </data>
+  <data name="Portals_Descending.Content" xml:space="preserve">
+    <value>По убыванию</value>
+  </data>
+  <data name="Portals_Description.Text" xml:space="preserve">
+    <value>Отображайте содержимое папки на рабочем столе. Файлы, добавленные в папку или удалённые из неё, автоматически появляются в пространстве портала.</value>
+  </data>
+  <data name="Portals_Details" xml:space="preserve">
+    <value>{0}×{1} • {2} • Сортировка: {3}{4}</value>
+  </data>
+  <data name="Portals_DirectoryMissing" xml:space="preserve">
+    <value>Каталог не существует.</value>
+  </data>
+  <data name="Portals_EditDialogTitle" xml:space="preserve">
+    <value>Изменить портал папки</value>
+  </data>
+  <data name="Portals_EmptyDescription.Text" xml:space="preserve">
+    <value>Добавьте портал, чтобы отобразить на рабочем столе такую папку, как «Загрузки».</value>
+  </data>
+  <data name="Portals_EmptyTitle.Text" xml:space="preserve">
+    <value>Нет порталов папок</value>
+  </data>
+  <data name="Portals_EnableNavigation.Header" xml:space="preserve">
+    <value>Включить навигацию</value>
+  </data>
+  <data name="Portals_EnableNavigation.OffContent" xml:space="preserve">
+    <value>Щелчок открывает папки в Проводнике</value>
+  </data>
+  <data name="Portals_EnableNavigation.OnContent" xml:space="preserve">
+    <value>Щелчок выполняет переход внутри портала</value>
+  </data>
+  <data name="Portals_FolderPath.Text" xml:space="preserve">
+    <value>Путь к папке</value>
+  </data>
+  <data name="Portals_Name.Header" xml:space="preserve">
+    <value>Название портала</value>
+  </data>
+  <data name="Portals_Name.PlaceholderText" xml:space="preserve">
+    <value>например, Загрузки</value>
+  </data>
+  <data name="Portals_NavigationOn" xml:space="preserve">
+    <value> • Навигация: вкл.</value>
+  </data>
+  <data name="Portals_PathRequired" xml:space="preserve">
+    <value>Необходимо указать путь к папке.</value>
+  </data>
+  <data name="Portals_Removed" xml:space="preserve">
+    <value>Портал удалён. Изменения применены автоматически.</value>
+  </data>
+  <data name="Portals_SelectFolder" xml:space="preserve">
+    <value>Выбрать папку</value>
+  </data>
+  <data name="Portals_SortBy.Header" xml:space="preserve">
+    <value>Сортировать по</value>
+  </data>
+  <data name="Portals_SortDate.Content" xml:space="preserve">
+    <value>Дата изменения</value>
+  </data>
+  <data name="Portals_SortDateLabel" xml:space="preserve">
+    <value>Дата</value>
+  </data>
+  <data name="Portals_SortDirection.Header" xml:space="preserve">
+    <value>Направление сортировки</value>
+  </data>
+  <data name="Portals_SortName.Content" xml:space="preserve">
+    <value>Имя</value>
+  </data>
+  <data name="Portals_SortNameLabel" xml:space="preserve">
+    <value>Имя</value>
+  </data>
+  <data name="Portals_SortSize.Content" xml:space="preserve">
+    <value>Размер</value>
+  </data>
+  <data name="Portals_SortSizeLabel" xml:space="preserve">
+    <value>Размер</value>
+  </data>
+  <data name="Portals_Title.Text" xml:space="preserve">
+    <value>Порталы папок</value>
+  </data>
+  <data name="Portals_Updated" xml:space="preserve">
+    <value>Портал обновлён. Изменения применены автоматически.</value>
+  </data>
+  <data name="Portals_ViewDetails.Content" xml:space="preserve">
+    <value>Подробности</value>
+  </data>
+  <data name="Portals_ViewDetailsLabel" xml:space="preserve">
+    <value>Подробности</value>
+  </data>
+  <data name="Portals_ViewIcons.Content" xml:space="preserve">
+    <value>Значки</value>
+  </data>
+  <data name="Portals_ViewIconsLabel" xml:space="preserve">
+    <value>Значки</value>
+  </data>
+  <data name="Portals_ViewMode.Header" xml:space="preserve">
+    <value>Режим просмотра</value>
+  </data>
+  <data name="Portals_VisibleColumns.Text" xml:space="preserve">
+    <value>Видимые столбцы (режим «Подробности»)</value>
+  </data>
+  <data name="QuickHide_AdditionalOptions.Text" xml:space="preserve">
+    <value>Дополнительные параметры</value>
+  </data>
+  <data name="QuickHide_AutoHide.Content" xml:space="preserve">
+    <value>Автоматически скрывать значки, когда рабочий стол не используется</value>
+  </data>
+  <data name="QuickHide_AutoShow.Content" xml:space="preserve">
+    <value>Автоматически показывать значки, когда рабочий стол используется</value>
+  </data>
+  <data name="QuickHide_Description.Text" xml:space="preserve">
+    <value>Быстрое скрытие позволяет мгновенно скрывать и показывать значки рабочего стола двойным щелчком по пустому месту на нём.</value>
+  </data>
+  <data name="QuickHide_Enabled.Content" xml:space="preserve">
+    <value>Включено</value>
+  </data>
+  <data name="QuickHide_ExcludeSpaces.Content" xml:space="preserve">
+    <value>Исключить отдельные пространства</value>
+  </data>
+  <data name="QuickHide_HowToUse.Content" xml:space="preserve">
+    <value>Как использовать</value>
+  </data>
+  <data name="QuickHide_PreviewCaption.Text" xml:space="preserve">
+    <value>Дважды щёлкните рабочий стол, чтобы скрыть/показать</value>
+  </data>
+  <data name="QuickHide_Save.Content" xml:space="preserve">
+    <value>Сохранить параметры</value>
+  </data>
+  <data name="QuickHide_SavedMessage" xml:space="preserve">
+    <value>Параметры быстрого скрытия обновлены.</value>
+  </data>
+  <data name="QuickHide_SavedTitle" xml:space="preserve">
+    <value>Параметры сохранены</value>
+  </data>
+  <data name="QuickHide_ScopeAll.Content" xml:space="preserve">
+    <value>Скрывать все значки и группы пространств</value>
+  </data>
+  <data name="QuickHide_ScopeIcons.Content" xml:space="preserve">
+    <value>Скрывать только значки рабочего стола</value>
+  </data>
+  <data name="QuickHide_ScopeSpaces.Content" xml:space="preserve">
+    <value>Скрывать только группы пространств</value>
+  </data>
+  <data name="QuickHide_SettingsTitle.Text" xml:space="preserve">
+    <value>Параметры</value>
+  </data>
+  <data name="QuickHide_ShowOnStart.Content" xml:space="preserve">
+    <value>Всегда показывать значки при запуске</value>
+  </data>
+  <data name="QuickHide_Title.Text" xml:space="preserve">
+    <value>Быстрое скрытие</value>
+  </data>
+  <data name="RollUp_Description.Text" xml:space="preserve">
+    <value>Сворачивайте пространства и порталы папок до заголовка, когда нужно больше места на рабочем столе.</value>
+  </data>
+  <data name="RollUp_Enable.Header" xml:space="preserve">
+    <value>Включить сворачивание</value>
+  </data>
+  <data name="RollUp_Enable.OffContent" xml:space="preserve">
+    <value>Команды сворачивания отключены</value>
+  </data>
+  <data name="RollUp_Enable.OnContent" xml:space="preserve">
+    <value>Команды сворачивания доступны</value>
+  </data>
+  <data name="RollUp_Saved" xml:space="preserve">
+    <value>Параметры сворачивания сохранены. Применены автоматически.</value>
+  </data>
+  <data name="RollUp_Title.Text" xml:space="preserve">
+    <value>Сворачивание</value>
+  </data>
+  <data name="Rules_Add.Content" xml:space="preserve">
+    <value>Добавить правило</value>
+  </data>
+  <data name="Rules_AddDialogTitle" xml:space="preserve">
+    <value>Добавить правило сортировки</value>
+  </data>
+  <data name="Rules_Added" xml:space="preserve">
+    <value>Правило добавлено. Изменения применены автоматически.</value>
+  </data>
+  <data name="Rules_AgeRange" xml:space="preserve">
+    <value>{0}..{1} дн.</value>
+  </data>
+  <data name="Rules_CategoryArchives" xml:space="preserve">
+    <value>Архивы</value>
+  </data>
+  <data name="Rules_CategoryAudio" xml:space="preserve">
+    <value>Аудио</value>
+  </data>
+  <data name="Rules_CategoryCode" xml:space="preserve">
+    <value>Код</value>
+  </data>
+  <data name="Rules_CategoryDocuments" xml:space="preserve">
+    <value>Документы</value>
+  </data>
+  <data name="Rules_CategoryExecutables" xml:space="preserve">
+    <value>Исполняемые файлы</value>
+  </data>
+  <data name="Rules_CategoryFolders" xml:space="preserve">
+    <value>Папки</value>
+  </data>
+  <data name="Rules_CategoryImages" xml:space="preserve">
+    <value>Изображения</value>
+  </data>
+  <data name="Rules_CategoryOther" xml:space="preserve">
+    <value>Другое</value>
+  </data>
+  <data name="Rules_CategoryShortcuts" xml:space="preserve">
+    <value>Ярлыки</value>
+  </data>
+  <data name="Rules_CategoryVideo" xml:space="preserve">
+    <value>Видео</value>
+  </data>
+  <data name="Rules_Description.Text" xml:space="preserve">
+    <value>Задайте правила для автоматической сортировки новых элементов рабочего стола по пространствам на основе расширения файла или шаблона имени.</value>
+  </data>
+  <data name="Rules_EditDialogTitle" xml:space="preserve">
+    <value>Изменить правило сортировки</value>
+  </data>
+  <data name="Rules_EmptyDescription.Text" xml:space="preserve">
+    <value>Добавьте правило для автоматической организации новых файлов на рабочем столе.</value>
+  </data>
+  <data name="Rules_EmptyTitle.Text" xml:space="preserve">
+    <value>Нет правил сортировки</value>
+  </data>
+  <data name="Rules_EnableRule" xml:space="preserve">
+    <value>Включить или отключить правило</value>
+  </data>
+  <data name="Rules_ExtensionRequired" xml:space="preserve">
+    <value>Необходимо указать шаблон расширения.</value>
+  </data>
+  <data name="Rules_Extensions" xml:space="preserve">
+    <value>Расширения (через запятую)</value>
+  </data>
+  <data name="Rules_FileCategory" xml:space="preserve">
+    <value>Категория файла</value>
+  </data>
+  <data name="Rules_KindAge" xml:space="preserve">
+    <value>Возраст</value>
+  </data>
+  <data name="Rules_KindCategory" xml:space="preserve">
+    <value>Категория</value>
+  </data>
+  <data name="Rules_KindExtension" xml:space="preserve">
+    <value>Расширение</value>
+  </data>
+  <data name="Rules_KindName" xml:space="preserve">
+    <value>Имя содержит</value>
+  </data>
+  <data name="Rules_KindShortcut" xml:space="preserve">
+    <value>Назначение ярлыка</value>
+  </data>
+  <data name="Rules_KindSize" xml:space="preserve">
+    <value>Размер</value>
+  </data>
+  <data name="Rules_MatchBy" xml:space="preserve">
+    <value>Критерий совпадения</value>
+  </data>
+  <data name="Rules_MaxAge" xml:space="preserve">
+    <value>Макс. возраст (дни, -1 = без ограничений)</value>
+  </data>
+  <data name="Rules_MaxSize" xml:space="preserve">
+    <value>Макс. размер (KB, -1 = без ограничений)</value>
+  </data>
+  <data name="Rules_MinAge" xml:space="preserve">
+    <value>Мин. возраст (дни)</value>
+  </data>
+  <data name="Rules_MinSize" xml:space="preserve">
+    <value>Мин. размер (KB)</value>
+  </data>
+  <data name="Rules_NameContains" xml:space="preserve">
+    <value>Имя содержит</value>
+  </data>
+  <data name="Rules_NameExample" xml:space="preserve">
+    <value>отчёт</value>
+  </data>
+  <data name="Rules_NameRequired" xml:space="preserve">
+    <value>Необходимо указать часть имени.</value>
+  </data>
+  <data name="Rules_NoTarget" xml:space="preserve">
+    <value>(нет назначения)</value>
+  </data>
+  <data name="Rules_Priority" xml:space="preserve">
+    <value>Приоритет (меньше = проверяется раньше)</value>
+  </data>
+  <data name="Rules_Removed" xml:space="preserve">
+    <value>Правило удалено.</value>
+  </data>
+  <data name="Rules_ShortcutRequired" xml:space="preserve">
+    <value>Необходимо указать часть назначения ярлыка.</value>
+  </data>
+  <data name="Rules_ShortcutTarget" xml:space="preserve">
+    <value>Назначение ярлыка содержит</value>
+  </data>
+  <data name="Rules_TargetRequired" xml:space="preserve">
+    <value>Необходимо выбрать целевое пространство.</value>
+  </data>
+  <data name="Rules_TargetSpace" xml:space="preserve">
+    <value>Целевое пространство</value>
+  </data>
+  <data name="Rules_TargetSpacePlaceholder" xml:space="preserve">
+    <value>Выберите пространство</value>
+  </data>
+  <data name="Rules_Title.Text" xml:space="preserve">
+    <value>Правила сортировки</value>
+  </data>
+  <data name="Rules_Updated" xml:space="preserve">
+    <value>Правило обновлено.</value>
+  </data>
+  <data name="Settings_AutoArrangeSaved" xml:space="preserve">
+    <value>Параметр сохранён. Применён автоматически.</value>
+  </data>
+  <data name="Settings_AutoUpdateCheck.Header" xml:space="preserve">
+    <value>Проверять обновления при запуске</value>
+  </data>
+  <data name="Settings_AutoUpdateCheckDescription.Text" xml:space="preserve">
+    <value>DeskSpace OS проверяет обновления один раз при запуске и устанавливает новую версию автоматически. Отключите, чтобы проверять только вручную через меню.</value>
+  </data>
+  <data name="Settings_AutoUpdateCheckSaved" xml:space="preserve">
+    <value>Параметр обновления сохранён.</value>
+  </data>
+  <data name="Settings_DisableAutoArrange.Header" xml:space="preserve">
+    <value>Отключить автоупорядочивание значков</value>
+  </data>
+  <data name="Settings_DisableAutoArrangeDescription.Text" xml:space="preserve">
+    <value>Автоматически отключает автоупорядочивание Windows при запуске службы, чтобы значки можно было свободно размещать внутри пространств. Восстанавливается при завершении работы службы.</value>
+  </data>
+  <data name="Settings_Language.Header" xml:space="preserve">
+    <value>Язык</value>
+  </data>
+  <data name="Settings_LanguageDescription.Text" xml:space="preserve">
+    <value>Выберите язык приложения. Перезапустите параметры DeskSpace OS, чтобы применить изменение везде.</value>
+  </data>
+  <data name="Settings_LanguageRestartRequired" xml:space="preserve">
+    <value>Язык сохранён. Перезапустите параметры DeskSpace OS, чтобы применить его везде.</value>
+  </data>
+  <data name="Settings_PageDescription.Text" xml:space="preserve">
+    <value>Общие параметры приложения.</value>
+  </data>
+  <data name="Settings_PageTitle.Text" xml:space="preserve">
+    <value>Параметры</value>
+  </data>
+  <data name="Settings_QuickHide.Header" xml:space="preserve">
+    <value>Быстрое скрытие</value>
+  </data>
+  <data name="Settings_QuickHideDescription.Text" xml:space="preserve">
+    <value>Быстро скрывать значки и пространства двойным щелчком по пустому месту на рабочем столе.</value>
+  </data>
+  <data name="Settings_QuickHideSaved" xml:space="preserve">
+    <value>Параметр быстрого скрытия сохранён.</value>
+  </data>
+  <data name="Settings_StartWithWindows.Header" xml:space="preserve">
+    <value>Запускать вместе с Windows</value>
+  </data>
+  <data name="Settings_StartWithWindowsDescription.Text" xml:space="preserve">
+    <value>Автоматически запускать службу DeskSpace OS при входе в систему.</value>
+  </data>
+  <data name="Settings_StartupDisabled" xml:space="preserve">
+    <value>Запись автозапуска удалена.</value>
+  </data>
+  <data name="Settings_StartupEnabled" xml:space="preserve">
+    <value>DeskSpace OS будет запускаться вместе с Windows.</value>
+  </data>
+  <data name="Settings_StartupError" xml:space="preserve">
+    <value>Не удалось изменить параметр автозапуска: {0}</value>
+  </data>
+  <data name="Settings_SystemDefault.Content" xml:space="preserve">
+    <value>Системный язык</value>
+  </data>
+  <data name="Spaces_ColorTransparency" xml:space="preserve">
+    <value>Цвет и прозрачность</value>
+  </data>
+  <data name="Spaces_Create.Text" xml:space="preserve">
+    <value>Создать пространство</value>
+  </data>
+  <data name="Spaces_CreateDialogTitle" xml:space="preserve">
+    <value>Создать пространство</value>
+  </data>
+  <data name="Spaces_Created" xml:space="preserve">
+    <value>Создано «{0}». Изменения применены автоматически.</value>
+  </data>
+  <data name="Spaces_DefaultName" xml:space="preserve">
+    <value>Новое пространство</value>
+  </data>
+  <data name="Spaces_DeleteConfirmation" xml:space="preserve">
+    <value>Вы действительно хотите удалить «{0}»? Значки будут возвращены на рабочий стол.</value>
+  </data>
+  <data name="Spaces_DeleteDialogTitle" xml:space="preserve">
+    <value>Удалить пространство</value>
+  </data>
+  <data name="Spaces_Deleted" xml:space="preserve">
+    <value>Удалено «{0}». Изменения применены автоматически.</value>
+  </data>
+  <data name="Spaces_Description.Text" xml:space="preserve">
+    <value>Управляйте пространствами рабочего стола. Изменения сохраняются и применяются автоматически.</value>
+  </data>
+  <data name="Spaces_Details" xml:space="preserve">
+    <value>Значки: {0} • {1}×{2}</value>
+  </data>
+  <data name="Spaces_EditDialogTitle" xml:space="preserve">
+    <value>Изменить пространство</value>
+  </data>
+  <data name="Spaces_Empty" xml:space="preserve">
+    <value>Пусто</value>
+  </data>
+  <data name="Spaces_EmptyDescription.Text" xml:space="preserve">
+    <value>Нажмите «Создать пространство» или нарисуйте прямоугольник на рабочем столе, чтобы создать первое пространство.</value>
+  </data>
+  <data name="Spaces_EmptyTitle.Text" xml:space="preserve">
+    <value>Пространств пока нет</value>
+  </data>
+  <data name="Spaces_Height" xml:space="preserve">
+    <value>Высота</value>
+  </data>
+  <data name="Spaces_NamePlaceholder" xml:space="preserve">
+    <value>Название пространства</value>
+  </data>
+  <data name="Spaces_Title.Text" xml:space="preserve">
+    <value>Пространства</value>
+  </data>
+  <data name="Spaces_TitleField" xml:space="preserve">
+    <value>Заголовок</value>
+  </data>
+  <data name="Spaces_Updated" xml:space="preserve">
+    <value>Пространство обновлено. Изменения применены автоматически.</value>
+  </data>
+  <data name="Spaces_Width" xml:space="preserve">
+    <value>Ширина</value>
+  </data>
+  <data name="Tabs_Description.Text" xml:space="preserve">
+    <value>Выберите оформление вкладок пространств и порталов папок.</value>
+  </data>
+  <data name="Tabs_Flat.Content" xml:space="preserve">
+    <value>Плоские</value>
+  </data>
+  <data name="Tabs_Menu.Content" xml:space="preserve">
+    <value>Меню</value>
+  </data>
+  <data name="Tabs_Rounded.Content" xml:space="preserve">
+    <value>Скруглённые</value>
+  </data>
+  <data name="Tabs_Saved" xml:space="preserve">
+    <value>Параметры вкладок сохранены. Применены автоматически.</value>
+  </data>
+  <data name="Tabs_Segmented.Content" xml:space="preserve">
+    <value>Сегментированные</value>
+  </data>
+  <data name="Tabs_Style.Header" xml:space="preserve">
+    <value>Стиль вкладок</value>
+  </data>
+  <data name="Tabs_Title.Text" xml:space="preserve">
+    <value>Вкладки</value>
+  </data>
+  <data name="Update_AvailableMessage" xml:space="preserve">
+    <value>Доступна DeskSpace OS {0}. Она будет установлена при следующем запуске, пока включена автоматическая проверка обновлений.</value>
+  </data>
+  <data name="Update_AvailableTitle" xml:space="preserve">
+    <value>Доступно обновление</value>
+  </data>
+  <data name="Update_Checking" xml:space="preserve">
+    <value>Проверка…</value>
+  </data>
+  <data name="Update_DevelopmentMessage" xml:space="preserve">
+    <value>Версия {0} установлена не через DeskSpace OS Setup, поэтому автоматические обновления недоступны.</value>
+  </data>
+  <data name="Update_DevelopmentTitle" xml:space="preserve">
+    <value>Версия для разработки</value>
+  </data>
+  <data name="Update_ErrorMessage" xml:space="preserve">
+    <value>DeskSpace OS не удалось проверить обновления: {0}</value>
+  </data>
+  <data name="Update_ErrorTitle" xml:space="preserve">
+    <value>Не удалось проверить обновления</value>
+  </data>
+  <data name="Update_MenuLabel" xml:space="preserve">
+    <value>Проверить обновления</value>
+  </data>
+  <data name="Update_UpToDateMessage" xml:space="preserve">
+    <value>DeskSpace OS {0} — последняя версия.</value>
+  </data>
+  <data name="Update_UpToDateTitle" xml:space="preserve">
+    <value>У вас последняя версия</value>
+  </data>
+  <data name="Zen_Description.Text" xml:space="preserve">
+    <value>Когда режим включён, пространства сливаются с фоновым рисунком, если мышь бездействует над другими окнами, чтобы ничего не отвлекало от работы. Наведите указатель обратно на рабочий стол, чтобы вернуть их.</value>
+  </data>
+  <data name="Zen_EnableToggle.Header" xml:space="preserve">
+    <value>Включить режим дзен</value>
+  </data>
+  <data name="Zen_EnableToggle.OffContent" xml:space="preserve">
+    <value>Пространства остаются видимыми</value>
+  </data>
+  <data name="Zen_EnableToggle.OnContent" xml:space="preserve">
+    <value>Пространства исчезают при бездействии</value>
+  </data>
+  <data name="Zen_IdleTime.Header" xml:space="preserve">
+    <value>Время бездействия до исчезновения (секунды)</value>
+  </data>
+  <data name="Zen_Opacity.Header" xml:space="preserve">
+    <value>Прозрачность после исчезновения (0.0 – 1.0)</value>
+  </data>
+  <data name="Zen_PageTitle.Text" xml:space="preserve">
+    <value>Режим дзен</value>
+  </data>
+  <data name="Zen_Preview.Text" xml:space="preserve">
+    <value>Предпросмотр</value>
+  </data>
+  <data name="Zen_PreviewOffActive.Text" xml:space="preserve">
+    <value>Активно</value>
+  </data>
+  <data name="Zen_PreviewOffCaption.Text" xml:space="preserve">
+    <value>Выкл. — пространства остаются видимыми</value>
+  </data>
+  <data name="Zen_PreviewOffImageName" xml:space="preserve">
+    <value>Рабочий стол с выключенным режимом дзен — пространства остаются видимыми</value>
+  </data>
+  <data name="Zen_PreviewOnActive.Text" xml:space="preserve">
+    <value>Активно</value>
+  </data>
+  <data name="Zen_PreviewOnCaption.Text" xml:space="preserve">
+    <value>Вкл. — пространства исчезают при бездействии</value>
+  </data>
+  <data name="Zen_PreviewOnImageName" xml:space="preserve">
+    <value>Рабочий стол с включённым режимом дзен — пространства слились с фоновым рисунком</value>
+  </data>
+  <data name="Zen_Saved" xml:space="preserve">
+    <value>Параметры режима дзен сохранены. Применены автоматически.</value>
+  </data>
+</root>

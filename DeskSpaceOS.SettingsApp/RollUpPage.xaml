@@ -6,17 +6,14 @@
 
     <ScrollViewer>
         <StackPanel Spacing="24" Padding="0,0,16,24" MaxWidth="720" HorizontalAlignment="Left">
-            <TextBlock Text="Roll-Up" FontSize="24" FontWeight="SemiBold"/>
-            <TextBlock Text="Collapse spaces and folder portals to their header when you need more desktop space."
+            <TextBlock x:Uid="RollUp_Title" FontSize="24" FontWeight="SemiBold"/>
+            <TextBlock x:Uid="RollUp_Description"
                        Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                        TextWrapping="Wrap"/>
 
             <ToggleSwitch
                 x:Name="EnableRollUpToggle"
-                Header="Enable Roll-Up"
-                OnContent="Roll-Up commands are available"
-                OffContent="Roll-Up commands are disabled"
-                AutomationProperties.Name="Enable Roll-Up"
+                x:Uid="RollUp_Enable"
                 AutomationProperties.AutomationId="EnableRollUpToggle"
                 Toggled="EnableRollUpToggle_Toggled"/>
 

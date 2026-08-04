@@ -4,14 +4,7 @@ namespace DeskSpaceOS_SettingsApp;
 
 public sealed partial class AboutPage : Page
 {
-    public string AppVersion
-    {
-        get
-        {
-            var version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
-            return version != null ? $"Version {version.Major}.{version.Minor}.{version.Build}" : "Version Unknown";
-        }
-    }
+    public string AppVersion => Loc.Format("About_Version", UpdateChecker.CurrentVersion);
 
     public AboutPage()
     {

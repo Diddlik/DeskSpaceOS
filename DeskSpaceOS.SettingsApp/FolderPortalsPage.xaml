@@ -9,11 +9,11 @@
 
     <ScrollViewer>
         <StackPanel Spacing="16" Padding="0,0,16,24">
-            <TextBlock Text="Folder Portals" FontSize="24" FontWeight="SemiBold" />
-            <TextBlock Text="Mirror the contents of a folder on your desktop. Files added to or removed from the folder appear automatically in the portal space."
+            <TextBlock x:Uid="Portals_Title" FontSize="24" FontWeight="SemiBold" />
+            <TextBlock x:Uid="Portals_Description"
                        Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" />
 
-            <Button Content="Add Folder Portal" Style="{ThemeResource AccentButtonStyle}" Click="AddPortalButton_Click" />
+            <Button x:Uid="Portals_Add" Style="{ThemeResource AccentButtonStyle}" Click="AddPortalButton_Click" />
 
             <InfoBar x:Name="StatusInfoBar" IsOpen="False" IsClosable="True" />
 
@@ -22,8 +22,8 @@
             <!-- Empty state -->
             <StackPanel x:Name="EmptyState" Visibility="Collapsed" HorizontalAlignment="Center" Spacing="8" Padding="0,40,0,0">
                 <FontIcon Glyph="&#xE8B7;" FontSize="48" Foreground="{ThemeResource TextFillColorSecondaryBrush}" HorizontalAlignment="Center" />
-                <TextBlock Text="No folder portals" FontSize="16" HorizontalAlignment="Center" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
-                <TextBlock Text="Add a portal to mirror a folder like Downloads on your desktop."
+                <TextBlock x:Uid="Portals_EmptyTitle" FontSize="16" HorizontalAlignment="Center" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                <TextBlock x:Uid="Portals_EmptyDescription"
                            HorizontalAlignment="Center" Foreground="{ThemeResource TextFillColorTertiaryBrush}" TextWrapping="Wrap" />
             </StackPanel>
         </StackPanel>

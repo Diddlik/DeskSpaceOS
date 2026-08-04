@@ -75,12 +75,24 @@ Pushing a semver tag `v*` (e.g. `git tag v0.5.1 && git push origin v0.5.1`) trig
 runs `build-installer.ps1`, and publishes a GitHub Release with the Velopack assets to
 `Diddlik/DeskSpaceOS` (channel `stable`, vpk pinned to `0.0.1298`). Manual/local release:
 `build-installer.ps1 -Version X.Y.Z -GitHubToken <tok>` (GitHub) or `-LocalReleasesPath <dir>`.
+`build-installer.ps1` passes the release version into both published assemblies;
+SettingsApp's About page shows Velopack's installed version, falling back to the
+assembly informational version for portable/development builds.
+
 
 ### Auto-update
-`UpdateService` (Velopack `GithubSource`) polls every 4h and self-applies. The release URL
-defaults in code to `https://github.com/Diddlik/DeskSpaceOS`; override with `Updates:Url`
-in `appsettings.json` (shipped next to the exe) — use a local folder / `file://` URI to test
-the update flow. `VelopackApp.Build().Run()` must stay first in `Program.cs`.
+`UpdateService` (Velopack `GithubSource`) performs **one** check per service start and
+self-applies; it does not poll. The check is skipped when `AppSettings.AutoUpdateCheck`
+is `false` (toggle on the SettingsApp Settings page). The release URL defaults in code to
+`https://github.com/Diddlik/DeskSpaceOS`; override with `Updates:Url` in `appsettings.json`
+(shipped next to the exe) — use a local folder / `file://` URI to test the update flow.
+`Updates:StartupDelaySeconds` (default 120) shortens the pre-check delay for testing.
+`VelopackApp.Build().Run()` must stay first in `Program.cs` — it installs the Velopack
+locator that `UpdateService` and SettingsApp's `UpdateChecker` both depend on.
+SettingsApp's footer includes a localized, read-only **Check for updates** action.
+It reports development/up-to-date/available/error states; `UpdateService` remains
+the sole owner of download and apply behavior.
+
 
 SettingsApp requires Windows **Developer Mode** enabled. If a run fails because an
 old instance is live, `taskkill /IM <name>.exe /F` before re-running.
@@ -126,12 +138,17 @@ old instance is live, `taskkill /IM <name>.exe /F` before re-running.
   Settings, About. `PlaceholderPage` exists but is no longer routed to.
 - Namespace is `DeskSpaceOS_SettingsApp` (underscore) — preserve unless the
   `.csproj` `RootNamespace` changes.
+- UI resources live under `Strings/{en-US,de-DE,ru-RU,uk-UA}/Resources.resw`.
+  Settings offers system-default, English, German, Russian, and Ukrainian;
+  `ApplicationLanguages.PrimaryLanguageOverride` is set before XAML initialization.
 
 ## Data & Settings Storage
 
 - User settings persist to `%AppData%\DeskSpaceOS\settings.json` (indented JSON via
   `AppSettingsStore`). Spaces, folder portals, and sorting rules use sibling stores
   in the same folder.
+- `AppSettings.Language` stores the optional BCP-47 UI override (`""` follows the OS).
+- `AppSettings.AutoUpdateCheck` gates the Service's single startup update check.
 - `SettingsWatcher` gives the Service live reload when the SettingsApp writes changes.
 - Do **not** introduce a second settings format without an explicit migration;
   respect the existing patterns in `DeskSpaceOS.Core/Storage/`.

@@ -46,6 +46,12 @@ public class AppSettings
 
     /// <summary>Snap threshold in DIPs — distance at which drag coordinates pull to a snap target.</summary>
     public double SnapThresholdDIPs { get; set; } = 10.0;
+
+    /// <summary>BCP-47 UI language override (e.g. "de-DE"). Empty = follow the OS.</summary>
+    public string Language { get; set; } = "";
+
+    /// <summary>Whether the service checks for updates once at startup.</summary>
+    public bool AutoUpdateCheck { get; set; } = true;
 }
 
 public static class AppSettingsStore

@@ -29,7 +29,7 @@ public sealed partial class HotkeysPage : Page
 
         AppSettingsStore.Save(_settings);
 
-        StatusInfoBar.Message = "Hotkeys saved. Changes applied automatically.";
+        StatusInfoBar.Message = Loc.Get("Hotkeys_Saved");
         StatusInfoBar.Severity = InfoBarSeverity.Success;
         StatusInfoBar.IsOpen = true;
     }

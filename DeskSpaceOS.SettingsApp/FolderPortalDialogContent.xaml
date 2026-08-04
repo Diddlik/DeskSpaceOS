@@ -6,11 +6,10 @@
     <StackPanel Width="460" Spacing="10" Padding="0,0,0,8">
         <TextBox
             x:Name="TitleBox"
-            Header="Portal Name"
-            PlaceholderText="e.g. Downloads" />
+            x:Uid="Portals_Name" />
 
         <StackPanel Spacing="4">
-            <TextBlock Text="Folder Path" FontSize="14" />
+            <TextBlock x:Uid="Portals_FolderPath" FontSize="14" />
             <Grid ColumnSpacing="8">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" MinWidth="0" />
@@ -27,7 +26,7 @@
                 <Button
                     x:Name="BrowseButton"
                     Grid.Column="1"
-                    Content="Browse..."
+                    x:Uid="Portals_Browse"
                     Width="104"
                     Click="BrowseButton_Click" />
             </Grid>
@@ -35,48 +34,46 @@
 
         <ComboBox
             x:Name="ViewModeCombo"
-            Header="View Mode"
+            x:Uid="Portals_ViewMode"
             HorizontalAlignment="Stretch"
             SelectedIndex="0">
-            <ComboBoxItem Content="Icons" />
-            <ComboBoxItem Content="Details" />
+            <ComboBoxItem x:Uid="Portals_ViewIcons" />
+            <ComboBoxItem x:Uid="Portals_ViewDetails" />
         </ComboBox>
 
         <ComboBox
             x:Name="SortCombo"
-            Header="Sort By"
+            x:Uid="Portals_SortBy"
             HorizontalAlignment="Stretch"
             SelectedIndex="0">
-            <ComboBoxItem Content="Name" />
-            <ComboBoxItem Content="Date Modified" />
-            <ComboBoxItem Content="Size" />
+            <ComboBoxItem x:Uid="Portals_SortName" />
+            <ComboBoxItem x:Uid="Portals_SortDate" />
+            <ComboBoxItem x:Uid="Portals_SortSize" />
         </ComboBox>
 
         <ComboBox
             x:Name="SortDirCombo"
-            Header="Sort Direction"
+            x:Uid="Portals_SortDirection"
             HorizontalAlignment="Stretch"
             SelectedIndex="0">
-            <ComboBoxItem Content="Ascending" />
-            <ComboBoxItem Content="Descending" />
+            <ComboBoxItem x:Uid="Portals_Ascending" />
+            <ComboBoxItem x:Uid="Portals_Descending" />
         </ComboBox>
 
         <ToggleSwitch
             x:Name="EnableNavSwitch"
-            Header="Enable Navigation"
-            OffContent="Clicks open folders in Explorer"
-            OnContent="Clicks navigate inside the portal" />
+            x:Uid="Portals_EnableNavigation" />
 
         <TextBlock
-            Text="Visible Columns (Details view)"
+            x:Uid="Portals_VisibleColumns"
             FontSize="13"
             FontWeight="SemiBold"
             Margin="0,2,0,0" />
 
         <StackPanel Orientation="Horizontal" Spacing="20">
-            <CheckBox Content="Name" IsChecked="True" IsEnabled="False" />
-            <CheckBox x:Name="ShowDateCheck" Content="Date Modified" IsChecked="True" />
-            <CheckBox x:Name="ShowSizeCheck" Content="Size" IsChecked="True" />
+            <CheckBox x:Uid="Portals_ColumnName" IsChecked="True" IsEnabled="False" />
+            <CheckBox x:Name="ShowDateCheck" x:Uid="Portals_ColumnDate" IsChecked="True" />
+            <CheckBox x:Name="ShowSizeCheck" x:Uid="Portals_ColumnSize" IsChecked="True" />
         </StackPanel>
     </StackPanel>
 </UserControl>

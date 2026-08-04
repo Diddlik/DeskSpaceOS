@@ -43,7 +43,7 @@ public sealed partial class PeekPage : Page
     private void Persist()
     {
         AppSettingsStore.Save(_settings);
-        StatusInfoBar.Message = "Peek settings saved. Applied automatically.";
+        StatusInfoBar.Message = Loc.Get("Peek_Saved");
         StatusInfoBar.Severity = InfoBarSeverity.Success;
         StatusInfoBar.IsOpen = true;
     }

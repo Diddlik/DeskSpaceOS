@@ -34,7 +34,7 @@ public sealed partial class TabsPage : Page
         _settings.TabStyle = tabStyle;
         AppSettingsStore.Save(_settings);
 
-        StatusInfoBar.Message = "Tab settings saved. Applied automatically.";
+        StatusInfoBar.Message = Loc.Get("Tabs_Saved");
         StatusInfoBar.Severity = InfoBarSeverity.Success;
         StatusInfoBar.IsOpen = true;
     }

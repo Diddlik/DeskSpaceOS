@@ -44,7 +44,7 @@ public sealed partial class AppearancePage : Page
 
         AppSettingsStore.Save(_settings);
 
-        StatusInfoBar.Message = "Default appearance saved.";
+        StatusInfoBar.Message = Loc.Get("Appearance_Saved");
         StatusInfoBar.Severity = InfoBarSeverity.Success;
         StatusInfoBar.IsOpen = true;
     }

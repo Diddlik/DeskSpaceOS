@@ -9,8 +9,8 @@
 
     <ScrollViewer>
         <StackPanel Spacing="24" Padding="0,0,16,24">
-            <TextBlock Text="Hotkeys" FontSize="24" FontWeight="SemiBold" />
-            <TextBlock Text="Configure keyboard shortcuts for quick actions."
+            <TextBlock x:Uid="Hotkeys_Title" FontSize="24" FontWeight="SemiBold" />
+            <TextBlock x:Uid="Hotkeys_Description"
                        Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" />
 
             <!-- Peek Mode -->
@@ -23,12 +23,11 @@
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
                     <StackPanel Spacing="2">
-                        <TextBlock Text="Peek Mode" FontWeight="SemiBold" />
-                        <TextBlock Text="Bring all spaces above active windows"
+                        <TextBlock x:Uid="Hotkeys_PeekTitle" FontWeight="SemiBold" />
+                        <TextBlock x:Uid="Hotkeys_PeekDescription"
                                    Foreground="{ThemeResource TextFillColorSecondaryBrush}" FontSize="12" />
                     </StackPanel>
-                    <TextBox x:Name="PeekHotkeyBox" Grid.Column="1" Width="160"
-                             PlaceholderText="e.g. Win+Space" />
+                    <TextBox x:Name="PeekHotkeyBox" x:Uid="Hotkeys_PeekPlaceholder" Grid.Column="1" Width="160" />
                 </Grid>
             </Border>
 
@@ -42,12 +41,11 @@
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
                     <StackPanel Spacing="2">
-                        <TextBlock Text="Distraction Free Mode" FontWeight="SemiBold" />
-                        <TextBlock Text="Hide all spaces and icons"
+                        <TextBlock x:Uid="Hotkeys_DistractionFreeTitle" FontWeight="SemiBold" />
+                        <TextBlock x:Uid="Hotkeys_DistractionFreeDescription"
                                    Foreground="{ThemeResource TextFillColorSecondaryBrush}" FontSize="12" />
                     </StackPanel>
-                    <TextBox x:Name="DistractionFreeHotkeyBox" Grid.Column="1" Width="160"
-                             PlaceholderText="e.g. Win+D" />
+                    <TextBox x:Name="DistractionFreeHotkeyBox" x:Uid="Hotkeys_DistractionFreePlaceholder" Grid.Column="1" Width="160" />
                 </Grid>
             </Border>
 
@@ -61,16 +59,15 @@
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
                     <StackPanel Spacing="2">
-                        <TextBlock Text="New Space" FontWeight="SemiBold" />
-                        <TextBlock Text="Start drawing a new space"
+                        <TextBlock x:Uid="Hotkeys_NewSpaceTitle" FontWeight="SemiBold" />
+                        <TextBlock x:Uid="Hotkeys_NewSpaceDescription"
                                    Foreground="{ThemeResource TextFillColorSecondaryBrush}" FontSize="12" />
                     </StackPanel>
-                    <TextBox x:Name="NewSpaceHotkeyBox" Grid.Column="1" Width="160"
-                             PlaceholderText="e.g. Ctrl+Shift+N" />
+                    <TextBox x:Name="NewSpaceHotkeyBox" x:Uid="Hotkeys_NewSpacePlaceholder" Grid.Column="1" Width="160" />
                 </Grid>
             </Border>
 
-            <Button Content="Save Hotkeys" Style="{ThemeResource AccentButtonStyle}" Click="SaveButton_Click" />
+            <Button x:Uid="Hotkeys_Save" Style="{ThemeResource AccentButtonStyle}" Click="SaveButton_Click" />
             <InfoBar x:Name="StatusInfoBar" IsOpen="False" IsClosable="True" />
         </StackPanel>
     </ScrollViewer>

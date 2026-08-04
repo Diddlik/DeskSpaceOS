@@ -14,25 +14,36 @@
         </Grid.RowDefinitions>
 
         <Border x:Name="AppTitleBar" Background="Transparent" Height="32">
-            <TextBlock Text="DeskSpace OS Settings" VerticalAlignment="Center" Margin="16,0,0,0" FontSize="12"/>
+            <TextBlock x:Uid="MainWindow_Title" VerticalAlignment="Center" Margin="16,0,0,0" FontSize="12"/>
         </Border>
 
-        <NavigationView x:Name="NavView" Grid.Row="1" PaneDisplayMode="Left" IsSettingsVisible="True" SelectionChanged="NavView_SelectionChanged">
+        <NavigationView x:Name="NavView"
+                        Grid.Row="1"
+                        PaneDisplayMode="Left"
+                        IsSettingsVisible="True"
+                        ItemInvoked="NavView_ItemInvoked"
+                        SelectionChanged="NavView_SelectionChanged">
             <NavigationView.MenuItems>
-                <NavigationViewItem Icon="Library" Content="Spaces" Tag="Spaces" />
-                <NavigationViewItem Icon="Folder" Content="Folder Portals" Tag="Portals" />
-                <NavigationViewItem Icon="Highlight" Content="Color &amp; Appearance" Tag="Appearance" />
-                <NavigationViewItem Icon="Filter" Content="Sorting Rules" Tag="Rules" />
-                <NavigationViewItem Icon="Keyboard" Content="Hotkeys" Tag="Hotkeys" />
-                <NavigationViewItem Icon="SlideShow" Content="Roll-Up" Tag="RollUp" />
-                <NavigationViewItem Icon="View" Content="Zen Mode" Tag="ZenMode" />
-                <NavigationViewItem Icon="PreviewLink" Content="Peek" Tag="Peek" />
-                <NavigationViewItem Icon="HideBcc" Content="QuickHide" Tag="QuickHide" />
-                <NavigationViewItem Icon="List" Content="Tabs" Tag="Tabs" />
-                <NavigationViewItem Icon="ViewAll" Content="Layout" Tag="Layout" />
+                <NavigationViewItem x:Uid="Nav_Spaces" Icon="Library" Tag="Spaces" />
+                <NavigationViewItem x:Uid="Nav_Portals" Icon="Folder" Tag="Portals" />
+                <NavigationViewItem x:Uid="Nav_Appearance" Icon="Highlight" Tag="Appearance" />
+                <NavigationViewItem x:Uid="Nav_Rules" Icon="Filter" Tag="Rules" />
+                <NavigationViewItem x:Uid="Nav_Hotkeys" Icon="Keyboard" Tag="Hotkeys" />
+                <NavigationViewItem x:Uid="Nav_RollUp" Icon="SlideShow" Tag="RollUp" />
+                <NavigationViewItem x:Uid="Nav_ZenMode" Icon="View" Tag="ZenMode" />
+                <NavigationViewItem x:Uid="Nav_Peek" Icon="PreviewLink" Tag="Peek" />
+                <NavigationViewItem x:Uid="Nav_QuickHide" Icon="HideBcc" Tag="QuickHide" />
+                <NavigationViewItem x:Uid="Nav_Tabs" Icon="List" Tag="Tabs" />
+                <NavigationViewItem x:Uid="Nav_Layout" Icon="ViewAll" Tag="Layout" />
             </NavigationView.MenuItems>
             <NavigationView.FooterMenuItems>
-                <NavigationViewItem x:Name="AboutNavItem" Icon="ContactInfo" Content="About" Tag="About" />
+                <NavigationViewItem x:Name="UpdateNavItem"
+                                    x:Uid="Nav_CheckForUpdates"
+                                    Icon="Sync"
+                                    AutomationProperties.AutomationId="CheckForUpdatesNavItem"
+                                    SelectsOnInvoked="False"
+                                    Tag="Update" />
+                <NavigationViewItem x:Name="AboutNavItem" x:Uid="Nav_About" Icon="ContactInfo" Tag="About" />
             </NavigationView.FooterMenuItems>
             <Frame x:Name="ContentFrame" Padding="24" />
         </NavigationView>

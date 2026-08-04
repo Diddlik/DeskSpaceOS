@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Automation;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Media;
 using DeskSpaceOS.Core.Models;
@@ -58,6 +59,7 @@ public sealed partial class SortingRulesPage : Page
             VerticalAlignment = VerticalAlignment.Center,
             MinWidth = 0
         };
+        AutomationProperties.SetName(enableToggle, Loc.Get("Rules_EnableRule"));
         enableToggle.Toggled += (s, _) =>
         {
             if (s is ToggleSwitch ts && ts.Tag is Guid id)
@@ -120,6 +122,7 @@ public sealed partial class SortingRulesPage : Page
             VerticalAlignment = VerticalAlignment.Center
         };
         editButton.Click += EditRule_Click;
+        AutomationProperties.SetName(editButton, Loc.Get("Common_Edit"));
 
         var deleteButton = new Button
         {
@@ -129,6 +132,7 @@ public sealed partial class SortingRulesPage : Page
             VerticalAlignment = VerticalAlignment.Center
         };
         deleteButton.Click += DeleteRule_Click;
+        AutomationProperties.SetName(deleteButton, Loc.Get("Common_Delete"));
 
         var row = new StackPanel
         {
@@ -172,21 +176,26 @@ public sealed partial class SortingRulesPage : Page
         };
     }
 
-    private static string DescribeKind(SortingRule r) => r.Kind switch
+    private static string DescribeKind(SortingRule rule) => GetKindLabel(rule.Kind);
+
+    private static string GetKindLabel(SortingRuleKind kind) => kind switch
     {
-        SortingRuleKind.Extension => "Extension",
-        SortingRuleKind.FileCategory => "Category",
-        SortingRuleKind.NameContains => "Name contains",
-        SortingRuleKind.ShortcutTarget => "Shortcut target",
-        SortingRuleKind.Age => "Age",
-        SortingRuleKind.Size => "Size",
-        _ => r.Kind.ToString()
+        SortingRuleKind.Extension => Loc.Get("Rules_KindExtension"),
+        SortingRuleKind.FileCategory => Loc.Get("Rules_KindCategory"),
+        SortingRuleKind.NameContains => Loc.Get("Rules_KindName"),
+        SortingRuleKind.ShortcutTarget => Loc.Get("Rules_KindShortcut"),
+        SortingRuleKind.Age => Loc.Get("Rules_KindAge"),
+        SortingRuleKind.Size => Loc.Get("Rules_KindSize"),
+        _ => kind.ToString()
     };
+
+    private static string GetCategoryLabel(FileCategory category) =>
+        Loc.Get($"Rules_Category{category}");
 
     private static string DescribePattern(SortingRule r) => r.Kind switch
     {
         SortingRuleKind.Extension => !string.IsNullOrEmpty(r.Pattern) ? r.Pattern : r.ExtensionPattern,
-        SortingRuleKind.FileCategory => r.Category.ToString(),
+        SortingRuleKind.FileCategory => GetCategoryLabel(r.Category),
         SortingRuleKind.NameContains => $"\u201c{r.Pattern}\u201d",
         SortingRuleKind.ShortcutTarget => $"\u201c{r.Pattern}\u201d",
         SortingRuleKind.Age => FormatAgeRange(r.MinAgeDays, r.MaxAgeDays),
@@ -196,8 +205,8 @@ public sealed partial class SortingRulesPage : Page
 
     private static string FormatAgeRange(int min, int max)
     {
-        string hi = max == int.MaxValue ? "\u221E" : max.ToString(CultureInfo.InvariantCulture);
-        return $"{min}..{hi} days";
+        string hi = max == int.MaxValue ? "\u221E" : max.ToString(CultureInfo.CurrentCulture);
+        return Loc.Format("Rules_AgeRange", min, hi);
     }
 
     private static string FormatSizeRange(long min, long max)
@@ -222,7 +231,7 @@ public sealed partial class SortingRulesPage : Page
             var c = _spaces.Find(x => x.Id == r.TargetSpaceId);
             if (c != null) return c.Title;
         }
-        return string.IsNullOrEmpty(r.TargetSpaceTitle) ? "(no target)" : r.TargetSpaceTitle;
+        return string.IsNullOrEmpty(r.TargetSpaceTitle) ? Loc.Get("Rules_NoTarget") : r.TargetSpaceTitle;
     }
 
     private async void AddRuleButton_Click(object sender, RoutedEventArgs e)
@@ -246,47 +255,47 @@ public sealed partial class SortingRulesPage : Page
 
         var kindCombo = new ComboBox
         {
-            Header = "Match By",
+            Header = Loc.Get("Rules_MatchBy"),
             HorizontalAlignment = HorizontalAlignment.Stretch
         };
         foreach (var kind in Enum.GetValues<SortingRuleKind>())
-            kindCombo.Items.Add(kind.ToString());
+            kindCombo.Items.Add(GetKindLabel(kind));
         kindCombo.SelectedIndex = (int)rule.Kind;
 
         // --- Inputs per kind (switched by visibility) ---
         var extensionBox = new TextBox
         {
-            Header = "Extensions (comma-separated)",
+            Header = Loc.Get("Rules_Extensions"),
             PlaceholderText = ".jpg, .png, .pdf",
             Text = !string.IsNullOrEmpty(rule.Pattern) ? rule.Pattern : rule.ExtensionPattern
         };
 
         var categoryCombo = new ComboBox
         {
-            Header = "File Category",
+            Header = Loc.Get("Rules_FileCategory"),
             HorizontalAlignment = HorizontalAlignment.Stretch
         };
-        foreach (var c in Enum.GetValues<FileCategory>())
-            categoryCombo.Items.Add(c.ToString());
+        foreach (var category in Enum.GetValues<FileCategory>())
+            categoryCombo.Items.Add(GetCategoryLabel(category));
         categoryCombo.SelectedIndex = (int)rule.Category;
 
         var nameBox = new TextBox
         {
-            Header = "Name contains",
-            PlaceholderText = "report",
+            Header = Loc.Get("Rules_NameContains"),
+            PlaceholderText = Loc.Get("Rules_NameExample"),
             Text = rule.Kind == SortingRuleKind.NameContains ? rule.Pattern : string.Empty
         };
 
         var shortcutBox = new TextBox
         {
-            Header = "Shortcut target contains",
+            Header = Loc.Get("Rules_ShortcutTarget"),
             PlaceholderText = @"C:\Program Files\ or notepad.exe",
             Text = rule.Kind == SortingRuleKind.ShortcutTarget ? rule.Pattern : string.Empty
         };
 
         var ageMin = new NumberBox
         {
-            Header = "Min age (days)",
+            Header = Loc.Get("Rules_MinAge"),
             Minimum = 0,
             Maximum = 100000,
             SpinButtonPlacementMode = NumberBoxSpinButtonPlacementMode.Inline,
@@ -294,7 +303,7 @@ public sealed partial class SortingRulesPage : Page
         };
         var ageMax = new NumberBox
         {
-            Header = "Max age (days, -1 = unlimited)",
+            Header = Loc.Get("Rules_MaxAge"),
             Minimum = -1,
             Maximum = 100000,
             SpinButtonPlacementMode = NumberBoxSpinButtonPlacementMode.Inline,
@@ -303,7 +312,7 @@ public sealed partial class SortingRulesPage : Page
 
         var sizeMin = new NumberBox
         {
-            Header = "Min size (KB)",
+            Header = Loc.Get("Rules_MinSize"),
             Minimum = 0,
             Maximum = 1024L * 1024L * 1024L,
             SpinButtonPlacementMode = NumberBoxSpinButtonPlacementMode.Inline,
@@ -311,7 +320,7 @@ public sealed partial class SortingRulesPage : Page
         };
         var sizeMax = new NumberBox
         {
-            Header = "Max size (KB, -1 = unlimited)",
+            Header = Loc.Get("Rules_MaxSize"),
             Minimum = -1,
             Maximum = 1024L * 1024L * 1024L,
             SpinButtonPlacementMode = NumberBoxSpinButtonPlacementMode.Inline,
@@ -321,8 +330,8 @@ public sealed partial class SortingRulesPage : Page
         // Space ordering
         var targetCombo = new ComboBox
         {
-            Header = "Target Space",
-            PlaceholderText = "Select a space",
+            Header = Loc.Get("Rules_TargetSpace"),
+            PlaceholderText = Loc.Get("Rules_TargetSpacePlaceholder"),
             HorizontalAlignment = HorizontalAlignment.Stretch
         };
         int targetIndex = -1;
@@ -339,7 +348,7 @@ public sealed partial class SortingRulesPage : Page
 
         var priorityBox = new NumberBox
         {
-            Header = "Priority (lower = evaluated first)",
+            Header = Loc.Get("Rules_Priority"),
             Minimum = 0,
             Maximum = 10000,
             SpinButtonPlacementMode = NumberBoxSpinButtonPlacementMode.Inline,
@@ -380,10 +389,10 @@ public sealed partial class SortingRulesPage : Page
 
         var dialog = new ContentDialog
         {
-            Title = isEdit ? "Edit Sorting Rule" : "Add Sorting Rule",
+            Title = Loc.Get(isEdit ? "Rules_EditDialogTitle" : "Rules_AddDialogTitle"),
             Content = new ScrollViewer { Content = panel, MaxHeight = 500 },
-            PrimaryButtonText = isEdit ? "Save" : "Add",
-            CloseButtonText = "Cancel",
+            PrimaryButtonText = Loc.Get(isEdit ? "Common_Save" : "Common_Add"),
+            CloseButtonText = Loc.Get("Common_Cancel"),
             DefaultButton = ContentDialogButton.Primary,
             XamlRoot = this.XamlRoot
         };
@@ -393,7 +402,7 @@ public sealed partial class SortingRulesPage : Page
 
         if (targetCombo.SelectedIndex < 0 || targetCombo.SelectedIndex >= _spaces.Count)
         {
-            ShowStatus("Target space is required.", InfoBarSeverity.Warning);
+            ShowStatus(Loc.Get("Rules_TargetRequired"), InfoBarSeverity.Warning);
             return;
         }
 
@@ -411,7 +420,7 @@ public sealed partial class SortingRulesPage : Page
                 string ext = extensionBox.Text.Trim();
                 if (string.IsNullOrWhiteSpace(ext))
                 {
-                    ShowStatus("Extension pattern is required.", InfoBarSeverity.Warning);
+                    ShowStatus(Loc.Get("Rules_ExtensionRequired"), InfoBarSeverity.Warning);
                     return;
                 }
                 rule.Pattern = ext;
@@ -423,7 +432,7 @@ public sealed partial class SortingRulesPage : Page
             case SortingRuleKind.NameContains:
                 if (string.IsNullOrWhiteSpace(nameBox.Text))
                 {
-                    ShowStatus("Name substring is required.", InfoBarSeverity.Warning);
+                    ShowStatus(Loc.Get("Rules_NameRequired"), InfoBarSeverity.Warning);
                     return;
                 }
                 rule.Pattern = nameBox.Text.Trim();
@@ -431,7 +440,7 @@ public sealed partial class SortingRulesPage : Page
             case SortingRuleKind.ShortcutTarget:
                 if (string.IsNullOrWhiteSpace(shortcutBox.Text))
                 {
-                    ShowStatus("Shortcut target substring is required.", InfoBarSeverity.Warning);
+                    ShowStatus(Loc.Get("Rules_ShortcutRequired"), InfoBarSeverity.Warning);
                     return;
                 }
                 rule.Pattern = shortcutBox.Text.Trim();
@@ -451,7 +460,9 @@ public sealed partial class SortingRulesPage : Page
 
         SortingRuleStore.Save(_rules);
         RebuildList();
-        ShowStatus(isEdit ? "Rule updated." : "Rule added. Changes applied automatically.", InfoBarSeverity.Success);
+        ShowStatus(
+            Loc.Get(isEdit ? "Rules_Updated" : "Rules_Added"),
+            InfoBarSeverity.Success);
     }
 
     private int NextPriority()
@@ -468,7 +479,7 @@ public sealed partial class SortingRulesPage : Page
             _rules.RemoveAll(r => r.Id == id);
             SortingRuleStore.Save(_rules);
             RebuildList();
-            ShowStatus("Rule removed.", InfoBarSeverity.Informational);
+            ShowStatus(Loc.Get("Rules_Removed"), InfoBarSeverity.Informational);
         }
     }
 

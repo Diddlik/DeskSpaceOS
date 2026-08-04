@@ -9,8 +9,8 @@
 
     <ScrollViewer>
         <StackPanel Spacing="24" Padding="0,0,16,24" MaxWidth="800" HorizontalAlignment="Left">
-            <TextBlock Text="Quick Hide" FontSize="28" FontWeight="SemiBold" />
-            <TextBlock Text="Quick Hide lets you instantly hide and show your desktop icons by double-clicking an empty spot on your desktop."
+            <TextBlock x:Uid="QuickHide_Title" FontSize="28" FontWeight="SemiBold" />
+            <TextBlock x:Uid="QuickHide_Description"
                        TextWrapping="Wrap" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
 
             <!-- Dummy Preview Screen -->
@@ -23,39 +23,39 @@
                                 <ScaleTransform ScaleX="2" ScaleY="2" />
                             </SymbolIcon.RenderTransform>
                         </SymbolIcon>
-                        <TextBlock Text="Double-click desktop to hide/show" FontStyle="Italic" Opacity="0.7" />
+                        <TextBlock x:Uid="QuickHide_PreviewCaption" FontStyle="Italic" Opacity="0.7" />
                     </StackPanel>
                 </Grid>
             </Border>
 
             <StackPanel Spacing="4">
-                <HyperlinkButton Content="How to use" Padding="0" />
-                <HyperlinkButton Content="Exclude individual spaces" Padding="0" />
+                <HyperlinkButton x:Uid="QuickHide_HowToUse" Padding="0" />
+                <HyperlinkButton x:Uid="QuickHide_ExcludeSpaces" Padding="0" />
             </StackPanel>
 
             <StackPanel Spacing="16">
-                <TextBlock Text="Settings" FontSize="20" FontWeight="SemiBold" />
+                <TextBlock x:Uid="QuickHide_SettingsTitle" FontSize="20" FontWeight="SemiBold" />
                 
-                <CheckBox x:Name="EnableQuickHideCheckBox" Content="Enabled" Checked="SettingChanged" Unchecked="SettingChanged" />
+                <CheckBox x:Name="EnableQuickHideCheckBox" x:Uid="QuickHide_Enabled" Checked="SettingChanged" Unchecked="SettingChanged" />
                 
                 <StackPanel Spacing="8" Margin="0,8,0,0">
                     <ComboBox x:Name="QuickHideScopeComboBox" Width="400" SelectionChanged="SettingChanged">
-                        <ComboBoxItem Content="Hide all desktop icons and space groups" Tag="IconsAndSpaces" />
-                        <ComboBoxItem Content="Hide desktop icons only" Tag="OnlyIcons" />
-                        <ComboBoxItem Content="Hide space groups only" Tag="OnlySpaces" />
+                        <ComboBoxItem x:Uid="QuickHide_ScopeAll" Tag="IconsAndSpaces" />
+                        <ComboBoxItem x:Uid="QuickHide_ScopeIcons" Tag="OnlyIcons" />
+                        <ComboBoxItem x:Uid="QuickHide_ScopeSpaces" Tag="OnlySpaces" />
                     </ComboBox>
                 </StackPanel>
 
-                <CheckBox x:Name="AutoHideCheckBox" Content="Automatically hide icons when the desktop is not in use" Checked="SettingChanged" Unchecked="SettingChanged" />
-                <CheckBox x:Name="AutoShowCheckBox" Content="Automatically show icons when the desktop is in use" Checked="SettingChanged" Unchecked="SettingChanged" />
+                <CheckBox x:Name="AutoHideCheckBox" x:Uid="QuickHide_AutoHide" Checked="SettingChanged" Unchecked="SettingChanged" />
+                <CheckBox x:Name="AutoShowCheckBox" x:Uid="QuickHide_AutoShow" Checked="SettingChanged" Unchecked="SettingChanged" />
             </StackPanel>
 
             <StackPanel Spacing="16">
-                <TextBlock Text="Additional options" FontSize="20" FontWeight="SemiBold" />
-                <CheckBox x:Name="ShowOnStartCheckBox" Content="Always show icons on startup" Checked="SettingChanged" Unchecked="SettingChanged" />
+                <TextBlock x:Uid="QuickHide_AdditionalOptions" FontSize="20" FontWeight="SemiBold" />
+                <CheckBox x:Name="ShowOnStartCheckBox" x:Uid="QuickHide_ShowOnStart" Checked="SettingChanged" Unchecked="SettingChanged" />
             </StackPanel>
 
-            <Button x:Name="SaveButton" Content="Save settings" Style="{ThemeResource AccentButtonStyle}" Click="SaveButton_Click" Margin="0,12,0,0" />
+            <Button x:Name="SaveButton" x:Uid="QuickHide_Save" Style="{ThemeResource AccentButtonStyle}" Click="SaveButton_Click" Margin="0,12,0,0" />
             <InfoBar x:Name="StatusInfoBar" IsOpen="False" IsClosable="True" />
         </StackPanel>
     </ScrollViewer>

@@ -74,6 +74,7 @@ public partial class OverlayWindow : Window
         _workerWHandle = workerWHandle;
         _settingsWatcher = settingsWatcher;
         _logger = logger;
+        UiLog.Logger = logger;
         _currentSettings = AppSettingsStore.Load();
 
         // Size to cover the entire virtual screen
@@ -1288,7 +1289,10 @@ public partial class OverlayWindow : Window
             }
             SpaceStore.Save(models);
         }
-        catch { /* Don't crash if save fails */ }
+        catch (Exception ex)
+        {
+            _logger?.LogWarning(ex, "Failed to save spaces — keeping the last stored layout.");
+        }
     }
 
     /// <summary>Re-hide inactive tab icons on all spaces.</summary>
@@ -1358,7 +1362,10 @@ public partial class OverlayWindow : Window
                 cc.RestoreAllTabIcons(model);
             }
         }
-        catch { /* Don't crash if load fails */ }
+        catch (Exception ex)
+        {
+            _logger?.LogWarning(ex, "Failed to load spaces — starting with an empty overlay.");
+        }
     }
     
     private IntPtr _overlayHwnd = IntPtr.Zero;
@@ -1605,11 +1612,6 @@ public partial class OverlayWindow : Window
                 Canvas.SetTop(pc, model.Y);
 
                 pc.StateChanged += (_, _) => SavePortals();
-                pc.Deleted += (_, _) =>
-                {
-                    _portalWatcher.Unwatch(pc.PortalId);
-                    SavePortals();
-                };
                 pc.TabSwitched += (_, _) =>
                 {
                     _portalWatcher.Rewatch(pc);
@@ -1623,7 +1625,10 @@ public partial class OverlayWindow : Window
                 _portalWatcher.Watch(pc);
             }
         }
-        catch { /* Don't crash if load fails */ }
+        catch (Exception ex)
+        {
+            _logger?.LogWarning(ex, "Failed to load folder portals — starting without portals.");
+        }
     }
 
     private void SavePortals()
@@ -1639,7 +1644,10 @@ public partial class OverlayWindow : Window
             }
             FolderPortalStore.Save(models);
         }
-        catch { }
+        catch (Exception ex)
+        {
+            _logger?.LogWarning(ex, "Failed to save folder portals — keeping the last stored layout.");
+        }
     }
 
     // --- Hot-reload handlers ---
@@ -1764,11 +1772,6 @@ public partial class OverlayWindow : Window
                         Canvas.SetTop(pc, model.Y);
 
                         pc.StateChanged += (_, _) => SavePortals();
-                        pc.Deleted += (_, _) =>
-                        {
-                            _portalWatcher.Unwatch(pc.PortalId);
-                            SavePortals();
-                        };
                         pc.TabSwitched += (_, _) =>
                         {
                             _portalWatcher.Rewatch(pc);

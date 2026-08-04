@@ -67,7 +67,7 @@ public sealed partial class FolderPortalDialogContent : UserControl
         dialog.GetOptions(out uint options);
         dialog.SetOptions((FileOpenOptions)options | FileOpenOptions.PickFolders | FileOpenOptions.ForceFileSystem |
             FileOpenOptions.PathMustExist | FileOpenOptions.NoChangeDir);
-        dialog.SetTitle("Select Folder");
+        dialog.SetTitle(Loc.Get("Portals_SelectFolder"));
 
         var hwnd = IntPtr.Zero;
         var window = (Application.Current as App)?.GetWindow();

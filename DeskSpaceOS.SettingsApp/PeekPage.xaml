@@ -6,26 +6,21 @@
 
     <ScrollViewer>
         <StackPanel Spacing="24" Padding="0,0,16,24" MaxWidth="720" HorizontalAlignment="Left">
-            <TextBlock Text="Peek" FontSize="24" FontWeight="SemiBold"/>
-            <TextBlock Text="Temporarily bring spaces and folder portals above active windows."
+            <TextBlock x:Uid="Peek_Title" FontSize="24" FontWeight="SemiBold"/>
+            <TextBlock x:Uid="Peek_Description"
                        Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                        TextWrapping="Wrap"/>
 
             <ToggleSwitch
                 x:Name="EnablePeekToggle"
-                Header="Enable Peek"
-                OnContent="Peek hotkey is active"
-                OffContent="Peek hotkey is disabled"
-                AutomationProperties.Name="Enable Peek"
+                x:Uid="Peek_Enable"
                 AutomationProperties.AutomationId="EnablePeekToggle"
                 Toggled="EnablePeekToggle_Toggled"/>
 
             <TextBox
                 x:Name="PeekHotkeyBox"
-                Header="Peek hotkey"
+                x:Uid="Peek_Hotkey"
                 Width="240"
-                PlaceholderText="e.g. Win+Space"
-                AutomationProperties.Name="Peek hotkey"
                 AutomationProperties.AutomationId="PeekHotkeyBox"
                 TextChanged="PeekHotkeyBox_TextChanged"/>
 

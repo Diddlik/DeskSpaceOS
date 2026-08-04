@@ -6,32 +6,30 @@
 
     <ScrollViewer>
         <StackPanel Spacing="24" Padding="0,0,16,24" MaxWidth="720" HorizontalAlignment="Left">
-            <TextBlock Text="Zen Mode" FontSize="24" FontWeight="SemiBold"/>
-            <TextBlock Text="When enabled, spaces fade into the wallpaper when the mouse is idle over other windows, keeping the desktop distraction-free. Hover back onto the desktop to bring them back."
+            <TextBlock x:Uid="Zen_PageTitle" FontSize="24" FontWeight="SemiBold"/>
+            <TextBlock x:Uid="Zen_Description"
                        Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap"/>
 
             <ToggleSwitch x:Name="ZenModeToggle"
-                          Header="Enable Zen Mode"
-                          OnContent="Spaces fade when idle"
-                          OffContent="Spaces stay visible"
+                          x:Uid="Zen_EnableToggle"
                           Toggled="ZenModeToggle_Toggled"/>
 
             <StackPanel x:Name="TuningPanel" Spacing="16">
                 <NumberBox x:Name="IdleBox"
-                           Header="Idle time before fade (seconds)"
+                           x:Uid="Zen_IdleTime"
                            Minimum="0.1" Maximum="30" SmallChange="0.1" LargeChange="1"
                            SpinButtonPlacementMode="Inline"
                            ValueChanged="AnyValue_Changed"/>
 
                 <NumberBox x:Name="OpacityBox"
-                           Header="Faded opacity (0.0 – 1.0)"
+                           x:Uid="Zen_Opacity"
                            Minimum="0" Maximum="1" SmallChange="0.05" LargeChange="0.1"
                            SpinButtonPlacementMode="Inline"
                            ValueChanged="AnyValue_Changed"/>
             </StackPanel>
             
             <StackPanel Spacing="8">
-                <TextBlock Text="Preview" FontWeight="SemiBold"/>
+                <TextBlock x:Uid="Zen_Preview" FontWeight="SemiBold"/>
                 <Grid ColumnSpacing="12">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -44,13 +42,12 @@
                             BorderThickness="1" CornerRadius="8" Padding="8"
                             Background="{ThemeResource LayerFillColorDefaultBrush}">
                         <StackPanel Spacing="8">
-                            <Image Source="ms-appx:///Assets/zen_mode_off.png"
-                                   AutomationProperties.Name="Desktop with Zen Mode off — spaces stay visible"
+                            <Image x:Name="PreviewOffImage"
                                    Stretch="Uniform" Height="200"/>
-                            <TextBlock Text="Off — spaces stay visible"
+                            <TextBlock x:Uid="Zen_PreviewOffCaption"
                                        HorizontalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap"
                                        Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
-                            <TextBlock x:Name="PreviewOffActiveLabel" Text="Active" Visibility="Collapsed"
+                            <TextBlock x:Name="PreviewOffActiveLabel" x:Uid="Zen_PreviewOffActive" Visibility="Collapsed"
                                        HorizontalAlignment="Center" FontWeight="SemiBold"
                                        Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}"/>
                         </StackPanel>
@@ -62,13 +59,12 @@
                             BorderThickness="1" CornerRadius="8" Padding="8"
                             Background="{ThemeResource LayerFillColorDefaultBrush}">
                         <StackPanel Spacing="8">
-                            <Image Source="ms-appx:///Assets/zen_mode_on.png"
-                                   AutomationProperties.Name="Desktop with Zen Mode on — spaces faded into the wallpaper"
+                            <Image x:Name="PreviewOnImage"
                                    Stretch="Uniform" Height="200"/>
-                            <TextBlock Text="On — spaces fade when idle"
+                            <TextBlock x:Uid="Zen_PreviewOnCaption"
                                        HorizontalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap"
                                        Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
-                            <TextBlock x:Name="PreviewOnActiveLabel" Text="Active" Visibility="Collapsed"
+                            <TextBlock x:Name="PreviewOnActiveLabel" x:Uid="Zen_PreviewOnActive" Visibility="Collapsed"
                                        HorizontalAlignment="Center" FontWeight="SemiBold"
                                        Foreground="{ThemeResource AccentTextFillColorPrimaryBrush}"/>
                         </StackPanel>

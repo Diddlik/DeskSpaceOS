@@ -3,6 +3,7 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.Win32;
 using DeskSpaceOS.Core.Storage;
+using Windows.Globalization;
 
 namespace DeskSpaceOS_SettingsApp;
 
@@ -28,6 +29,15 @@ public sealed partial class SettingsPage : Page
         StartWithWindowsToggle.IsOn = IsStartupEnabled();
         DisableAutoArrangeToggle.IsOn = _settings.DisableAutoArrange;
         EnableQuickHideToggle.IsOn = _settings.EnableQuickHide;
+        AutoUpdateCheckToggle.IsOn = _settings.AutoUpdateCheck;
+        LanguageComboBox.SelectedIndex = _settings.Language switch
+        {
+            "en-US" => 1,
+            "de-DE" => 2,
+            "ru-RU" => 3,
+            "uk-UA" => 4,
+            _ => 0
+        };
         _loading = false;
     }
 
@@ -37,7 +47,16 @@ public sealed partial class SettingsPage : Page
 
         _settings.EnableQuickHide = EnableQuickHideToggle.IsOn;
         AppSettingsStore.Save(_settings);
-        ShowStatus("Quick Hide setting saved.", InfoBarSeverity.Informational);
+        ShowStatus(Loc.Get("Settings_QuickHideSaved"), InfoBarSeverity.Informational);
+    }
+
+    private void AutoUpdateCheckToggle_Toggled(object sender, RoutedEventArgs e)
+    {
+        if (_loading) return;
+
+        _settings.AutoUpdateCheck = AutoUpdateCheckToggle.IsOn;
+        AppSettingsStore.Save(_settings);
+        ShowStatus(Loc.Get("Settings_AutoUpdateCheckSaved"), InfoBarSeverity.Informational);
     }
 
     private void StartWithWindowsToggle_Toggled(object sender, RoutedEventArgs e)
@@ -64,11 +83,13 @@ public sealed partial class SettingsPage : Page
             }
 
             AppSettingsStore.Save(_settings);
-            ShowStatus(enable ? "DeskSpace OS will start with Windows." : "Startup entry removed.", InfoBarSeverity.Success);
+            ShowStatus(
+                Loc.Get(enable ? "Settings_StartupEnabled" : "Settings_StartupDisabled"),
+                InfoBarSeverity.Success);
         }
         catch (System.Exception ex)
         {
-            ShowStatus($"Could not update startup setting: {ex.Message}", InfoBarSeverity.Error);
+            ShowStatus(Loc.Format("Settings_StartupError", ex.Message), InfoBarSeverity.Error);
         }
     }
 
@@ -78,7 +99,18 @@ public sealed partial class SettingsPage : Page
 
         _settings.DisableAutoArrange = DisableAutoArrangeToggle.IsOn;
         AppSettingsStore.Save(_settings);
-        ShowStatus("Setting saved. Applied automatically.", InfoBarSeverity.Informational);
+        ShowStatus(Loc.Get("Settings_AutoArrangeSaved"), InfoBarSeverity.Informational);
+    }
+
+    private void LanguageComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if (_loading || LanguageComboBox.SelectedItem is not ComboBoxItem { Tag: string language })
+            return;
+
+        _settings.Language = language;
+        AppSettingsStore.Save(_settings);
+        ApplicationLanguages.PrimaryLanguageOverride = language;
+        ShowStatus(Loc.Get("Settings_LanguageRestartRequired"), InfoBarSeverity.Informational);
     }
 
     private static string FindServiceExePath()

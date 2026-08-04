@@ -58,7 +58,7 @@ DeskSpace OS is built with modern .NET technologies to ensure high performance a
 - **Background Service:** .NET 10 Windows worker service (WPF + Windows Forms) for overlays and shell integration
 - **Settings App:** .NET 10 Windows App SDK / WinUI 3 for a native, fluid Windows 11 design experience
 
-Platform is **x64**. Application updates are delivered via Velopack.
+Platform is **x64**. The Settings app follows the Windows display language by default and can be switched to English, German, Russian, or Ukrainian. Its About page shows the installed release version and provides a manual update check. Updates are delivered via Velopack: the background service checks once per start and installs a newer version automatically — switch **Check for updates at startup** off in Settings to check only manually.
 
 ## 📥 Getting Started
 

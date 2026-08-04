@@ -62,9 +62,6 @@ public partial class PortalSpaceControl : System.Windows.Controls.UserControl
     /// <summary>Raised when the portal is resized or moved so the overlay can persist.</summary>
     public event EventHandler? StateChanged;
 
-    /// <summary>Raised when the portal is deleted.</summary>
-    public event EventHandler? Deleted;
-
     private readonly List<FileEntry> _fileEntries = new();
 
     // View/sort state
@@ -268,7 +265,12 @@ public partial class PortalSpaceControl : System.Windows.Controls.UserControl
                         modified = fi.LastWriteTime;
                     }
                 }
-                catch { }
+                catch (Exception ex) when (ex is IOException or UnauthorizedAccessException)
+                {
+                    // Unreadable entry: list it with unknown size/date instead of dropping it.
+                    size = 0;
+                    modified = DateTime.MinValue;
+                }
 
                 _fileEntries.Add(new FileEntry
                 {
@@ -312,7 +314,12 @@ public partial class PortalSpaceControl : System.Windows.Controls.UserControl
                 modified = fi.LastWriteTime;
             }
         }
-        catch { }
+        catch (Exception ex) when (ex is IOException or UnauthorizedAccessException)
+        {
+            // Unreadable entry: list it with unknown size/date instead of dropping it.
+            size = 0;
+            modified = DateTime.MinValue;
+        }
 
         _fileEntries.Add(new FileEntry
         {
@@ -670,7 +677,10 @@ public partial class PortalSpaceControl : System.Windows.Controls.UserControl
         {
             Process.Start(new ProcessStartInfo(filePath) { UseShellExecute = true });
         }
-        catch { }
+        catch (Exception ex)
+        {
+            UiLog.Warn(ex, "Failed to open {Path} via the shell.", filePath);
+        }
         return true;
     }
 
@@ -696,7 +706,10 @@ public partial class PortalSpaceControl : System.Windows.Controls.UserControl
             var parent = Directory.GetParent(DirectoryPath);
             if (parent != null) NavigateTo(parent.FullName);
         }
-        catch { }
+        catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or ArgumentException)
+        {
+            UiLog.Warn(ex, "Failed to resolve the parent of {Path} — staying in place.", DirectoryPath);
+        }
     }
 
     public void NavigateHome()
@@ -944,7 +957,7 @@ public partial class PortalSpaceControl : System.Windows.Controls.UserControl
         if (!string.IsNullOrEmpty(DirectoryPath) && Directory.Exists(DirectoryPath))
         {
             try { Process.Start(new ProcessStartInfo(DirectoryPath) { UseShellExecute = true }); }
-            catch { }
+            catch (Exception ex) { UiLog.Warn(ex, "Failed to open folder {Path} in the shell.", DirectoryPath); }
         }
     }
 
@@ -1019,7 +1032,7 @@ public partial class PortalSpaceControl : System.Windows.Controls.UserControl
         openItem.Click += (_, _) =>
         {
             try { Process.Start(new ProcessStartInfo(filePath) { UseShellExecute = true }); }
-            catch { }
+            catch (Exception ex) { UiLog.Warn(ex, "Failed to open {Path} via the shell.", filePath); }
         };
         menu.Items.Add(openItem);
 
@@ -1035,7 +1048,7 @@ public partial class PortalSpaceControl : System.Windows.Controls.UserControl
         copyPathItem.Click += (_, _) =>
         {
             try { System.Windows.Clipboard.SetText(filePath); }
-            catch { }
+            catch (Exception ex) { UiLog.Warn(ex, "Failed to copy the path of {Path} to the clipboard.", filePath); }
         };
         menu.Items.Add(copyPathItem);
 
@@ -1047,7 +1060,7 @@ public partial class PortalSpaceControl : System.Windows.Controls.UserControl
         propertiesItem.Click += (_, _) =>
         {
             try { Process.Start(new ProcessStartInfo(filePath) { Verb = "properties", UseShellExecute = true }); }
-            catch { }
+            catch (Exception ex) { UiLog.Warn(ex, "Failed to show shell properties for {Path}.", filePath); }
         };
         menu.Items.Add(new Separator());
         menu.Items.Add(propertiesItem);
@@ -1063,7 +1076,10 @@ public partial class PortalSpaceControl : System.Windows.Controls.UserControl
             var files = new System.Collections.Specialized.StringCollection { filePath };
             System.Windows.Clipboard.SetFileDropList(files);
         }
-        catch { }
+        catch (Exception ex)
+        {
+            UiLog.Warn(ex, "Failed to copy {Path} to the clipboard.", filePath);
+        }
     }
 
     private void DeleteFileToRecycleBin(string filePath)
@@ -1088,7 +1104,10 @@ public partial class PortalSpaceControl : System.Windows.Controls.UserControl
             SelectFile(null);
             RefreshFiles();
         }
-        catch { }
+        catch (Exception ex)
+        {
+            UiLog.Warn(ex, "Failed to move {Path} to the recycle bin.", filePath);
+        }
     }
 
     private static void ShowInFileExplorer(string filePath)
@@ -1100,7 +1119,10 @@ public partial class PortalSpaceControl : System.Windows.Controls.UserControl
             else if (Directory.Exists(filePath))
                 Process.Start(new ProcessStartInfo("explorer.exe", $"/select,\"{filePath}\"") { UseShellExecute = true });
         }
-        catch { }
+        catch (Exception ex)
+        {
+            UiLog.Warn(ex, "Failed to reveal {Path} in File Explorer.", filePath);
+        }
     }
 
     private static bool PathEquals(string? left, string? right)

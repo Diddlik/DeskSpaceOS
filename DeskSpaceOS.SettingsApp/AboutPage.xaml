@@ -8,8 +8,8 @@
 
     <ScrollViewer>
         <StackPanel Spacing="24" Padding="0,0,16,24">
-            <TextBlock Text="About" FontSize="24" FontWeight="SemiBold" />
-            <TextBlock Text="Information about the application."
+            <TextBlock x:Uid="About_PageTitle" FontSize="24" FontWeight="SemiBold" />
+            <TextBlock x:Uid="About_PageDescription"
                        Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
 
             <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
@@ -27,18 +27,18 @@
                         <TextBlock Text="DeskSpace OS" FontSize="20" FontWeight="SemiBold" />
                         <TextBlock Text="{x:Bind AppVersion}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" FontSize="12" />
                         
-                        <TextBlock Text="A modern, open-source desktop organizer that groups your shortcuts and files into highly customizable visual spaces (spaces). Clean up your digital workspace and boost your productivity."
+                        <TextBlock x:Uid="About_ProductDescription"
                                    TextWrapping="Wrap" Margin="0,8,0,16" />
 
-                        <TextBlock Text="Credits &amp; Open Source Packages" FontWeight="SemiBold" FontSize="14" Margin="0,8,0,4" />
-                        <TextBlock Text="Built with passion for the desktop community. This application uses the following open-source libraries and technologies:"
+                        <TextBlock x:Uid="About_CreditsTitle" FontWeight="SemiBold" FontSize="14" Margin="0,8,0,4" />
+                        <TextBlock x:Uid="About_CreditsDescription"
                                    Foreground="{ThemeResource TextFillColorSecondaryBrush}" FontSize="12" TextWrapping="Wrap" Margin="0,0,0,4" />
                         
                         <RichTextBlock Foreground="{ThemeResource TextFillColorSecondaryBrush}" FontSize="12" TextWrapping="Wrap">
-                            <Paragraph>• <Run FontWeight="SemiBold">Microsoft.WindowsAppSDK</Run> (WinUI 3)</Paragraph>
-                            <Paragraph>• <Run FontWeight="SemiBold">Microsoft.Extensions.Hosting</Run> &amp; <Run FontWeight="SemiBold">Logging</Run></Paragraph>
-                            <Paragraph>• <Run FontWeight="SemiBold">Win32 APIs</Run> (SysListView32 hook &amp; user32.dll integrations)</Paragraph>
-                            <Paragraph>Special thanks to the contributors and the C# community.</Paragraph>
+                            <Paragraph><Run x:Uid="About_WinUiPackage" /></Paragraph>
+                            <Paragraph><Run x:Uid="About_HostingPackage" /></Paragraph>
+                            <Paragraph><Run x:Uid="About_Win32Package" /></Paragraph>
+                            <Paragraph><Run x:Uid="About_Thanks" /></Paragraph>
                         </RichTextBlock>
                     </StackPanel>
                 </Grid>

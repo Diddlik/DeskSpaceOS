@@ -17,8 +17,8 @@
 
 .PARAMETER LocalReleasesPath
     Drop packages into a local folder instead of uploading to GitHub.
-    The installed app will pick up updates from this folder automatically
-    when appsettings.json "Updates:Url" points to the same path.
+    The installed app picks up updates from this folder on the next service
+    start when appsettings.json "Updates:Url" points to the same path.
     Example: -LocalReleasesPath "C:\DeskSpaceOS-releases"
 
 .PARAMETER GitHubToken
@@ -88,6 +88,7 @@ dotnet publish DeskSpaceOS.Service/DeskSpaceOS.Service.csproj `
     --runtime win-x64 `
     --self-contained `
     -p:Platform=x64 `
+    -p:Version=$Version `
     -p:PublishSingleFile=false `
     --output $PublishDir
 
@@ -106,6 +107,7 @@ dotnet publish DeskSpaceOS.SettingsApp/DeskSpaceOS.SettingsApp.csproj `
     --runtime win-x64 `
     --self-contained `
     -p:Platform=x64 `
+    -p:Version=$Version `
     -p:WindowsAppSDKSelfContained=true `
     -p:PublishSingleFile=false `
     -p:PublishTrimmed=false `
@@ -138,7 +140,8 @@ if ($LocalReleasesPath) {
     Write-Host "  1. Install:   $LocalReleasesPath\DeskSpaceOS-win-Setup.exe"
     Write-Host "  2. appsettings.json -> Updates:Url = file:///$fwdPath"
     Write-Host "  3. Build a higher version to the same folder."
-    Write-Host "     The running service will pick it up within 4h."
+    Write-Host "     Restart the service to apply it (or set"
+    Write-Host "     Updates:StartupDelaySeconds = 0 to skip the startup delay)."
 }
 elseif ($GitHubToken) {
     Write-Host "--> Uploading to GitHub Releases ($RepoUrl)..." -ForegroundColor Cyan

@@ -77,19 +77,27 @@ public sealed partial class FolderPortalsPage : Page
         };
 
         // View info
-        string viewInfo = portal.ViewMode == PortalViewMode.Icons ? "Icons" : "Details";
+        string viewInfo = Loc.Get(portal.ViewMode == PortalViewMode.Icons
+            ? "Portals_ViewIconsLabel"
+            : "Portals_ViewDetailsLabel");
         string sortInfo = portal.SortColumn switch
         {
-            PortalSortColumn.DateModified => "Date",
-            PortalSortColumn.Size => "Size",
-            _ => "Name"
+            PortalSortColumn.DateModified => Loc.Get("Portals_SortDateLabel"),
+            PortalSortColumn.Size => Loc.Get("Portals_SortSizeLabel"),
+            _ => Loc.Get("Portals_SortNameLabel")
         };
         sortInfo += portal.SortAscending ? " \u2191" : " \u2193";
-        string navInfo = portal.EnableNavigation ? " \u2022 Navigation: On" : "";
+        string navInfo = portal.EnableNavigation ? Loc.Get("Portals_NavigationOn") : "";
 
         var detailText = new TextBlock
         {
-            Text = $"{(int)portal.Width}\u00d7{(int)portal.Height} \u2022 {viewInfo} \u2022 Sort: {sortInfo}{navInfo}",
+            Text = Loc.Format(
+                "Portals_Details",
+                (int)portal.Width,
+                (int)portal.Height,
+                viewInfo,
+                sortInfo,
+                navInfo),
             FontSize = 11,
             Foreground = (Brush)Application.Current.Resources["TextFillColorTertiaryBrush"]
         };
@@ -106,7 +114,7 @@ public sealed partial class FolderPortalsPage : Page
             {
                 Orientation = Orientation.Horizontal,
                 Spacing = 6,
-                Children = { new FontIcon { Glyph = "\uE70F", FontSize = 14 }, new TextBlock { Text = "Edit" } }
+                Children = { new FontIcon { Glyph = "\uE70F", FontSize = 14 }, new TextBlock { Text = Loc.Get("Common_Edit") } }
             },
             Style = (Style)Application.Current.Resources["SubtleButtonStyle"],
             Tag = portal.Id,
@@ -121,7 +129,7 @@ public sealed partial class FolderPortalsPage : Page
             {
                 Orientation = Orientation.Horizontal,
                 Spacing = 6,
-                Children = { new FontIcon { Glyph = "\uE74D", FontSize = 14 }, new TextBlock { Text = "Remove" } }
+                Children = { new FontIcon { Glyph = "\uE74D", FontSize = 14 }, new TextBlock { Text = Loc.Get("Common_Remove") } }
             },
             Style = (Style)Application.Current.Resources["SubtleButtonStyle"],
             Tag = portal.Id,
@@ -166,7 +174,10 @@ public sealed partial class FolderPortalsPage : Page
     private async void AddPortalButton_Click(object sender, RoutedEventArgs e)
     {
         var dialogContent = new FolderPortalDialogContent();
-        var dialog = CreatePortalDialog("Add Folder Portal", "Add", dialogContent);
+        var dialog = CreatePortalDialog(
+            Loc.Get("Portals_AddDialogTitle"),
+            Loc.Get("Common_Add"),
+            dialogContent);
 
         var result = await dialog.ShowAsync();
         if (result == ContentDialogResult.Primary)
@@ -174,13 +185,13 @@ public sealed partial class FolderPortalsPage : Page
             var data = dialogContent.GetData();
             if (string.IsNullOrWhiteSpace(data.DirectoryPath))
             {
-                ShowStatus("Folder path is required.", InfoBarSeverity.Warning);
+                ShowStatus(Loc.Get("Portals_PathRequired"), InfoBarSeverity.Warning);
                 return;
             }
 
             if (!System.IO.Directory.Exists(data.DirectoryPath))
             {
-                ShowStatus("Directory does not exist.", InfoBarSeverity.Error);
+                ShowStatus(Loc.Get("Portals_DirectoryMissing"), InfoBarSeverity.Error);
                 return;
             }
 
@@ -199,7 +210,7 @@ public sealed partial class FolderPortalsPage : Page
 
             FolderPortalStore.Save(_portals);
             RebuildList();
-            ShowStatus("Portal added. It will appear on the desktop automatically.", InfoBarSeverity.Success);
+            ShowStatus(Loc.Get("Portals_Added"), InfoBarSeverity.Success);
         }
     }
 
@@ -211,7 +222,10 @@ public sealed partial class FolderPortalsPage : Page
 
         var dialogContent = new FolderPortalDialogContent();
         dialogContent.LoadFrom(portal);
-        var dialog = CreatePortalDialog("Edit Folder Portal", "Save", dialogContent);
+        var dialog = CreatePortalDialog(
+            Loc.Get("Portals_EditDialogTitle"),
+            Loc.Get("Common_Save"),
+            dialogContent);
 
         var result = await dialog.ShowAsync();
         if (result == ContentDialogResult.Primary)
@@ -219,13 +233,13 @@ public sealed partial class FolderPortalsPage : Page
             var data = dialogContent.GetData();
             if (string.IsNullOrWhiteSpace(data.DirectoryPath))
             {
-                ShowStatus("Folder path is required.", InfoBarSeverity.Warning);
+                ShowStatus(Loc.Get("Portals_PathRequired"), InfoBarSeverity.Warning);
                 return;
             }
 
             if (!System.IO.Directory.Exists(data.DirectoryPath))
             {
-                ShowStatus("Directory does not exist.", InfoBarSeverity.Error);
+                ShowStatus(Loc.Get("Portals_DirectoryMissing"), InfoBarSeverity.Error);
                 return;
             }
 
@@ -241,7 +255,7 @@ public sealed partial class FolderPortalsPage : Page
 
             FolderPortalStore.Save(_portals);
             RebuildList();
-            ShowStatus("Portal updated. Changes applied automatically.", InfoBarSeverity.Success);
+            ShowStatus(Loc.Get("Portals_Updated"), InfoBarSeverity.Success);
         }
     }
 
@@ -252,7 +266,7 @@ public sealed partial class FolderPortalsPage : Page
             _portals.RemoveAll(p => p.Id == id);
             FolderPortalStore.Save(_portals);
             RebuildList();
-            ShowStatus("Portal removed. Changes applied automatically.", InfoBarSeverity.Informational);
+            ShowStatus(Loc.Get("Portals_Removed"), InfoBarSeverity.Informational);
         }
     }
 
@@ -275,7 +289,7 @@ public sealed partial class FolderPortalsPage : Page
                 MinHeight = 460
             },
             PrimaryButtonText = primaryButtonText,
-            CloseButtonText = "Cancel",
+            CloseButtonText = Loc.Get("Common_Cancel"),
             DefaultButton = ContentDialogButton.Primary,
             XamlRoot = XamlRoot,
             MinWidth = PortalDialogWidth,
@@ -291,6 +305,6 @@ public sealed partial class FolderPortalsPage : Page
 
         var trimmedPath = data.DirectoryPath.TrimEnd(System.IO.Path.DirectorySeparatorChar, System.IO.Path.AltDirectorySeparatorChar);
         var folderName = System.IO.Path.GetFileName(trimmedPath);
-        return string.IsNullOrWhiteSpace(folderName) ? "Portal" : folderName;
+        return string.IsNullOrWhiteSpace(folderName) ? Loc.Get("Portals_DefaultName") : folderName;
     }
 }

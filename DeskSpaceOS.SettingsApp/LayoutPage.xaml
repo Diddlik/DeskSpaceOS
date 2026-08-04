@@ -6,20 +6,19 @@
 
     <ScrollViewer>
         <StackPanel Spacing="24" Padding="0,0,16,24" MaxWidth="720" HorizontalAlignment="Left">
-            <TextBlock Text="Layout" FontSize="24" FontWeight="SemiBold"/>
-            <TextBlock Text="Control how spaces align themselves during drag operations. Snapping pulls spaces to screen edges and to the bounding boxes of other spaces."
+            <TextBlock x:Uid="Layout_Title" FontSize="24" FontWeight="SemiBold"/>
+            <TextBlock x:Uid="Layout_Description"
                        Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap"/>
 
-            <TextBlock Text="Magnetic Snapping" FontSize="16" FontWeight="SemiBold" Margin="0,8,0,0"/>
+            <TextBlock x:Uid="Layout_SnappingTitle" FontSize="16" FontWeight="SemiBold" Margin="0,8,0,0"/>
 
             <ToggleSwitch x:Name="SnappingToggle"
-                          Header="Enable magnetic snapping"
-                          OnContent="Spaces snap while dragging"
-                          OffContent="Free movement"
+                          x:Uid="Layout_Snapping"
+                          AutomationProperties.AutomationId="SnappingToggle"
                           Toggled="SnappingToggle_Toggled"/>
 
             <NumberBox x:Name="ThresholdBox"
-                       Header="Snap threshold (pixels)"
+                       x:Uid="Layout_Threshold"
                        Minimum="1" Maximum="100" SmallChange="1" LargeChange="5"
                        SpinButtonPlacementMode="Inline"
                        ValueChanged="Threshold_Changed"/>

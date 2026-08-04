@@ -9,8 +9,8 @@
 
     <ScrollViewer>
         <StackPanel Spacing="24" Padding="0,0,16,24">
-            <TextBlock Text="Settings" FontSize="24" FontWeight="SemiBold" />
-            <TextBlock Text="General application settings."
+            <TextBlock x:Uid="Settings_PageTitle" FontSize="24" FontWeight="SemiBold" />
+            <TextBlock x:Uid="Settings_PageDescription"
                        Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
 
             <!-- Startup -->
@@ -18,9 +18,11 @@
                     BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
                     BorderThickness="1" CornerRadius="8" Padding="16,12">
                 <StackPanel Spacing="4">
-                    <ToggleSwitch x:Name="StartWithWindowsToggle" Header="Start with Windows"
+                    <ToggleSwitch x:Name="StartWithWindowsToggle"
+                                  x:Uid="Settings_StartWithWindows"
+                                  AutomationProperties.AutomationId="StartWithWindowsToggle"
                                   Toggled="StartWithWindowsToggle_Toggled" />
-                    <TextBlock Text="Launch the DeskSpace OS service automatically when you sign in."
+                    <TextBlock x:Uid="Settings_StartWithWindowsDescription"
                                Foreground="{ThemeResource TextFillColorSecondaryBrush}" FontSize="12"
                                TextWrapping="Wrap" />
                 </StackPanel>
@@ -31,9 +33,11 @@
                     BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
                     BorderThickness="1" CornerRadius="8" Padding="16,12">
                 <StackPanel Spacing="4">
-                    <ToggleSwitch x:Name="DisableAutoArrangeToggle" Header="Disable icon auto-arrange"
+                    <ToggleSwitch x:Name="DisableAutoArrangeToggle"
+                                  x:Uid="Settings_DisableAutoArrange"
+                                  AutomationProperties.AutomationId="DisableAutoArrangeToggle"
                                   Toggled="DisableAutoArrangeToggle_Toggled" />
-                    <TextBlock Text="Automatically disables Windows auto-arrange when the service starts, so icons can be freely positioned inside spaces. Restored on service exit."
+                    <TextBlock x:Uid="Settings_DisableAutoArrangeDescription"
                                Foreground="{ThemeResource TextFillColorSecondaryBrush}" FontSize="12"
                                TextWrapping="Wrap" />
                 </StackPanel>
@@ -44,9 +48,49 @@
                     BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
                     BorderThickness="1" CornerRadius="8" Padding="16,12">
                 <StackPanel Spacing="4">
-                    <ToggleSwitch x:Name="EnableQuickHideToggle" Header="Quick Hide"
+                    <ToggleSwitch x:Name="EnableQuickHideToggle"
+                                  x:Uid="Settings_QuickHide"
+                                  AutomationProperties.AutomationId="EnableQuickHideToggle"
                                   Toggled="EnableQuickHideToggle_Toggled" />
-                    <TextBlock Text="Quick-hide desktop icons and spaces with a double-click on empty desktop space."
+                    <TextBlock x:Uid="Settings_QuickHideDescription"
+                               Foreground="{ThemeResource TextFillColorSecondaryBrush}" FontSize="12"
+                               TextWrapping="Wrap" />
+                </StackPanel>
+            </Border>
+
+            <!-- Language -->
+            <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                    BorderThickness="1" CornerRadius="8" Padding="16,12">
+                <StackPanel Spacing="8">
+                    <ComboBox x:Name="LanguageComboBox"
+                              x:Uid="Settings_Language"
+                              AutomationProperties.AutomationId="LanguageComboBox"
+                              HorizontalAlignment="Stretch"
+                              SelectionChanged="LanguageComboBox_SelectionChanged">
+                        <ComboBoxItem x:Uid="Settings_SystemDefault" Tag="" />
+                        <ComboBoxItem Content="English" Tag="en-US" />
+                        <ComboBoxItem Content="Deutsch" Tag="de-DE" />
+                        <ComboBoxItem Content="Русский" Tag="ru-RU" />
+                        <ComboBoxItem Content="Українська" Tag="uk-UA" />
+                    </ComboBox>
+                    <TextBlock x:Uid="Settings_LanguageDescription"
+                               Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                               FontSize="12"
+                               TextWrapping="Wrap" />
+                </StackPanel>
+            </Border>
+
+            <!-- Automatic update check -->
+            <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                    BorderThickness="1" CornerRadius="8" Padding="16,12">
+                <StackPanel Spacing="4">
+                    <ToggleSwitch x:Name="AutoUpdateCheckToggle"
+                                  x:Uid="Settings_AutoUpdateCheck"
+                                  AutomationProperties.AutomationId="AutoUpdateCheckToggle"
+                                  Toggled="AutoUpdateCheckToggle_Toggled" />
+                    <TextBlock x:Uid="Settings_AutoUpdateCheckDescription"
                                Foreground="{ThemeResource TextFillColorSecondaryBrush}" FontSize="12"
                                TextWrapping="Wrap" />
                 </StackPanel>

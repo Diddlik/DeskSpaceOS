@@ -28,7 +28,7 @@ public sealed partial class RollUpPage : Page
         _settings.EnableRollUp = EnableRollUpToggle.IsOn;
         AppSettingsStore.Save(_settings);
 
-        StatusInfoBar.Message = "Roll-Up settings saved. Applied automatically.";
+        StatusInfoBar.Message = Loc.Get("RollUp_Saved");
         StatusInfoBar.Severity = InfoBarSeverity.Success;
         StatusInfoBar.IsOpen = true;
     }

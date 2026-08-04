@@ -145,7 +145,11 @@ public static class SortingRuleEvaluator
                 }
             }
         }
-        catch { }
+        catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or NotSupportedException)
+        {
+            // Best-effort probe: an unreadable shortcut simply has no known target.
+            return null;
+        }
         return null;
     }
 }

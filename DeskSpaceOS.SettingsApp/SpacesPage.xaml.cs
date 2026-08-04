@@ -157,7 +157,7 @@ public sealed partial class SpacesPage : Page
         {
             rowSpace.Children.Add(new TextBlock
             {
-                Text = "Empty",
+                Text = Loc.Get("Spaces_Empty"),
                 FontSize = 11,
                 FontStyle = Windows.UI.Text.FontStyle.Italic,
                 Foreground = new SolidColorBrush(Windows.UI.Color.FromArgb(0x80, 0xFF, 0xFF, 0xFF)),
@@ -173,7 +173,7 @@ public sealed partial class SpacesPage : Page
         // --- Info + buttons row ---
         var details = new TextBlock
         {
-            Text = $"{space.IconNames.Count} icon(s) \u2022 {(int)space.Width}\u00d7{(int)space.Height}",
+            Text = Loc.Format("Spaces_Details", space.IconNames.Count, (int)space.Width, (int)space.Height),
             FontSize = 12,
             Foreground = (Brush)Application.Current.Resources["TextFillColorSecondaryBrush"],
             Margin = new Thickness(0, 6, 0, 0)
@@ -186,7 +186,7 @@ public sealed partial class SpacesPage : Page
             {
                 Orientation = Orientation.Horizontal,
                 Spacing = 6,
-                Children = { new FontIcon { Glyph = "\uE70F", FontSize = 14 }, new TextBlock { Text = "Edit" } }
+                Children = { new FontIcon { Glyph = "\uE70F", FontSize = 14 }, new TextBlock { Text = Loc.Get("Common_Edit") } }
             },
             Style = (Style)Application.Current.Resources["SubtleButtonStyle"],
             Tag = space.Id,
@@ -201,7 +201,7 @@ public sealed partial class SpacesPage : Page
             {
                 Orientation = Orientation.Horizontal,
                 Spacing = 6,
-                Children = { new FontIcon { Glyph = "\uE74D", FontSize = 14 }, new TextBlock { Text = "Delete" } }
+                Children = { new FontIcon { Glyph = "\uE74D", FontSize = 14 }, new TextBlock { Text = Loc.Get("Common_Delete") } }
             },
             Style = (Style)Application.Current.Resources["SubtleButtonStyle"],
             Tag = space.Id,
@@ -290,13 +290,13 @@ public sealed partial class SpacesPage : Page
         var titleBox = new TextBox
         {
             Text = GetDefaultSpaceTitle(),
-            Header = "Title",
-            PlaceholderText = "Space name"
+            Header = Loc.Get("Spaces_TitleField"),
+            PlaceholderText = Loc.Get("Spaces_NamePlaceholder")
         };
 
         var widthBox = new NumberBox
         {
-            Header = "Width",
+            Header = Loc.Get("Spaces_Width"),
             Value = 320,
             Minimum = 160,
             Maximum = 1200,
@@ -308,7 +308,7 @@ public sealed partial class SpacesPage : Page
 
         var heightBox = new NumberBox
         {
-            Header = "Height",
+            Header = Loc.Get("Spaces_Height"),
             Value = 220,
             Minimum = 120,
             Maximum = 900,
@@ -338,15 +338,15 @@ public sealed partial class SpacesPage : Page
         var panel = new StackPanel { Spacing = 16, MinWidth = 360 };
         panel.Children.Add(titleBox);
         panel.Children.Add(sizeGrid);
-        panel.Children.Add(new TextBlock { Text = "Color & Transparency" });
+        panel.Children.Add(new TextBlock { Text = Loc.Get("Spaces_ColorTransparency") });
         panel.Children.Add(colorPicker);
 
         var dialog = new ContentDialog
         {
-            Title = "Create Space",
+            Title = Loc.Get("Spaces_CreateDialogTitle"),
             Content = panel,
-            PrimaryButtonText = "Create",
-            CloseButtonText = "Cancel",
+            PrimaryButtonText = Loc.Get("Common_Create"),
+            CloseButtonText = Loc.Get("Common_Cancel"),
             DefaultButton = ContentDialogButton.Primary,
             XamlRoot = this.XamlRoot
         };
@@ -376,12 +376,12 @@ public sealed partial class SpacesPage : Page
         _spaces.Add(space);
         SpaceStore.Save(_spaces);
         RebuildList();
-        ShowStatus($"Created \"{space.Title}\". Changes applied automatically.");
+        ShowStatus(Loc.Format("Spaces_Created", space.Title));
     }
 
     private string GetDefaultSpaceTitle()
     {
-        const string baseTitle = "New Space";
+        string baseTitle = Loc.Get("Spaces_DefaultName");
         if (!_spaces.Exists(c => string.Equals(c.Title, baseTitle, StringComparison.OrdinalIgnoreCase)))
             return baseTitle;
 
@@ -408,7 +408,12 @@ public sealed partial class SpacesPage : Page
         var space = _spaces.Find(c => c.Id == id);
         if (space == null) return;
 
-        var titleBox = new TextBox { Text = space.Title, Header = "Title", PlaceholderText = "Space name" };
+        var titleBox = new TextBox
+        {
+            Text = space.Title,
+            Header = Loc.Get("Spaces_TitleField"),
+            PlaceholderText = Loc.Get("Spaces_NamePlaceholder")
+        };
 
         var colorPicker = new ColorPicker
         {
@@ -421,15 +426,15 @@ public sealed partial class SpacesPage : Page
 
         var panel = new StackPanel { Spacing = 16, MinWidth = 320 };
         panel.Children.Add(titleBox);
-        panel.Children.Add(new TextBlock { Text = "Color & Transparency" });
+        panel.Children.Add(new TextBlock { Text = Loc.Get("Spaces_ColorTransparency") });
         panel.Children.Add(colorPicker);
 
         var dialog = new ContentDialog
         {
-            Title = "Edit Space",
+            Title = Loc.Get("Spaces_EditDialogTitle"),
             Content = panel,
-            PrimaryButtonText = "Save",
-            CloseButtonText = "Cancel",
+            PrimaryButtonText = Loc.Get("Common_Save"),
+            CloseButtonText = Loc.Get("Common_Cancel"),
             DefaultButton = ContentDialogButton.Primary,
             XamlRoot = this.XamlRoot
         };
@@ -448,7 +453,7 @@ public sealed partial class SpacesPage : Page
 
             SpaceStore.Save(_spaces);
             RebuildList();
-            ShowStatus("Space updated. Changes applied automatically.");
+            ShowStatus(Loc.Get("Spaces_Updated"));
         }
     }
 
@@ -460,10 +465,10 @@ public sealed partial class SpacesPage : Page
 
         var dialog = new ContentDialog
         {
-            Title = "Delete Space",
-            Content = $"Are you sure you want to delete \"{space.Title}\"? Icons will be released back to the desktop.",
-            PrimaryButtonText = "Delete",
-            CloseButtonText = "Cancel",
+            Title = Loc.Get("Spaces_DeleteDialogTitle"),
+            Content = Loc.Format("Spaces_DeleteConfirmation", space.Title),
+            PrimaryButtonText = Loc.Get("Common_Delete"),
+            CloseButtonText = Loc.Get("Common_Cancel"),
             DefaultButton = ContentDialogButton.Close,
             XamlRoot = this.XamlRoot
         };
@@ -474,7 +479,7 @@ public sealed partial class SpacesPage : Page
             _spaces.Remove(space);
             SpaceStore.Save(_spaces);
             RebuildList();
-            ShowStatus($"Deleted \"{space.Title}\". Changes applied automatically.");
+            ShowStatus(Loc.Format("Spaces_Deleted", space.Title));
         }
     }
 
