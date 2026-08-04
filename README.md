@@ -37,6 +37,8 @@ Save valuable screen real estate by double-clicking the title bar of a space to 
 ### 🧘 Zen Mode
 Reduce visual distractions by fading out spaces and desktop icons when they are not actively being used. They gently reappear when you hover your mouse over them or click the desktop.
 
+![Zen Mode Screenshot](docs/images/zenmode.png)
+
 ### 👀 Peek
 Instantly bring your desktop spaces on top of all your open windows with a simple hotkey. Access your files and apps quickly without needing to minimize your current work.
 
