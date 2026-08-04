@@ -1,0 +1,16 @@
+<Window x:Class="DeskSpaceOS.Service.OverlayWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Overlay Window"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        ShowInTaskbar="False"
+        Topmost="False"
+        ResizeMode="NoResize"
+        SnapsToDevicePixels="True">
+    
+    <Canvas x:Name="OverlayCanvas" Background="Transparent">
+        <!-- Spaces will be drawn dynamically here -->
+    </Canvas>
+</Window>

@@ -1,0 +1,30 @@
+<Page
+    x:Class="DeskSpaceOS_SettingsApp.TabsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Loaded="Page_Loaded">
+
+    <ScrollViewer>
+        <StackPanel Spacing="24" Padding="0,0,16,24" MaxWidth="720" HorizontalAlignment="Left">
+            <TextBlock Text="Tabs" FontSize="24" FontWeight="SemiBold"/>
+            <TextBlock Text="Choose how space and folder portal tabs are drawn."
+                       Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                       TextWrapping="Wrap"/>
+
+            <ComboBox
+                x:Name="TabStyleComboBox"
+                Header="Tab style"
+                Width="320"
+                AutomationProperties.Name="Tab style"
+                AutomationProperties.AutomationId="TabStyleComboBox"
+                SelectionChanged="TabStyleComboBox_SelectionChanged">
+                <ComboBoxItem Content="Menu" Tag="Menu"/>
+                <ComboBoxItem Content="Flat" Tag="Flat"/>
+                <ComboBoxItem Content="Segmented" Tag="Segmented"/>
+                <ComboBoxItem Content="Rounded" Tag="Rounded"/>
+            </ComboBox>
+
+            <InfoBar x:Name="StatusInfoBar" IsOpen="False" IsClosable="True"/>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

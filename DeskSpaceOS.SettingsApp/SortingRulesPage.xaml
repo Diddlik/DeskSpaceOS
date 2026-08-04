@@ -1,0 +1,31 @@
+<Page
+    x:Class="DeskSpaceOS_SettingsApp.SortingRulesPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Loaded="Page_Loaded">
+
+    <ScrollViewer>
+        <StackPanel Spacing="24" Padding="0,0,16,24">
+            <TextBlock Text="Sorting Rules" FontSize="24" FontWeight="SemiBold" />
+            <TextBlock Text="Define rules to automatically sort new desktop items into spaces by file extension or name pattern."
+                       Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" />
+
+            <Button x:Name="AddRuleButton" Content="Add Rule" Style="{ThemeResource AccentButtonStyle}" Click="AddRuleButton_Click" />
+
+            <ItemsRepeater x:Name="RulesList" />
+
+            <!-- Empty state -->
+            <StackPanel x:Name="EmptyState" Visibility="Collapsed" HorizontalAlignment="Center" Spacing="8" Padding="0,40,0,0">
+                <FontIcon Glyph="&#xE16E;" FontSize="48" Foreground="{ThemeResource TextFillColorSecondaryBrush}" HorizontalAlignment="Center" />
+                <TextBlock Text="No sorting rules" FontSize="16" HorizontalAlignment="Center" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                <TextBlock Text="Add a rule to automatically organize new files on your desktop."
+                           HorizontalAlignment="Center" Foreground="{ThemeResource TextFillColorTertiaryBrush}" TextWrapping="Wrap" />
+            </StackPanel>
+
+            <InfoBar x:Name="StatusInfoBar" IsOpen="False" IsClosable="True" />
+        </StackPanel>
+    </ScrollViewer>
+</Page>

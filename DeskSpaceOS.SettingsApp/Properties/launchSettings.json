@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "DeskSpaceOS.SettingsApp (Unpackaged)": {
+      "commandName": "Project"
+    },
+    "DeskSpaceOS.SettingsApp (Package)": {
+      "commandName": "MsixPackage"
+    }
+  }
+}

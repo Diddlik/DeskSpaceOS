@@ -1,0 +1,50 @@
+name: Release
+
+# Push a version tag (e.g. v0.5.1) to build and publish a GitHub Release:
+#   git tag v0.5.1 && git push origin v0.5.1
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write # required for vpk to create/publish the GitHub Release
+
+jobs:
+  release:
+    # WinUI 3 / WindowsAppSDK + WPF require a Windows runner.
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET 10
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "10.0.x"
+
+      - name: Derive version from tag
+        id: ver
+        shell: pwsh
+        run: |
+          $version = "${{ github.ref_name }}".TrimStart('v')
+          if (-not ($version -match '^\d+\.\d+\.\d+')) {
+            throw "Tag '${{ github.ref_name }}' is not a valid semver (expected vMAJOR.MINOR.PATCH)."
+          }
+          "version=$version" >> $env:GITHUB_OUTPUT
+
+      - name: Install Velopack CLI
+        # Pinned to the version that produced the existing releases so delta
+        # packages stay compatible across the stable channel.
+        run: dotnet tool install --global vpk --version 0.0.1298
+
+      - name: Build, package & publish release
+        shell: pwsh
+        run: |
+          ./build-installer.ps1 `
+            -Version ${{ steps.ver.outputs.version }} `
+            -Channel stable `
+            -GitHubToken $env:GH_TOKEN
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

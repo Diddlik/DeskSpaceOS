@@ -1,0 +1,40 @@
+<Page
+    x:Class="DeskSpaceOS_SettingsApp.ZenModePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Loaded="Page_Loaded">
+
+    <ScrollViewer>
+        <StackPanel Spacing="24" Padding="0,0,16,24" MaxWidth="720" HorizontalAlignment="Left">
+            <TextBlock Text="Zen Mode" FontSize="24" FontWeight="SemiBold"/>
+            <TextBlock Text="When enabled, spaces fade into the wallpaper when the mouse is idle over other windows, keeping the desktop distraction-free. Hover back onto the desktop to bring them back."
+                       Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap"/>
+
+            <ToggleSwitch x:Name="ZenModeToggle"
+                          Header="Enable Zen Mode"
+                          OnContent="Spaces fade when idle"
+                          OffContent="Spaces stay visible"
+                          Toggled="ZenModeToggle_Toggled"/>
+
+            <StackPanel x:Name="TuningPanel" Spacing="16">
+                <NumberBox x:Name="IdleBox"
+                           Header="Idle time before fade (seconds)"
+                           Minimum="0.1" Maximum="30" SmallChange="0.1" LargeChange="1"
+                           SpinButtonPlacementMode="Inline"
+                           ValueChanged="AnyValue_Changed"/>
+
+                <NumberBox x:Name="OpacityBox"
+                           Header="Faded opacity (0.0 – 1.0)"
+                           Minimum="0" Maximum="1" SmallChange="0.05" LargeChange="0.1"
+                           SpinButtonPlacementMode="Inline"
+                           ValueChanged="AnyValue_Changed"/>
+            </StackPanel>
+            
+            <Border BorderBrush="{ThemeResource SurfaceStrokeColorDefaultBrush}" BorderThickness="1" CornerRadius="8" MaxWidth="600" HorizontalAlignment="Left">
+                <Image x:Name="ZenModePreviewImage" Stretch="Uniform" Height="300"/>
+            </Border>
+
+            <InfoBar x:Name="StatusInfoBar" IsOpen="False" IsClosable="True"/>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

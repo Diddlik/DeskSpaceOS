@@ -1,0 +1,58 @@
+<Page
+    x:Class="DeskSpaceOS_SettingsApp.SettingsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Loaded="Page_Loaded">
+
+    <ScrollViewer>
+        <StackPanel Spacing="24" Padding="0,0,16,24">
+            <TextBlock Text="Settings" FontSize="24" FontWeight="SemiBold" />
+            <TextBlock Text="General application settings."
+                       Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+
+            <!-- Startup -->
+            <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                    BorderThickness="1" CornerRadius="8" Padding="16,12">
+                <StackPanel Spacing="4">
+                    <ToggleSwitch x:Name="StartWithWindowsToggle" Header="Start with Windows"
+                                  Toggled="StartWithWindowsToggle_Toggled" />
+                    <TextBlock Text="Launch the DeskSpace OS service automatically when you sign in."
+                               Foreground="{ThemeResource TextFillColorSecondaryBrush}" FontSize="12"
+                               TextWrapping="Wrap" />
+                </StackPanel>
+            </Border>
+
+            <!-- Auto arrange -->
+            <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                    BorderThickness="1" CornerRadius="8" Padding="16,12">
+                <StackPanel Spacing="4">
+                    <ToggleSwitch x:Name="DisableAutoArrangeToggle" Header="Disable icon auto-arrange"
+                                  Toggled="DisableAutoArrangeToggle_Toggled" />
+                    <TextBlock Text="Automatically disables Windows auto-arrange when the service starts, so icons can be freely positioned inside spaces. Restored on service exit."
+                               Foreground="{ThemeResource TextFillColorSecondaryBrush}" FontSize="12"
+                               TextWrapping="Wrap" />
+                </StackPanel>
+            </Border>
+
+            <!-- Quick Hide -->
+            <Border Background="{ThemeResource CardBackgroundFillColorDefaultBrush}"
+                    BorderBrush="{ThemeResource CardStrokeColorDefaultBrush}"
+                    BorderThickness="1" CornerRadius="8" Padding="16,12">
+                <StackPanel Spacing="4">
+                    <ToggleSwitch x:Name="EnableQuickHideToggle" Header="Quick Hide"
+                                  Toggled="EnableQuickHideToggle_Toggled" />
+                    <TextBlock Text="Quick-hide desktop icons and spaces with a double-click on empty desktop space."
+                               Foreground="{ThemeResource TextFillColorSecondaryBrush}" FontSize="12"
+                               TextWrapping="Wrap" />
+                </StackPanel>
+            </Border>
+
+            <InfoBar x:Name="StatusInfoBar" IsOpen="False" IsClosable="True" />
+        </StackPanel>
+    </ScrollViewer>
+</Page>

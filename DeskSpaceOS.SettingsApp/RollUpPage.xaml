@@ -1,0 +1,26 @@
+<Page
+    x:Class="DeskSpaceOS_SettingsApp.RollUpPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Loaded="Page_Loaded">
+
+    <ScrollViewer>
+        <StackPanel Spacing="24" Padding="0,0,16,24" MaxWidth="720" HorizontalAlignment="Left">
+            <TextBlock Text="Roll-Up" FontSize="24" FontWeight="SemiBold"/>
+            <TextBlock Text="Collapse spaces and folder portals to their header when you need more desktop space."
+                       Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                       TextWrapping="Wrap"/>
+
+            <ToggleSwitch
+                x:Name="EnableRollUpToggle"
+                Header="Enable Roll-Up"
+                OnContent="Roll-Up commands are available"
+                OffContent="Roll-Up commands are disabled"
+                AutomationProperties.Name="Enable Roll-Up"
+                AutomationProperties.AutomationId="EnableRollUpToggle"
+                Toggled="EnableRollUpToggle_Toggled"/>
+
+            <InfoBar x:Name="StatusInfoBar" IsOpen="False" IsClosable="True"/>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

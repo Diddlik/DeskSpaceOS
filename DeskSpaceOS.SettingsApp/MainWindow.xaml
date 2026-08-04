@@ -1,0 +1,40 @@
+<Window
+    x:Class="DeskSpaceOS_SettingsApp.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:DeskSpaceOS_SettingsApp"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Border x:Name="AppTitleBar" Background="Transparent" Height="32">
+            <TextBlock Text="DeskSpace OS Settings" VerticalAlignment="Center" Margin="16,0,0,0" FontSize="12"/>
+        </Border>
+
+        <NavigationView x:Name="NavView" Grid.Row="1" PaneDisplayMode="Left" IsSettingsVisible="True" SelectionChanged="NavView_SelectionChanged">
+            <NavigationView.MenuItems>
+                <NavigationViewItem Icon="Library" Content="Spaces" Tag="Spaces" />
+                <NavigationViewItem Icon="Folder" Content="Folder Portals" Tag="Portals" />
+                <NavigationViewItem Icon="Highlight" Content="Color &amp; Appearance" Tag="Appearance" />
+                <NavigationViewItem Icon="Filter" Content="Sorting Rules" Tag="Rules" />
+                <NavigationViewItem Icon="Keyboard" Content="Hotkeys" Tag="Hotkeys" />
+                <NavigationViewItem Icon="SlideShow" Content="Roll-Up" Tag="RollUp" />
+                <NavigationViewItem Icon="View" Content="Zen Mode" Tag="ZenMode" />
+                <NavigationViewItem Icon="PreviewLink" Content="Peek" Tag="Peek" />
+                <NavigationViewItem Icon="HideBcc" Content="QuickHide" Tag="QuickHide" />
+                <NavigationViewItem Icon="List" Content="Tabs" Tag="Tabs" />
+                <NavigationViewItem Icon="ViewAll" Content="Layout" Tag="Layout" />
+            </NavigationView.MenuItems>
+            <NavigationView.FooterMenuItems>
+                <NavigationViewItem x:Name="AboutNavItem" Icon="ContactInfo" Content="About" Tag="About" />
+            </NavigationView.FooterMenuItems>
+            <Frame x:Name="ContentFrame" Padding="24" />
+        </NavigationView>
+    </Grid>
+</Window>

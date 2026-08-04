@@ -1,0 +1,15 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+  </Configurations>
+  <Project Path="DeskSpaceOS.Core/DeskSpaceOS.Core.csproj">
+    <Platform Project="x64" />
+  </Project>
+  <Project Path="DeskSpaceOS.Service/DeskSpaceOS.Service.csproj">
+    <Platform Project="x64" />
+  </Project>
+  <Project Path="DeskSpaceOS.SettingsApp/DeskSpaceOS.SettingsApp.csproj">
+    <Platform Project="x64" />
+    <Deploy />
+  </Project>
+</Solution>

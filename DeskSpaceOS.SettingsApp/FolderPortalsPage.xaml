@@ -1,0 +1,31 @@
+<Page
+    x:Class="DeskSpaceOS_SettingsApp.FolderPortalsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Loaded="Page_Loaded">
+
+    <ScrollViewer>
+        <StackPanel Spacing="16" Padding="0,0,16,24">
+            <TextBlock Text="Folder Portals" FontSize="24" FontWeight="SemiBold" />
+            <TextBlock Text="Mirror the contents of a folder on your desktop. Files added to or removed from the folder appear automatically in the portal space."
+                       Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" />
+
+            <Button Content="Add Folder Portal" Style="{ThemeResource AccentButtonStyle}" Click="AddPortalButton_Click" />
+
+            <InfoBar x:Name="StatusInfoBar" IsOpen="False" IsClosable="True" />
+
+            <ItemsRepeater x:Name="PortalList" />
+
+            <!-- Empty state -->
+            <StackPanel x:Name="EmptyState" Visibility="Collapsed" HorizontalAlignment="Center" Spacing="8" Padding="0,40,0,0">
+                <FontIcon Glyph="&#xE8B7;" FontSize="48" Foreground="{ThemeResource TextFillColorSecondaryBrush}" HorizontalAlignment="Center" />
+                <TextBlock Text="No folder portals" FontSize="16" HorizontalAlignment="Center" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                <TextBlock Text="Add a portal to mirror a folder like Downloads on your desktop."
+                           HorizontalAlignment="Center" Foreground="{ThemeResource TextFillColorTertiaryBrush}" TextWrapping="Wrap" />
+            </StackPanel>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

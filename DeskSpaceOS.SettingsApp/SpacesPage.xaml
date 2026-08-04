@@ -1,0 +1,46 @@
+<Page
+    x:Class="DeskSpaceOS_SettingsApp.SpacesPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Loaded="Page_Loaded">
+
+    <ScrollViewer>
+        <StackPanel Spacing="16" Padding="0,0,16,24">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Text="Spaces" FontSize="24" FontWeight="SemiBold" />
+
+                <Button Grid.Column="1"
+                        Style="{ThemeResource AccentButtonStyle}"
+                        Click="CreateSpaceButton_Click">
+                    <StackPanel Orientation="Horizontal" Spacing="6">
+                        <FontIcon Glyph="&#xE710;" FontSize="14" />
+                        <TextBlock Text="Create Space" />
+                    </StackPanel>
+                </Button>
+            </Grid>
+            <TextBlock Text="Manage your desktop spaces. Changes are saved and applied automatically."
+                       Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" />
+
+            <InfoBar x:Name="StatusInfoBar" IsOpen="False" IsClosable="True" />
+
+            <!-- Space list -->
+            <ItemsRepeater x:Name="SpaceList" />
+
+            <!-- Empty state -->
+            <StackPanel x:Name="EmptyState" Visibility="Collapsed" HorizontalAlignment="Center" Spacing="8" Padding="0,40,0,0">
+                <FontIcon Glyph="&#xE71D;" FontSize="48" Foreground="{ThemeResource TextFillColorSecondaryBrush}" HorizontalAlignment="Center" />
+                <TextBlock Text="No spaces yet" FontSize="16" HorizontalAlignment="Center" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                <TextBlock Text="Use Create Space or draw a rectangle on the desktop to create your first space." HorizontalAlignment="Center"
+                           Foreground="{ThemeResource TextFillColorTertiaryBrush}" />
+            </StackPanel>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

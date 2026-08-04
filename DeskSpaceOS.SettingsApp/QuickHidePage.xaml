@@ -1,0 +1,62 @@
+<Page
+    x:Class="DeskSpaceOS_SettingsApp.QuickHidePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Loaded="Page_Loaded">
+
+    <ScrollViewer>
+        <StackPanel Spacing="24" Padding="0,0,16,24" MaxWidth="800" HorizontalAlignment="Left">
+            <TextBlock Text="Schnell-verstecken" FontSize="28" FontWeight="SemiBold" />
+            <TextBlock Text="Mit Quick-hide können Sie Ihre Desktop-Symbole durch Doppelklick auf eine leere Stelle Ihres Desktops schnell verbergen und anzeigen." 
+                       TextWrapping="Wrap" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+
+            <!-- Dummy Preview Screen -->
+            <Border BorderBrush="{ThemeResource SurfaceStrokeColorDefaultBrush}" BorderThickness="1" CornerRadius="8" Background="{ThemeResource LayerFillColorDefaultBrush}">
+                <Grid Height="200" Width="400">
+                    <Rectangle Fill="{ThemeResource AccentFillColorDefaultBrush}" Opacity="0.1" />
+                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Spacing="8">
+                        <SymbolIcon Symbol="HideBcc" RenderTransformOrigin="0.5,0.5">
+                            <SymbolIcon.RenderTransform>
+                                <ScaleTransform ScaleX="2" ScaleY="2" />
+                            </SymbolIcon.RenderTransform>
+                        </SymbolIcon>
+                        <TextBlock Text="Double-click desktop to hide/show" FontStyle="Italic" Opacity="0.7" />
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <StackPanel Spacing="4">
+                <HyperlinkButton Content="So verwenden Sie" Padding="0" />
+                <HyperlinkButton Content="Einzelne Spaces ausschließen" Padding="0" />
+            </StackPanel>
+
+            <StackPanel Spacing="16">
+                <TextBlock Text="Einstellungen" FontSize="20" FontWeight="SemiBold" />
+                
+                <CheckBox x:Name="EnableQuickHideCheckBox" Content="Aktiviert" Checked="SettingChanged" Unchecked="SettingChanged" />
+                
+                <StackPanel Spacing="8" Margin="0,8,0,0">
+                    <ComboBox x:Name="QuickHideScopeComboBox" Width="400" SelectionChanged="SettingChanged">
+                        <ComboBoxItem Content="Verberge alle Desktopsymbole und Space-Gruppen" Tag="IconsAndSpaces" />
+                        <ComboBoxItem Content="Nur Desktopsymbole verbergen" Tag="OnlyIcons" />
+                        <ComboBoxItem Content="Nur Space-Gruppen verbergen" Tag="OnlySpaces" />
+                    </ComboBox>
+                </StackPanel>
+
+                <CheckBox x:Name="AutoHideCheckBox" Content="Symbole automatisch ausblenden, wenn der Desktop nicht verwendet wird" Checked="SettingChanged" Unchecked="SettingChanged" />
+                <CheckBox x:Name="AutoShowCheckBox" Content="Symbole automatisch anzeigen, wenn der Desktop verwendet wird" Checked="SettingChanged" Unchecked="SettingChanged" />
+            </StackPanel>
+
+            <StackPanel Spacing="16">
+                <TextBlock Text="Zusätzliche Optionen" FontSize="20" FontWeight="SemiBold" />
+                <CheckBox x:Name="ShowOnStartCheckBox" Content="Beim Start immer Symbole anzeigen" Checked="SettingChanged" Unchecked="SettingChanged" />
+            </StackPanel>
+
+            <Button x:Name="SaveButton" Content="Einstellungen speichern" Style="{ThemeResource AccentButtonStyle}" Click="SaveButton_Click" Margin="0,12,0,0" />
+            <InfoBar x:Name="StatusInfoBar" IsOpen="False" IsClosable="True" />
+        </StackPanel>
+    </ScrollViewer>
+</Page>
