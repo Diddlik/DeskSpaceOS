@@ -48,3 +48,23 @@ jobs:
             -GitHubToken $env:GH_TOKEN
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # vpk 0.0.1298 has no --releaseNotes option and publishes the release under
+      # the bare version tag (e.g. 0.6.0), so the body is filled in afterwards
+      # from the matching RELEASE_NOTES.md section.
+      - name: Attach release notes
+        shell: pwsh
+        run: |
+          $version = "${{ steps.ver.outputs.version }}"
+          $lines = Get-Content RELEASE_NOTES.md
+          $start = ($lines | Select-String -Pattern "^## \[?$([regex]::Escape($version))\]?" -List).LineNumber
+          if (-not $start) { throw "RELEASE_NOTES.md has no '## $version' section." }
+          $rest = $lines[$start..($lines.Count - 1)]
+          $next = ($rest | Select-String -Pattern '^## ' -List).LineNumber
+          $body = if ($next) { $rest[0..($next - 2)] } else { $rest }
+          $notesFile = Join-Path $env:RUNNER_TEMP 'release-notes.md'
+          Set-Content -Path $notesFile -Value ($body -join "`n")
+          gh release edit $version --repo $env:GITHUB_REPOSITORY `
+            --title "DeskSpace OS $version" --notes-file $notesFile
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
