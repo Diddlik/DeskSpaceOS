@@ -7,7 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using DeskSpaceOS.Core.Storage;
 using Microsoft.UI.Xaml;
-using Windows.Globalization;
+using Microsoft.Windows.Globalization;
 
 namespace DeskSpaceOS_SettingsApp;
 

@@ -3,7 +3,7 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.Win32;
 using DeskSpaceOS.Core.Storage;
-using Windows.Globalization;
+using Microsoft.Windows.Globalization;
 
 namespace DeskSpaceOS_SettingsApp;
 

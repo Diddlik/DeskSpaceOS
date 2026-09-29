@@ -1,3 +1,15 @@
+## 0.6.2
+
+The Settings app opens again from the tray icon.
+
+### Fixed
+
+**Settings app crashed on start**
+Once a UI language was saved, the Settings app crashed right after launch, so
+clicking the tray icon seemed to do nothing. It used a Windows language API that
+only works in packaged apps. It now uses the Windows App SDK version, which also
+works in the installed (unpackaged) app.
+
 ## 0.6.1
 
 Space icons no longer get lost or pile up on top of each other.
