@@ -25,6 +25,11 @@ Status is updated as each item is implemented and verified.
   - Fullscreen or borderless apps on another display could receive laggy mouse input because the low-level hook dispatched desktop overlay work before cheaply filtering the target window.
   - Implemented cached desktop-layer handle checks, early non-desktop exits for click/wheel/up events, early-throttled ambient mouse-move processing for ZenMode/QuickHide auto state, and a foreground fullscreen/borderless monitor guard that suppresses passive DeskSpace mouse reactions while a game covers the pointer's display.
 
+- [ ] Space icons no longer get lost or overlap (implemented 2026-09-29, needs live verification).
+  - Causes fixed: stale ListView indices after desktop add/delete, new spaces created without a tab (icons not restored after restart), hot-reload wiping inactive tabs' icons, closing/deleting tabs and spaces leaving icons parked off-screen, same-space drops not re-snapped, duplicate display names, sorting rules giving one icon two owners, partial desktop at login dropping names on save, failed `spaces.json` read treated as "all spaces deleted".
+  - Verify: delete/add desktop files next to spaces, rename a file inside a space, close a tab, delete a space with several tabs, drag within a space, restart the service.
+  - Not addressed: display scaling other than 100% (grid uses DIPs as ListView pixels), fixed 80x100 icon cell vs. large desktop icons, icon hit-test when a monitor sits left of/above the primary, SettingsApp saving a stale `spaces.json` copy.
+
 ## Notes
 
 - `PlaceholderPage` still exists, but current navigation no longer routes to it.

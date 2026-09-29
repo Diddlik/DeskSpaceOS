@@ -25,7 +25,13 @@ public static class SpaceStore
         WriteIndented = true
     };
 
-    public static List<Space> Load()
+    public static List<Space> Load() => TryLoad() ?? new List<Space>();
+
+    /// <summary>
+    /// Like <see cref="Load"/>, but returns null when the file exists and can't be read or
+    /// parsed (e.g. caught mid-write), so callers can tell that apart from "no spaces".
+    /// </summary>
+    public static List<Space>? TryLoad()
     {
         string loadPath = File.Exists(StorePath) ? StorePath : LegacyStorePath;
 
@@ -45,7 +51,7 @@ public static class SpaceStore
         }
         catch
         {
-            return new List<Space>();
+            return null;
         }
     }
 

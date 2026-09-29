@@ -128,6 +128,13 @@ old instance is live, `taskkill /IM <name>.exe /F` before re-running.
   `PortalSpaceControl`, `CreateSpacePopup`).
 - Other runtime pieces: `FolderPortalWatcher`, `DesktopFileMonitor`,
   `ShellIconExtractor`, hotkey registration, live settings reload.
+- Icon ownership: spaces hold desktop `SysListView32` **indices** at runtime and persist
+  display **names**. Explorer shifts indices on every desktop add/delete/re-enumeration,
+  so `OverlayWindow` keeps an index→name snapshot and remaps all held indices
+  (`EnsureIconIndicesCurrent` / `ReconcileIconIndices`, triggered by
+  `DesktopFileMonitor.ItemsChanged` and item-count checks). Any new code that stores
+  icon indices must call `EnsureIconIndicesCurrent()` first and be covered by the remap.
+  Saved names not yet on the desktop stay pending per tab and are claimed when they appear.
 - Updates: `UpdateService` + Velopack. `Program.cs` intercepts Velopack CLI verbs
   first, and registers/unregisters autostart in the HKCU `...\Run` key under value
   `DeskSpaceOS` (also honors legacy `--install` / `--uninstall`).

@@ -15,6 +15,9 @@ public class DesktopFileMonitor : IDisposable
     /// <summary>Raised (on a worker thread) when a file is created or moved into a desktop folder.</summary>
     public event EventHandler<string>? FileArrived;
 
+    /// <summary>Raised (on a worker thread) when a desktop entry is created, deleted or renamed.</summary>
+    public event EventHandler? ItemsChanged;
+
     public void Start()
     {
         string userDesktop = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
@@ -30,8 +33,10 @@ public class DesktopFileMonitor : IDisposable
                 IncludeSubdirectories = false,
                 EnableRaisingEvents = true
             };
-            w.Created += (_, e) => FileArrived?.Invoke(this, e.FullPath);
-            w.Renamed += (_, e) => FileArrived?.Invoke(this, e.FullPath);
+            // ItemsChanged first so ListView indices are reconciled before a rule uses them.
+            w.Created += (_, e) => { ItemsChanged?.Invoke(this, EventArgs.Empty); FileArrived?.Invoke(this, e.FullPath); };
+            w.Deleted += (_, _) => ItemsChanged?.Invoke(this, EventArgs.Empty);
+            w.Renamed += (_, e) => { ItemsChanged?.Invoke(this, EventArgs.Empty); FileArrived?.Invoke(this, e.FullPath); };
             _watchers.Add(w);
         }
     }

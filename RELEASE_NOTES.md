@@ -1,3 +1,33 @@
+## 0.6.1
+
+Space icons no longer get lost or pile up on top of each other.
+
+### Fixed
+
+**Icons lost from spaces or overlapping inside them**
+Spaces tracked their icons by position in the desktop icon list, which Explorer
+renumbers whenever a desktop item is added or removed. After that, spaces
+pointed at the wrong icons and saved the wrong names. The service now keeps a
+name snapshot and remaps every tracked icon whenever the desktop changes.
+
+Also fixed in the same area:
+
+* Spaces drawn on the desktop were created without a tab, so their icons were
+  not restored after a restart.
+* Editing a space in the Settings app dropped the icons of its inactive tabs.
+* Closing a tab or deleting a space left icons hidden off-screen; they are now
+  moved to the remaining tab or laid out where the space was.
+* Icons moved within the same space now snap back into the grid.
+* Icons with the same display name (e.g. `Report.docx` and `Report.pdf` with
+  hidden extensions) no longer map to the same icon.
+* A sorting rule applied to a renamed file no longer puts the icon into two spaces.
+* Icons that are not on the desktop yet at login (Explorer still loading) are
+  kept and claimed once they appear, instead of being dropped on the next save.
+* A failed read of `spaces.json` during a write no longer removes all spaces.
+
+Icons that already lost their space in an earlier version must be dragged back
+in once.
+
 ## 0.6.0
 
 Localization, correct version reporting, and update control.

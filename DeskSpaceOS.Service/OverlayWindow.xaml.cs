@@ -47,6 +47,13 @@ public partial class OverlayWindow : Window
     private DesktopFileMonitor _desktopMonitor = new();
     private List<SortingRule> _sortingRules = new();
 
+    // Explorer shifts desktop ListView indices whenever items are added, removed or
+    // re-enumerated. _iconNames is the index→name snapshot the spaces' indices refer to.
+    private List<string> _iconNames = new();
+    private bool _iconIndicesDirty;
+    private System.Windows.Threading.DispatcherTimer? _reconcileTimer;
+    private int _reconcileTicksRemaining;
+
     // ZenMode mode (Phase 6)
     private bool _zenModeFaded = false;
     private System.Windows.Threading.DispatcherTimer? _zenModeIdleTimer;
@@ -169,7 +176,11 @@ public partial class OverlayWindow : Window
         // Load rules and start desktop monitor (Phase 5)
         _sortingRules = SortingRuleStore.Load();
         _desktopMonitor.FileArrived += OnDesktopFileArrived;
+        _desktopMonitor.ItemsChanged += OnDesktopItemsChanged;
         _desktopMonitor.Start();
+
+        // After login Explorer may still be populating the desktop; claim late icons.
+        ScheduleIconReconcile(ticks: 20);
 
         RegisterHotkeys(hwnd);
 
@@ -197,7 +208,9 @@ public partial class OverlayWindow : Window
         _settingsWatcher.SortingRulesChanged -= OnSortingRulesFileChanged;
 
         _desktopMonitor.FileArrived -= OnDesktopFileArrived;
+        _desktopMonitor.ItemsChanged -= OnDesktopItemsChanged;
         _desktopMonitor.Dispose();
+        _reconcileTimer?.Stop();
 
         _portalWatcher.Dispose();
 
@@ -519,6 +532,8 @@ public partial class OverlayWindow : Window
                 return;
             }
 
+            EnsureIconIndicesCurrent();
+
             var portal = GetPortalAtPoint(e.Point);
             if (portal != null)
             {
@@ -614,6 +629,9 @@ public partial class OverlayWindow : Window
             {
                 return;
             }
+
+            // Icon hit-testing below returns current indices; spaces must hold current ones too.
+            EnsureIconIndicesCurrent();
 
             // Close any open context menus
             CloseAllContextMenus();
@@ -1056,11 +1074,9 @@ public partial class OverlayWindow : Window
                 _isDraggingIcon = false;
                 _dropTargetSpace?.HideDropHighlight();
 
-                var iconIndices = new List<int>(_draggedIconIndices);
                 var source = _dragSourceSpace;
                 var target = GetSpaceAtPoint(pt);
 
-                _draggedIconIndices.Clear();
                 _dragSourceSpace = null;
                 _dropTargetSpace = null;
 
@@ -1081,6 +1097,12 @@ public partial class OverlayWindow : Window
                 timer.Tick += (_, _) =>
                 {
                     timer.Stop();
+
+                    // Dropping onto a folder icon moves files and shifts indices; reconciling
+                    // also remaps _draggedIconIndices, so read it only afterwards.
+                    EnsureIconIndicesCurrent();
+                    var iconIndices = new List<int>(_draggedIconIndices);
+                    _draggedIconIndices.Clear();
 
                     foreach (int iconIdx in iconIndices)
                     {
@@ -1259,7 +1281,7 @@ public partial class OverlayWindow : Window
         {
             try
             {
-                spaceControl.CaptureIconsWithinBounds();
+                spaceControl.CaptureIconsWithinBounds(OwnedIconIndices());
             }
             catch (Exception exInner)
             {
@@ -1280,6 +1302,9 @@ public partial class OverlayWindow : Window
     {
         try
         {
+            // ToModel reads names by index; stale indices would persist the wrong icons.
+            EnsureIconIndicesCurrent();
+
             _lastSaveTime = DateTime.UtcNow;
             var models = new List<Space>();
             foreach (var child in OverlayCanvas.Children)
@@ -1333,6 +1358,10 @@ public partial class OverlayWindow : Window
             {
                 _rehideTimer!.Stop();
                 _rehideTimer = null;
+
+                // Explorer can finish a drop after our 150 ms snap and leave the icon on top
+                // of another one; snap every space's grid once more.
+                RelayoutAllSpaces();
             }
         };
         _rehideTimer.Start();
@@ -1343,6 +1372,10 @@ public partial class OverlayWindow : Window
         try
         {
             var models = SpaceStore.Load();
+            if (_desktopListViewHandle != IntPtr.Zero)
+                _iconNames = ReadDesktopIconNames();
+            var pool = new IconNamePool(_iconNames);
+
             foreach (var model in models)
             {
                 var cc = new Controls.SpaceControl
@@ -1359,13 +1392,114 @@ public partial class OverlayWindow : Window
                 RegisterSpace(cc);
                 OverlayCanvas.Children.Add(cc);
 
-                cc.RestoreAllTabIcons(model);
+                cc.RestoreAllTabIcons(model, pool);
             }
         }
         catch (Exception ex)
         {
             _logger?.LogWarning(ex, "Failed to load spaces — starting with an empty overlay.");
         }
+    }
+
+    private List<string> ReadDesktopIconNames()
+    {
+        int count = ListViewManager.GetItemCount(_desktopListViewHandle);
+        var names = new List<string>(count);
+        for (int i = 0; i < count; i++)
+            names.Add(ListViewManager.GetItemText(_desktopListViewHandle, i) ?? string.Empty);
+        return names;
+    }
+
+    private HashSet<int> OwnedIconIndices() =>
+        OverlayCanvas.Children.OfType<Controls.SpaceControl>().SelectMany(s => s.AllManagedIconIndices).ToHashSet();
+
+    private void RelayoutAllSpaces()
+    {
+        foreach (var space in OverlayCanvas.Children.OfType<Controls.SpaceControl>())
+        {
+            space.UpdateCapturedIconsPositions();
+            space.RehideInactiveTabIcons();
+        }
+    }
+
+    private void OnDesktopItemsChanged(object? sender, EventArgs e)
+    {
+        Dispatcher.BeginInvoke(new Action(() =>
+        {
+            _iconIndicesDirty = true;
+            // The file event can arrive before Explorer updates its ListView; keep checking for a bit.
+            ScheduleIconReconcile(ticks: 5);
+        }));
+    }
+
+    private void ScheduleIconReconcile(int ticks)
+    {
+        _reconcileTicksRemaining = Math.Max(_reconcileTicksRemaining, ticks);
+        if (_reconcileTimer == null)
+        {
+            var timer = new System.Windows.Threading.DispatcherTimer { Interval = TimeSpan.FromMilliseconds(500) };
+            timer.Tick += (_, _) =>
+            {
+                if (IsDeskSpaceMouseOperationActive()) return; // indices are in use; try next tick
+                if (_desktopListViewHandle != IntPtr.Zero) ReconcileIconIndices();
+                if (--_reconcileTicksRemaining <= 0) timer.Stop();
+            };
+            _reconcileTimer = timer;
+        }
+        _reconcileTimer.Start();
+    }
+
+    /// <summary>Cheap check (one message) before any work that relies on held icon indices.</summary>
+    private void EnsureIconIndicesCurrent()
+    {
+        if (_desktopListViewHandle == IntPtr.Zero) return;
+        if (_iconIndicesDirty || ListViewManager.GetItemCount(_desktopListViewHandle) != _iconNames.Count)
+            ReconcileIconIndices();
+    }
+
+    /// <summary>
+    /// Maps every held icon index from the last name snapshot to the current ListView, so
+    /// spaces keep owning the same icons after Explorer re-indexed the desktop.
+    /// </summary>
+    private void ReconcileIconIndices()
+    {
+        _iconIndicesDirty = false;
+        var current = ReadDesktopIconNames();
+        if (current.SequenceEqual(_iconNames)) return;
+
+        var pool = new IconNamePool(current);
+        var map = new Dictionary<int, int>();
+        for (int i = 0; i < _iconNames.Count; i++)
+        {
+            if (pool.TryTake(_iconNames[i], out int idx))
+                map[i] = idx;
+        }
+
+        // A name changed in place (rename, "file name extensions" toggled) keeps its index
+        // unless another icon now sits there. Otherwise the item is gone.
+        var claimed = map.Values.ToHashSet();
+        for (int i = 0; i < _iconNames.Count && i < current.Count; i++)
+        {
+            if (!map.ContainsKey(i) && !claimed.Contains(i))
+                map[i] = i;
+        }
+
+        _iconNames = current;
+
+        var spaces = OverlayCanvas.Children.OfType<Controls.SpaceControl>().ToList();
+        foreach (var space in spaces)
+            space.RemapIconIndices(map);
+        _draggedIconIndices = _draggedIconIndices.Where(map.ContainsKey).Select(i => map[i]).ToList();
+        _hiddenFreeIconPositions = _hiddenFreeIconPositions
+            .Where(kv => map.ContainsKey(kv.Key))
+            .ToDictionary(kv => map[kv.Key], kv => kv.Value);
+
+        var freeIcons = new IconNamePool(_iconNames, OwnedIconIndices());
+        foreach (var space in spaces)
+            space.ResolvePendingIcons(freeIcons);
+
+        RelayoutAllSpaces();
+        SaveSpaces();
     }
     
     private IntPtr _overlayHwnd = IntPtr.Zero;
@@ -1666,7 +1800,11 @@ public partial class OverlayWindow : Window
         {
             try
             {
-                var newModels = SpaceStore.Load();
+                // A failed read (e.g. mid-write) must not look like "all spaces deleted".
+                var newModels = SpaceStore.TryLoad();
+                if (newModels == null) return;
+
+                EnsureIconIndicesCurrent();
                 var existingById = new Dictionary<Guid, Controls.SpaceControl>();
                 foreach (var child in OverlayCanvas.Children)
                 {
@@ -1681,6 +1819,7 @@ public partial class OverlayWindow : Window
                 {
                     if (!newIds.Contains(kvp.Key))
                     {
+                        kvp.Value.ReleaseAllIcons();
                         OverlayCanvas.Children.Remove(kvp.Value);
                         _logger?.LogInformation("Hot-reload: removed space {Id}", kvp.Key);
                     }
@@ -1695,6 +1834,9 @@ public partial class OverlayWindow : Window
                         existing.ApplyModel(model);
                         Canvas.SetLeft(existing, model.X);
                         Canvas.SetTop(existing, model.Y);
+                        // Icons must follow position/size changes instead of staying behind.
+                        existing.UpdateCapturedIconsPositions();
+                        existing.RehideInactiveTabIcons();
                     }
                     else
                     {
@@ -1710,7 +1852,7 @@ public partial class OverlayWindow : Window
                         Canvas.SetTop(cc, model.Y);
                         RegisterSpace(cc);
                         OverlayCanvas.Children.Add(cc);
-                        cc.RestoreAllTabIcons(model);
+                        cc.RestoreAllTabIcons(model, new IconNamePool(_iconNames, OwnedIconIndices()));
                         _logger?.LogInformation("Hot-reload: added space {Id}", model.Id);
                     }
                 }
@@ -1858,17 +2000,17 @@ public partial class OverlayWindow : Window
         var space = FindSpaceForRule(rule);
         if (space == null) return;
 
-        IntPtr lv = DesktopManager.GetDesktopListViewHandle();
-        if (lv == IntPtr.Zero) return;
+        if (_desktopListViewHandle == IntPtr.Zero) return;
+        EnsureIconIndicesCurrent();
 
         string fileName = System.IO.Path.GetFileName(fullPath);
-        int iconIdx = ListViewManager.FindItemByName(lv, fileName);
+        int iconIdx = _iconNames.IndexOf(fileName);
         if (iconIdx < 0)
         {
             // Try without extension (Explorer may hide known extensions)
             string withoutExt = System.IO.Path.GetFileNameWithoutExtension(fullPath);
             if (!string.IsNullOrEmpty(withoutExt) && withoutExt != fileName)
-                iconIdx = ListViewManager.FindItemByName(lv, withoutExt);
+                iconIdx = _iconNames.IndexOf(withoutExt);
         }
 
         if (iconIdx < 0)
@@ -1885,6 +2027,9 @@ public partial class OverlayWindow : Window
 
         if (!space.ContainsIcon(iconIdx))
         {
+            // A renamed file may already belong to a space (or another tab); one owner only.
+            foreach (var other in OverlayCanvas.Children.OfType<Controls.SpaceControl>())
+                other.RemoveIcon(iconIdx);
             space.AcceptDroppedIcon(iconIdx);
             _logger?.LogInformation("Sorted new desktop item '{File}' into space '{Space}'",
                 fileName, space.Title);

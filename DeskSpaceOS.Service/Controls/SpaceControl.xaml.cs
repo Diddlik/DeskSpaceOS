@@ -23,11 +23,16 @@ public partial class SpaceControl : System.Windows.Controls.UserControl
     private Dictionary<Guid, List<int>> _tabIconIndices = new();
     private int _renamingTabIndex = -1;
 
+    // Saved icon names not (yet) on the desktop, e.g. while Explorer is still populating it
+    // after login. Kept and persisted so the next save doesn't silently drop them.
+    private readonly Dictionary<Guid, List<string>> _pendingIconNames = new();
+
     public IReadOnlyList<SpaceTab> Tabs => _tabs;
     public IReadOnlyDictionary<Guid, List<int>> TabIconIndices => _tabIconIndices;
 
     /// <summary>All icon indices managed by this space across every tab.</summary>
-    public IEnumerable<int> AllManagedIconIndices => _tabIconIndices.Values.SelectMany(x => x).Distinct();
+    public IEnumerable<int> AllManagedIconIndices =>
+        _tabIconIndices.Values.SelectMany(x => x).Concat(_capturedIconIndices).Distinct();
 
     private bool _isRolledUp;
     private double _expandedHeight;
@@ -67,6 +72,13 @@ public partial class SpaceControl : System.Windows.Controls.UserControl
     {
         InitializeComponent();
         _listViewHandle = DesktopManager.GetDesktopListViewHandle();
+
+        // Every space needs a tab: without one, captured icons were only saved to the
+        // legacy IconNames field and were not restored after a restart.
+        _tabs.Add(new SpaceTab { Name = "New Space" });
+        _tabIconIndices[_tabs[0].Id] = new List<int>();
+        RebuildTabStrip();
+
         UpdateHeaderVisibility(false);
         this.Loaded += (s, e) => UpdateHeaderVisibility(IsMouseOver);
     }
@@ -116,6 +128,8 @@ public partial class SpaceControl : System.Windows.Controls.UserControl
                         tabModel.IconNames.Add(name);
                 }
             }
+            if (_pendingIconNames.TryGetValue(tab.Id, out var pending))
+                tabModel.IconNames.AddRange(pending);
             tabModels.Add(tabModel);
         }
 
@@ -151,16 +165,20 @@ public partial class SpaceControl : System.Windows.Controls.UserControl
             _currentAlpha = model.Alpha;
             UpdateBackgroundColor();
 
-            // Restore tabs
+            // Restore tabs. On hot-reload keep the icons each tab already owns; wiping them
+            // dropped every inactive tab's icons (left parked off-screen) on the next save.
+            SaveActiveTabIcons();
+            var previousIcons = _tabIconIndices;
             _tabs.Clear();
-            _tabIconIndices.Clear();
+            _tabIconIndices = new Dictionary<Guid, List<int>>();
 
             if (model.Tabs != null && model.Tabs.Count > 0)
             {
                 foreach (var t in model.Tabs)
                 {
                     _tabs.Add(new SpaceTab { Id = t.Id, Name = t.Name });
-                    _tabIconIndices[t.Id] = new List<int>(); // restored later by RestoreTabIconsByName
+                    // Fresh controls get their icons from RestoreAllTabIcons.
+                    _tabIconIndices[t.Id] = previousIcons.TryGetValue(t.Id, out var kept) ? kept : new List<int>();
                 }
                 _activeTabIndex = Math.Clamp(model.ActiveTabIndex, 0, _tabs.Count - 1);
             }
@@ -181,6 +199,7 @@ public partial class SpaceControl : System.Windows.Controls.UserControl
                 _tabs[0].Name = model.Title;
             }
 
+            _capturedIconIndices = new List<int>(_tabIconIndices[_tabs[_activeTabIndex].Id]);
             RebuildTabStrip();
         }
         finally
@@ -210,61 +229,67 @@ public partial class SpaceControl : System.Windows.Controls.UserControl
         return names;
     }
 
-    public void RestoreCapturedIconsByName(List<string> iconNames)
-    {
-        if (_listViewHandle == IntPtr.Zero || iconNames.Count == 0) return;
-
-        _capturedIconIndices.Clear();
-        int count = ListViewManager.GetItemCount(_listViewHandle);
-        for (int i = 0; i < count; i++)
-        {
-            string? name = ListViewManager.GetItemText(_listViewHandle, i);
-            if (name != null && iconNames.Contains(name))
-                _capturedIconIndices.Add(i);
-        }
-
-        // Sync to active tab
-        if (_tabs.Count > 0)
-            _tabIconIndices[_tabs[_activeTabIndex].Id] = new List<int>(_capturedIconIndices);
-    }
-
     /// <summary>
-    /// Restores icons for all tabs from the model, hiding inactive tabs' icons off-screen.
+    /// Restores icons for all tabs from the model, snaps the active tab into the grid and
+    /// hides inactive tabs' icons off-screen. Names not on the desktop yet stay pending.
     /// </summary>
-    public void RestoreAllTabIcons(Space model)
+    /// <param name="pool">Shared across spaces so each desktop icon is claimed only once.</param>
+    public void RestoreAllTabIcons(Space model, IconNamePool pool)
     {
         if (_listViewHandle == IntPtr.Zero) return;
 
-        int count = ListViewManager.GetItemCount(_listViewHandle);
-        // Build name-to-index lookup
-        var nameToIndex = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
-        for (int i = 0; i < count; i++)
-        {
-            string? name = ListViewManager.GetItemText(_listViewHandle, i);
-            if (name != null && !nameToIndex.ContainsKey(name))
-                nameToIndex[name] = i;
-        }
+        // Pre-tab data only has the legacy IconNames list (ApplyModel made one tab for it).
+        var tabNames = model.Tabs is { Count: > 0 }
+            ? model.Tabs.Select(t => t.IconNames).ToList()
+            : new List<List<string>> { model.IconNames };
 
-        for (int t = 0; t < _tabs.Count && t < model.Tabs.Count; t++)
+        for (int t = 0; t < _tabs.Count && t < tabNames.Count; t++)
         {
-            var tabModel = model.Tabs[t];
             var indices = new List<int>();
-            foreach (string iconName in tabModel.IconNames)
+            var pending = new List<string>();
+            foreach (string iconName in tabNames[t])
             {
-                if (nameToIndex.TryGetValue(iconName, out int idx))
+                if (pool.TryTake(iconName, out int idx))
                     indices.Add(idx);
+                else
+                    pending.Add(iconName);
             }
             _tabIconIndices[_tabs[t].Id] = indices;
-
-            if (t != _activeTabIndex)
-            {
-                // Hide inactive tab's icons off-screen
-                foreach (int idx in indices)
-                    ListViewManager.SetItemPosition(_listViewHandle, idx, -10000, -10000);
-            }
+            _pendingIconNames[_tabs[t].Id] = pending;
         }
 
-        // Set active tab's icons as current
+        _capturedIconIndices = new List<int>(_tabIconIndices[_tabs[_activeTabIndex].Id]);
+        // Explorer may have moved icons while the service was not running.
+        UpdateCapturedIconsPositions();
+        RehideInactiveTabIcons();
+    }
+
+    /// <summary>
+    /// Re-points every held icon index after Explorer re-indexed the desktop ListView.
+    /// Indices missing from <paramref name="map"/> belong to removed items and are dropped.
+    /// </summary>
+    public void RemapIconIndices(IReadOnlyDictionary<int, int> map)
+    {
+        SaveActiveTabIcons();
+        foreach (var tabId in _tabIconIndices.Keys.ToList())
+            _tabIconIndices[tabId] = _tabIconIndices[tabId].Where(map.ContainsKey).Select(i => map[i]).ToList();
+        _capturedIconIndices = new List<int>(_tabIconIndices[_tabs[_activeTabIndex].Id]);
+    }
+
+    /// <summary>Claims icons for pending names that have appeared on the desktop.</summary>
+    public void ResolvePendingIcons(IconNamePool freeIcons)
+    {
+        SaveActiveTabIcons();
+        foreach (var (tabId, pending) in _pendingIconNames)
+        {
+            if (!_tabIconIndices.TryGetValue(tabId, out var indices)) continue;
+            pending.RemoveAll(name =>
+            {
+                if (!freeIcons.TryTake(name, out int idx)) return false;
+                indices.Add(idx);
+                return true;
+            });
+        }
         _capturedIconIndices = new List<int>(_tabIconIndices[_tabs[_activeTabIndex].Id]);
     }
 
@@ -426,9 +451,10 @@ public partial class SpaceControl : System.Windows.Controls.UserControl
     /// Finds icons within bounds and lays them out in a grid.
     /// Use for initial capture (new space creation).
     /// </summary>
-    public void CaptureIconsWithinBounds()
+    /// <param name="ownedElsewhere">Icons owned by other spaces; never captured twice.</param>
+    public void CaptureIconsWithinBounds(ICollection<int> ownedElsewhere)
     {
-        ScanIconsWithinBounds();
+        ScanIconsWithinBounds(ownedElsewhere);
         if (_capturedIconIndices.Count > 0)
             UpdateCapturedIconsPositions();
     }
@@ -442,7 +468,7 @@ public partial class SpaceControl : System.Windows.Controls.UserControl
         ScanIconsWithinBounds();
     }
 
-    private void ScanIconsWithinBounds()
+    private void ScanIconsWithinBounds(ICollection<int>? exclude = null)
     {
         if (_listViewHandle == IntPtr.Zero) return;
 
@@ -460,6 +486,7 @@ public partial class SpaceControl : System.Windows.Controls.UserControl
         int iconCount = ListViewManager.GetItemCount(_listViewHandle);
         for (int i = 0; i < iconCount; i++)
         {
+            if (exclude?.Contains(i) == true) continue;
             var pos = ListViewManager.GetItemPosition(_listViewHandle, i);
             if (pos.HasValue)
             {
@@ -564,7 +591,8 @@ public partial class SpaceControl : System.Windows.Controls.UserControl
         }
     }
 
-    public void UpdateCapturedIconsPositions()
+    /// <param name="clipToBounds">False places every icon, even below the space, instead of parking hidden rows off-screen.</param>
+    public void UpdateCapturedIconsPositions(bool clipToBounds = true)
     {
         if (_listViewHandle == IntPtr.Zero || _capturedIconIndices.Count == 0)
         {
@@ -603,8 +631,9 @@ public partial class SpaceControl : System.Windows.Controls.UserControl
             int actualY = (int)(y - _scrollOffset);
 
             // Hide if its center falls outside the visible area of the space
-            if (actualY < (int)(spaceTop + ContentTop - (iconHeight / 2)) || 
-                actualY > (int)(spaceTop + spaceHeight - (iconHeight / 2)))
+            if (clipToBounds &&
+                (actualY < (int)(spaceTop + ContentTop - (iconHeight / 2)) ||
+                 actualY > (int)(spaceTop + spaceHeight - (iconHeight / 2))))
             {
                 ListViewManager.SetItemPosition(_listViewHandle, iconIndex, -10000, -10000);
             }
@@ -651,6 +680,7 @@ public partial class SpaceControl : System.Windows.Controls.UserControl
     {
         if (this.Parent is System.Windows.Controls.Panel parentPanel)
         {
+            ReleaseAllIcons();
             parentPanel.Children.Remove(this);
             Deleted?.Invoke(this, EventArgs.Empty);
         }
@@ -715,24 +745,22 @@ public partial class SpaceControl : System.Windows.Controls.UserControl
 
         var tab = _tabs[index];
 
-        // Release this tab's icons (move to free space, not off-screen)
-        if (_tabIconIndices.TryGetValue(tab.Id, out var icons) && _listViewHandle != IntPtr.Zero)
-        {
-            // Just leave them wherever they are; they become "free" icons
-        }
+        // Hand the closed tab's icons to the tab that stays active: an inactive tab's icons
+        // are parked off-screen and the active tab's would overlap the next tab's grid.
+        var released = _tabIconIndices.TryGetValue(tab.Id, out var icons) ? icons : new List<int>();
         _tabIconIndices.Remove(tab.Id);
+        _pendingIconNames.Remove(tab.Id);
         _tabs.RemoveAt(index);
 
-        // Adjust active index
-        if (_activeTabIndex >= _tabs.Count)
-            _activeTabIndex = _tabs.Count - 1;
+        // Keep the same tab active when a tab before it is closed
+        if (index < _activeTabIndex || _activeTabIndex >= _tabs.Count)
+            _activeTabIndex--;
 
-        // Load the now-active tab's icons
-        _capturedIconIndices = _tabIconIndices.TryGetValue(_tabs[_activeTabIndex].Id, out var newIcons)
-            ? new List<int>(newIcons)
-            : new List<int>();
+        _capturedIconIndices = _tabIconIndices[_tabs[_activeTabIndex].Id].Union(released).ToList();
+        SaveActiveTabIcons();
 
         UpdateCapturedIconsPositions();
+        RehideInactiveTabIcons();
         RebuildTabStrip();
         RaiseStateChanged();
     }
@@ -871,6 +899,18 @@ public partial class SpaceControl : System.Windows.Controls.UserControl
         }
     }
 
+    /// <summary>
+    /// Lays every icon of every tab out at this space's position so that none stays
+    /// parked off-screen once the space is removed.
+    /// </summary>
+    public void ReleaseAllIcons()
+    {
+        SaveActiveTabIcons();
+        _capturedIconIndices = AllManagedIconIndices.ToList();
+        _scrollOffset = 0;
+        UpdateCapturedIconsPositions(clipToBounds: false);
+    }
+
     public void MergeSpace(SpaceControl other)
     {
         other.SaveActiveTabIcons();
@@ -889,6 +929,9 @@ public partial class SpaceControl : System.Windows.Controls.UserControl
             {
                 _tabIconIndices[newTab.Id] = new List<int>();
             }
+
+            if (other._pendingIconNames.TryGetValue(tab.Id, out var pending))
+                _pendingIconNames[newTab.Id] = pending;
         }
 
         other.HideAllIcons();
@@ -1211,21 +1254,28 @@ public partial class SpaceControl : System.Windows.Controls.UserControl
     public bool AcceptDroppedIcon(int iconIndex)
     {
         if (_listViewHandle == IntPtr.Zero) return false;
-        if (_capturedIconIndices.Contains(iconIndex)) return true;
 
-        _capturedIconIndices.Add(iconIndex);
-        SaveActiveTabIcons(); // sync to _tabIconIndices immediately
+        if (!_capturedIconIndices.Contains(iconIndex))
+        {
+            _capturedIconIndices.Add(iconIndex);
+            SaveActiveTabIcons(); // sync to _tabIconIndices immediately
+            RaiseStateChanged();
+        }
+
+        // Always re-snap: Windows drops the icon at the cursor even when it was moved
+        // within this space, which would leave it on top of another icon.
         UpdateCapturedIconsPositions();
-        RaiseStateChanged();
         return true;
     }
 
     /// <summary>
-    /// Remove an icon from this space's captured set (e.g. when dragged out).
+    /// Remove an icon from every tab of this space (e.g. when dragged out).
     /// </summary>
     public bool RemoveIcon(int iconIndex)
     {
         bool removed = _capturedIconIndices.Remove(iconIndex);
+        foreach (var indices in _tabIconIndices.Values)
+            removed |= indices.Remove(iconIndex);
         if (removed)
         {
             SaveActiveTabIcons(); // sync to _tabIconIndices immediately
