@@ -566,10 +566,7 @@
     <value>Sprache</value>
   </data>
   <data name="Settings_LanguageDescription.Text" xml:space="preserve">
-    <value>Wählen Sie die App-Sprache. Starten Sie die DeskSpace OS-Einstellungen neu, um die Änderung überall anzuwenden.</value>
-  </data>
-  <data name="Settings_LanguageRestartRequired" xml:space="preserve">
-    <value>Sprache gespeichert. Starten Sie die DeskSpace OS-Einstellungen neu, um sie überall anzuwenden.</value>
+    <value>Wählen Sie die App-Sprache. Die Einstellungen starten danach neu.</value>
   </data>
   <data name="Settings_PageDescription.Text" xml:space="preserve">
     <value>Allgemeine Anwendungseinstellungen.</value>

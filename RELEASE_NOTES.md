@@ -1,3 +1,15 @@
+## 0.6.3
+
+Changing the language now takes effect right away.
+
+### Fixed
+
+**New language did not show up**
+The language was saved, but it only applied after a full restart of the Settings
+app. Clicking the tray icon while the window was still open just brought the old
+window back, still in the old language. The Settings app now restarts itself when
+you pick a new language.
+
 ## 0.6.2
 
 The Settings app opens again from the tray icon.

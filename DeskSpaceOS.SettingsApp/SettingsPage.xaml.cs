@@ -3,7 +3,6 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.Win32;
 using DeskSpaceOS.Core.Storage;
-using Microsoft.Windows.Globalization;
 
 namespace DeskSpaceOS_SettingsApp;
 
@@ -109,8 +108,7 @@ public sealed partial class SettingsPage : Page
 
         _settings.Language = language;
         AppSettingsStore.Save(_settings);
-        ApplicationLanguages.PrimaryLanguageOverride = language;
-        ShowStatus(Loc.Get("Settings_LanguageRestartRequired"), InfoBarSeverity.Informational);
+        ((App)Application.Current).Restart();
     }
 
     private static string FindServiceExePath()

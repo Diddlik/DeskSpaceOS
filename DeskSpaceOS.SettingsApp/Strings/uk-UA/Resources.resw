@@ -566,10 +566,7 @@
     <value>Мова</value>
   </data>
   <data name="Settings_LanguageDescription.Text" xml:space="preserve">
-    <value>Виберіть мову програми. Перезапустіть параметри DeskSpace OS, щоб застосувати зміну всюди.</value>
-  </data>
-  <data name="Settings_LanguageRestartRequired" xml:space="preserve">
-    <value>Мову збережено. Перезапустіть параметри DeskSpace OS, щоб застосувати її всюди.</value>
+    <value>Виберіть мову програми. Параметри перезапустяться, щоб застосувати її.</value>
   </data>
   <data name="Settings_PageDescription.Text" xml:space="preserve">
     <value>Загальні параметри програми.</value>

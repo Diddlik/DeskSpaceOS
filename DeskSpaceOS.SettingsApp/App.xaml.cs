@@ -57,6 +57,18 @@ public partial class App : Application
 
     public Window? GetWindow() => _window;
 
+    /// <summary>Relaunches the app, e.g. to apply a new UI language.</summary>
+    public void Restart()
+    {
+        // Release the single-instance guard so the new process does not just
+        // signal this one and exit.
+        _activationListenerCancellation?.Cancel();
+        _singleInstanceMutex.ReleaseMutex();
+        _singleInstanceMutex.Dispose();
+        Process.Start(new ProcessStartInfo(Environment.ProcessPath!) { UseShellExecute = true });
+        Environment.Exit(0);
+    }
+
     private void StartActivationListener()
     {
         _activationListenerCancellation = new CancellationTokenSource();

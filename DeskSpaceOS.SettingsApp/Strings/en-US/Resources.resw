@@ -566,10 +566,7 @@
     <value>Language</value>
   </data>
   <data name="Settings_LanguageDescription.Text" xml:space="preserve">
-    <value>Choose the app language. Restart DeskSpace OS Settings to apply the change everywhere.</value>
-  </data>
-  <data name="Settings_LanguageRestartRequired" xml:space="preserve">
-    <value>Language saved. Restart DeskSpace OS Settings to apply it everywhere.</value>
+    <value>Choose the app language. Settings restarts to apply it.</value>
   </data>
   <data name="Settings_PageDescription.Text" xml:space="preserve">
     <value>General application settings.</value>

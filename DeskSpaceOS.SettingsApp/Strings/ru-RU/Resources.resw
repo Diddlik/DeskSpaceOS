@@ -566,10 +566,7 @@
     <value>Язык</value>
   </data>
   <data name="Settings_LanguageDescription.Text" xml:space="preserve">
-    <value>Выберите язык приложения. Перезапустите параметры DeskSpace OS, чтобы применить изменение везде.</value>
-  </data>
-  <data name="Settings_LanguageRestartRequired" xml:space="preserve">
-    <value>Язык сохранён. Перезапустите параметры DeskSpace OS, чтобы применить его везде.</value>
+    <value>Выберите язык приложения. Параметры перезапустятся, чтобы применить его.</value>
   </data>
   <data name="Settings_PageDescription.Text" xml:space="preserve">
     <value>Общие параметры приложения.</value>
