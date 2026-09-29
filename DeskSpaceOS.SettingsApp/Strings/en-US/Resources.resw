@@ -760,4 +760,16 @@
   <data name="Zen_Saved" xml:space="preserve">
     <value>Zen Mode settings saved. Applied automatically.</value>
   </data>
+  <data name="Rules_TemplateShortcuts.Content" xml:space="preserve">
+    <value>Template: New shortcuts</value>
+  </data>
+  <data name="Rules_TemplateShortcutsSpace" xml:space="preserve">
+    <value>New shortcuts</value>
+  </data>
+  <data name="Rules_TemplateShortcutsAdded" xml:space="preserve">
+    <value>New shortcuts now go into the space "{0}".</value>
+  </data>
+  <data name="Rules_TemplateShortcutsExists" xml:space="preserve">
+    <value>A rule for shortcuts already exists.</value>
+  </data>
 </root>

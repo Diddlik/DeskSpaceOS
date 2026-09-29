@@ -760,4 +760,16 @@
   <data name="Zen_Saved" xml:space="preserve">
     <value>Параметры режима дзен сохранены. Применены автоматически.</value>
   </data>
+  <data name="Rules_TemplateShortcuts.Content" xml:space="preserve">
+    <value>Шаблон: новые ярлыки</value>
+  </data>
+  <data name="Rules_TemplateShortcutsSpace" xml:space="preserve">
+    <value>Новые ярлыки</value>
+  </data>
+  <data name="Rules_TemplateShortcutsAdded" xml:space="preserve">
+    <value>Новые ярлыки теперь попадают в пространство «{0}».</value>
+  </data>
+  <data name="Rules_TemplateShortcutsExists" xml:space="preserve">
+    <value>Правило для ярлыков уже существует.</value>
+  </data>
 </root>

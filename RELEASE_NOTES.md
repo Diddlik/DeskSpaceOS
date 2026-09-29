@@ -1,3 +1,16 @@
+## 0.6.4
+
+A one-click template keeps new shortcuts off the desktop.
+
+### Added
+
+**Template: New shortcuts**
+The Sorting Rules page has a new button, "Template: New shortcuts". It creates a
+space called "New shortcuts" and a rule that moves every new shortcut (.lnk and
+.url) into it. This includes shortcuts that installers put on the public desktop.
+Shortcuts already on the desktop stay where they are. More specific rules still
+win, because the template rule has the lowest priority.
+
 ## 0.6.3
 
 Changing the language now takes effect right away.

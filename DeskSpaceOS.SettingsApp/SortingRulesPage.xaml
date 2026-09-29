@@ -13,7 +13,10 @@
             <TextBlock x:Uid="Rules_Description"
                        Foreground="{ThemeResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" />
 
-            <Button x:Name="AddRuleButton" x:Uid="Rules_Add" Style="{ThemeResource AccentButtonStyle}" Click="AddRuleButton_Click" />
+            <StackPanel Orientation="Horizontal" Spacing="8">
+                <Button x:Name="AddRuleButton" x:Uid="Rules_Add" Style="{ThemeResource AccentButtonStyle}" Click="AddRuleButton_Click" />
+                <Button x:Uid="Rules_TemplateShortcuts" Click="ShortcutsTemplateButton_Click" />
+            </StackPanel>
 
             <ItemsRepeater x:Name="RulesList" />
 

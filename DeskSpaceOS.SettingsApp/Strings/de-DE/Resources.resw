@@ -760,4 +760,16 @@
   <data name="Zen_Saved" xml:space="preserve">
     <value>Zen-Modus-Einstellungen gespeichert. Automatisch angewendet.</value>
   </data>
+  <data name="Rules_TemplateShortcuts.Content" xml:space="preserve">
+    <value>Vorlage: Neue Verknüpfungen</value>
+  </data>
+  <data name="Rules_TemplateShortcutsSpace" xml:space="preserve">
+    <value>Neue Verknüpfungen</value>
+  </data>
+  <data name="Rules_TemplateShortcutsAdded" xml:space="preserve">
+    <value>Neue Verknüpfungen landen jetzt im Bereich „{0}“.</value>
+  </data>
+  <data name="Rules_TemplateShortcutsExists" xml:space="preserve">
+    <value>Es gibt bereits eine Regel für Verknüpfungen.</value>
+  </data>
 </root>

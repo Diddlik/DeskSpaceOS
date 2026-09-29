@@ -239,6 +239,52 @@ public sealed partial class SortingRulesPage : Page
         await ShowRuleDialog(null);
     }
 
+    /// <summary>Template: collect every new shortcut in its own space so the desktop stays clean.</summary>
+    private void ShortcutsTemplateButton_Click(object sender, RoutedEventArgs e)
+    {
+        string title = Loc.Get("Rules_TemplateShortcutsSpace");
+        if (_rules.Exists(r => r.Kind == SortingRuleKind.FileCategory && r.Category == FileCategory.Shortcuts))
+        {
+            ShowStatus(Loc.Get("Rules_TemplateShortcutsExists"), InfoBarSeverity.Informational);
+            return;
+        }
+
+        var space = _spaces.Find(s => string.Equals(s.Title, title, StringComparison.OrdinalIgnoreCase));
+        if (space == null)
+        {
+            var settings = AppSettingsStore.Load();
+            space = new Space
+            {
+                Id = Guid.NewGuid(),
+                Title = title,
+                X = 120,
+                Y = 120,
+                Width = 320,
+                Height = 220,
+                ColorR = settings.DefaultColorR,
+                ColorG = settings.DefaultColorG,
+                ColorB = settings.DefaultColorB,
+                Alpha = settings.DefaultAlpha,
+                Tabs = new List<SpaceTab> { new() { Name = title } },
+                ActiveTabIndex = 0
+            };
+            _spaces.Add(space);
+            SpaceStore.Save(_spaces);
+        }
+
+        _rules.Add(new SortingRule
+        {
+            Kind = SortingRuleKind.FileCategory,
+            Category = FileCategory.Shortcuts,
+            TargetSpaceId = space.Id,
+            TargetSpaceTitle = space.Title,
+            Priority = NextPriority()
+        });
+        SortingRuleStore.Save(_rules);
+        RebuildList();
+        ShowStatus(Loc.Format("Rules_TemplateShortcutsAdded", space.Title), InfoBarSeverity.Success);
+    }
+
     private async void EditRule_Click(object sender, RoutedEventArgs e)
     {
         if (sender is Button btn && btn.Tag is Guid id)
